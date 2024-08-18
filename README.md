@@ -1,5 +1,5 @@
 <h1>Wohmohr Landing page</h1>
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/98897284-7b43-4a9b-a7af-bf90bb99c8bc/deploy-status)](https://app.netlify.com/sites/wohnmohr/deploys)
 A simple landing page for wohnmohr
 
 ## Tools
