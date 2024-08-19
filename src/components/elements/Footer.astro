@@ -1,82 +1,5 @@
 ---
-import GroupFooterNav from "../blocks/GroupFooterNav.astro";
 import Container from "../shared/Container.astro";
-import FooterNav from "../shared/FooterNav.astro";
-import Paragraph from "../shared/Paragraph.astro";
-const footerNav1 = [
-  {
-    itemText: "Marketing",
-    itemLink: "#",
-  },
-  {
-    itemText: "Analylitics",
-    itemLink: "#",
-  },
-  {
-    itemText: "Commerce",
-    itemLink: "#",
-  },
-  {
-    itemText: "Insights",
-    itemLink: "#",
-  },
-];
-
-const footerSupport = [
-  {
-    itemText: "Pricing",
-    itemLink: "#",
-  },
-  {
-    itemText: "Guides",
-    itemLink: "#",
-  },
-  {
-    itemText: "FAQ",
-    itemLink: "#",
-  },
-  {
-    itemText: "Contact",
-    itemLink: "#",
-  },
-];
-
-const footerCompany = [
-  {
-    itemText: "About",
-    itemLink: "/about",
-  },
-  {
-    itemText: "Blog",
-    itemLink: "#",
-  },
-  {
-    itemText: "Jobs",
-    itemLink: "#",
-  },
-  {
-    itemText: "Parteners",
-    itemLink: "#",
-  },
-  {
-    itemText: "Jobs",
-    itemLink: "#",
-  },
-];
-const footerLegal = [
-  {
-    itemText: "Claim",
-    itemLink: "/#",
-  },
-  {
-    itemText: "Privacy",
-    itemLink: "#",
-  },
-  {
-    itemText: "Terms",
-    itemLink: "#",
-  },
-];
 ---
 
 <div class="mt-16"></div>
@@ -90,16 +13,16 @@ const footerLegal = [
       <div class="col-span-2 lg:col-span-1 h-auto flex flex-col">
         <div class="h-full">
           <a href="#" class="relative flex items-center gap-3">
-            <div class="relative w-7 h-7 overflow-auto flex rounded-xl">
+            <div class="relative w-10 h-10 overflow-auto flex rounded-xl">
               <img
                 src={"/logos/main-logo.png"}
                 alt="banner image"
-                width="12"
-                height="12"
+                width="20"
+                height="20"
                 class="w-auto left-1/2 -translate-x-1/2 absolute bottom-0 max-h-full"
               />
             </div>
-            <div class="inline-flex text-lg font-semibold text-heading-1">
+            <div class="inline-flex text-xl font-semibold text-heading-1">
               wohnmohr
             </div>
           </a>
@@ -172,31 +95,19 @@ const footerLegal = [
           </a>
         </div> -->
       </div>
-
-      <!-- <GroupFooterNav>
-        <FooterNav title={"Company"} navItems={footerCompany} />
-        <FooterNav title={"Solutions"} navItems={footerNav1} />
-      </GroupFooterNav>
-
-      <GroupFooterNav>
-        <FooterNav title={"Support"} navItems={footerSupport} />
-        <FooterNav title={"Ressources"} navItems={footerLegal} />
-      </GroupFooterNav> -->
     </div>
   </Container>
   <div class="bg-gradient-to-tl from-box-bg py-2 relative">
     <Container>
-      <div
-        class="flex justify-between items-center gap-6 md:text-lg text-heading-3"
-      >
-        <div>
+      <div class="flex justify-between items-center gap-6">
+        <p class="text-xs">
           &copy; <span id="year"></span> wohnmohr. All right reserved
-        </div>
-        <div>
+        </p>
+        <p class="text-xs">
           Proudly made by <a target="_blank" class="font-semibold"
             >wohnmohr team</a
           >
-        </div>
+        </p>
       </div>
     </Container>
   </div>
