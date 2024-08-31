@@ -3,7 +3,7 @@ import Service from "../cards/Service.astro";
 import Container from "../shared/Container.astro";
 import Paragraph from "../shared/Paragraph.astro";
 import Title from "../shared/Title.astro";
-import { services } from "../../utils/data.ts";
+import { features } from "../../utils/data.ts";
 
 type ServicesProps = {
   title: string;
@@ -15,20 +15,23 @@ type ServicesProps = {
 <section id="services">
   <Container className="space-y-10 md:sapce-y-12">
     <div class="text-center max-w-3xl mx-auto space-y-4">
-      <Title>Innovation Pipeline.</Title>
+      <Title>What Makes Us Your Engineering Dream Team</Title>
       <Paragraph>
-        From Vision to Reality: Our Step-by-Step Approach to Building Innovative
-        Solutions
+        With a deep understanding of the unique challenges faced by startups and
+        solopreneurs, our team delivers tailored technical solutions that turn
+        your ideas into scalable, high-impact products. We're not just
+        engineers; we're your strategic partners in innovation, committed to
+        driving your success every step of the way.
       </Paragraph>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       {
-        services.map((service: ServicesProps) => {
+        features.map((service: ServicesProps) => {
           return (
             <Service
               title={service.title}
               description={service.description}
-              icon={service.icon}
+              icon={service?.icon}
             />
           );
         })

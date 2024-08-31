@@ -49,4 +49,22 @@ const services = [
     },
 ];
 
-export { services };
+const features = [
+    {
+        title: "Tailored Technical Solutions",
+        description: "Our team specializes in providing custom software solutions and services designed to meet the unique needs of startups, solopreneurs, and entrepreneurs. Whether you’re building your first product, scaling your business, or optimizing your existing infrastructure, we’ve got you covered.",
+        icon: ""
+    },
+    {
+        title: "End-to-End Support",
+        description: "From concept to launch, we offer comprehensive support at every stage of your project. We don’t just write code; we provide strategic guidance, technical expertise, and ongoing support to ensure your idea thrives in the marketplace.",
+        icon: ""
+    },
+    {
+        icon: "",
+        title: "Scalable and Affordable",
+        description: "We understand the challenges of growing a business. That’s why our services are designed to be both scalable and cost-effective. We provide affordable startup software and services that grow with you, ensuring you get the most value as your business expands.",
+    }
+];
+
+export { features, services };
