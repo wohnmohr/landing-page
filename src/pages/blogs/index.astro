@@ -1,0 +1,89 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/elements/Navbar.astro";
+import Footer from "../../components/elements/Footer.astro";
+import Container from "../../components/shared/Container.astro";
+import { blogPosts } from "../../utils/blogs";
+
+const title = "Blog | wohnmohr AI Consulting—Rescue, Build, Automate & Test";
+const description =
+  "Practical guides from wohnmohr on vibe-code rescue, AI automation, testing, and shipping AI products that last.";
+---
+
+<Layout title={title} description={description}>
+  <Navbar variant="overlay" />
+  <main>
+    <section class="relative overflow-hidden bg-ink pb-16 pt-32 text-white sm:pb-20 sm:pt-36">
+      <div class="absolute inset-0" aria-hidden="true">
+        <div
+          class="absolute inset-0 bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-coral via-gold to-aqua"
+        >
+        </div>
+      </div>
+      <Container className="relative max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+          Blog
+        </p>
+        <h1
+          class="mt-3 font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-5xl"
+        >
+          Notes on shipping AI—and fixing it when vibes fail
+        </h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          Short, practical writing for founders and product teams building AI
+          products, automations, and test systems.
+        </p>
+      </Container>
+    </section>
+
+    <section class="py-16 md:py-24">
+      <Container className="max-w-3xl">
+        <ul class="space-y-6">
+          {
+            blogPosts.map((post, index) => {
+              const formattedDate = new Date(post.date).toLocaleDateString(
+                "en-US",
+                { year: "numeric", month: "short", day: "numeric" }
+              );
+              return (
+                <li
+                  data-reveal
+                  style={`--reveal-delay: ${index * 80}ms`}
+                >
+                  <a
+                    href={`/blogs/${post.slug}`}
+                    class="hover-lift block rounded-2xl border border-line bg-white px-6 py-7 transition hover:border-accent/40 sm:px-8"
+                  >
+                    <div class="flex flex-wrap items-center gap-3 text-sm text-slate">
+                      <time datetime={post.date}>{formattedDate}</time>
+                      <span aria-hidden="true">·</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h2 class="mt-3 font-display text-2xl font-semibold tracking-[-0.02em] text-ink">
+                      {post.title}
+                    </h2>
+                    <p class="mt-3 text-base leading-relaxed text-slate">
+                      {post.description}
+                    </p>
+                    <ul class="mt-4 flex flex-wrap gap-2">
+                      {post.tags.map((tag) => (
+                        <li class="rounded-md bg-sand px-2.5 py-1 text-xs font-semibold text-ink/80">
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </Container>
+    </section>
+  </main>
+  <Footer />
+</Layout>

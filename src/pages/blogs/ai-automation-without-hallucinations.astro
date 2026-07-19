@@ -1,0 +1,99 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getBlogPost } from "../../utils/blogs";
+
+const post = getBlogPost("ai-automation-without-hallucinations")!;
+---
+
+<BlogLayout post={post}>
+  <p>
+    AI automation promises hours back every week: draft replies, update CRMs,
+    summarize tickets, move data between tools. The failure mode is quieter—and
+    more expensive: confident wrong actions that look “done.”
+  </p>
+  <p>
+    Hallucinations aren’t just a chatbot problem. In automation, a bad
+    inference can email the wrong customer, overwrite a deal, or approve
+    something that should have waited for a human.
+  </p>
+
+  <h2>Where automations usually go wrong</h2>
+  <ul>
+    <li>
+      <strong>Unconstrained tools:</strong> the agent can write anywhere with
+      no approval step
+    </li>
+    <li>
+      <strong>No evals:</strong> you only notice failure when a human complains
+    </li>
+    <li>
+      <strong>Prompt-only logic:</strong> business rules live in vibes, not
+      code or schemas
+    </li>
+    <li>
+      <strong>Silent retries:</strong> the bot “fixes” itself by trying again—with
+      different wrong output
+    </li>
+  </ul>
+
+  <h2>A safer pattern: assist, then act</h2>
+  <p>Treat AI as a junior operator with a supervisor:</p>
+  <ol>
+    <li>
+      <strong>Draft / propose</strong> — AI prepares the change (email, CRM
+      field, ticket tag)
+    </li>
+    <li>
+      <strong>Validate</strong> — schema checks, allowlists, policy rules in
+      code
+    </li>
+    <li>
+      <strong>Approve</strong> — human-in-the-loop for high-risk actions
+    </li>
+    <li>
+      <strong>Execute</strong> — deterministic code performs the write
+    </li>
+    <li>
+      <strong>Log & eval</strong> — store inputs/outputs for regression later
+    </li>
+  </ol>
+  <blockquote>
+    If the action can’t be undone easily, don’t let the model do it alone.
+  </blockquote>
+
+  <h2>Minimum viable testing for AI workflows</h2>
+  <p>You don’t need a research lab. You need a small, boring suite:</p>
+  <ul>
+    <li>Golden examples: known tickets → expected classifications</li>
+    <li>Adversarial cases: missing fields, slang, multilingual input</li>
+    <li>Regression pack: re-run after every prompt or model change</li>
+    <li>Cost/latency baselines: so “smarter” doesn’t mean “too slow/expensive”</li>
+  </ul>
+  <p>
+    Pair this with
+    <a href="/services/ai-testing">AI testing practices</a> so automation and
+    product features share the same quality bar.
+  </p>
+
+  <h2>What “good” looks like in the first 30 days</h2>
+  <ul>
+    <li>One high-ROI workflow live (not ten half-finished bots)</li>
+    <li>Clear human approval for irreversible steps</li>
+    <li>A short eval set that fails loudly when quality drops</li>
+    <li>A runbook: what to do when the model is wrong</li>
+  </ul>
+
+  <h2>How wohnmohr helps</h2>
+  <p>
+    Our
+    <a href="/services/ai-automation">AI automation</a> work focuses on
+    shipping workflows that save time <em>and</em> stay trustworthy—guardrails,
+    tests, and handover included. If an existing bot is already causing
+    cleanup work, we’ll treat it like a rescue: stabilize first, then expand.
+  </p>
+  <p>
+    Not sure where to start?
+    <a href="/#health-check">Request a free health check</a> or
+    <a href="/#contact">book an intro call</a>.
+  </p>
+</BlogLayout>

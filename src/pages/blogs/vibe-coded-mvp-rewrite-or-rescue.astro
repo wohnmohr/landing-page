@@ -1,0 +1,95 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getBlogPost } from "../../utils/blogs";
+
+const post = getBlogPost("vibe-coded-mvp-rewrite-or-rescue")!;
+---
+
+<BlogLayout post={post}>
+  <p>
+    Vibe coding is great for speed. Cursor, ChatGPT, and friends can get a
+    founder from idea to clickable demo in a weekend. The hangover usually shows
+    up later: flaky deploys, secret leaks, mystery bugs, and a codebase nobody
+    wants to touch.
+  </p>
+  <p>
+    The question isn’t “was AI used?”—it’s whether you should
+    <strong>rescue</strong> what you have or <strong>rewrite</strong> the risky
+    parts. Here’s a practical way to decide.
+  </p>
+
+  <h2>Signs you can rescue (stabilize and harden)</h2>
+  <p>Rescue is usually the better bet when:</p>
+  <ul>
+    <li>Core user flows work most of the time, even if edge cases fail</li>
+    <li>You can still run the app locally and understand the main folders</li>
+    <li>Auth, payments, or data models are roughly correct—just messy</li>
+    <li>The product idea is validated; the engineering is what’s broken</li>
+  </ul>
+  <p>
+    In a rescue, the goal is not perfection. It’s a stable deploy path, fewer
+    landmines, and a clear map of what to keep vs rewrite next.
+  </p>
+
+  <h2>Signs you should rewrite (selectively or fully)</h2>
+  <p>Lean toward rewrite when:</p>
+  <ul>
+    <li>Nobody can explain how a critical path works—including the “author”</li>
+    <li>Secrets, API keys, or env files were committed or exposed</li>
+    <li>Every small change breaks three unrelated features</li>
+    <li>There’s no test of any kind and behavior depends on prompt luck</li>
+    <li>The stack choices fight your real constraints (hosting, team skills, cost)</li>
+  </ul>
+  <blockquote>
+    Rewriting everything is rarely step one. Often you rewrite the hot path and
+    rescue the rest.
+  </blockquote>
+
+  <h2>A 60-minute triage checklist</h2>
+  <ol>
+    <li>
+      <strong>Run it cold:</strong> fresh clone, install, env setup, start.
+      Note every manual hack required.
+    </li>
+    <li>
+      <strong>Walk the money paths:</strong> signup, core action, payment or
+      data write. Record failures.
+    </li>
+    <li>
+      <strong>Scan for secrets:</strong> keys in repo, client-exposed tokens,
+      open admin routes.
+    </li>
+    <li>
+      <strong>Check deploy reality:</strong> is there CI/CD, or only “works on
+      my laptop”?
+    </li>
+    <li>
+      <strong>Ask the ownership test:</strong> could a new engineer change this
+      safely in a week?
+    </li>
+  </ol>
+
+  <h2>What a good rescue engagement looks like</h2>
+  <p>
+    At <a href="/services/vibe-code-rescue">wohnmohr</a>, a Rescue Sprint
+    typically produces:
+  </p>
+  <ul>
+    <li>A risk map (security, reliability, maintainability)</li>
+    <li>Stabilized staging/production path</li>
+    <li>Hardening on the worst failure points</li>
+    <li>A keep / rewrite / defer plan for the next 2–4 weeks</li>
+  </ul>
+  <p>
+    If you’re unsure where you stand, start with a
+    <a href="/#health-check">free AI / vibe-code health check</a>. You’ll get
+    an honest read before you spend another sprint guessing.
+  </p>
+
+  <h2>Bottom line</h2>
+  <p>
+    Demos prove demand. Production proves craft. If your vibe-coded MVP is
+    mostly sound but fragile, rescue it. If it’s a black box with real risk,
+    rewrite the dangerous parts—on purpose, with a plan.
+  </p>
+</BlogLayout>
