@@ -1,0 +1,67 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getBlogPost } from "../../utils/blogs";
+
+const post = getBlogPost("vibe-coding-cursor-lovable-bolt-when-it-breaks")!;
+---
+
+<BlogLayout post={post}>
+  <p>
+    Cursor, Lovable, Bolt, and friends are excellent at one job: turning a
+    product idea into something clickable fast. The trouble starts when that
+    demo meets real users, real secrets, and a real deploy pipeline.
+  </p>
+  <p>
+    If your vibe-coded MVP “worked last week” and now fails in staging, you’re
+    not alone. Here’s what usually breaks—and the order of fixes that saves
+    budget.
+  </p>
+
+  <h2>What breaks first in production</h2>
+  <ul>
+    <li>
+      <strong>Env and secrets:</strong> keys in the client bundle, missing
+      production env vars, or committed <code>.env</code> files
+    </li>
+    <li>
+      <strong>Auth edge cases:</strong> happy-path login works; roles, session
+      expiry, and password resets don’t
+    </li>
+    <li>
+      <strong>Deploy drift:</strong> “works on my machine” with no reproducible
+      CI/CD or rollback
+    </li>
+    <li>
+      <strong>AI cost spikes:</strong> unbounded model calls with no timeouts,
+      caching, or budgets
+    </li>
+  </ul>
+
+  <h2>Fix order that usually costs less</h2>
+  <ol>
+    <li>Stop the bleeding: rotate leaked keys, lock admin routes</li>
+    <li>Make deploy boring: one path to staging you can repeat</li>
+    <li>Stabilize money/user paths before new features</li>
+    <li>Add smoke tests (and tiny evals if AI is in the loop)</li>
+    <li>Only then rewrite the modules that stay toxic</li>
+  </ol>
+
+  <blockquote>
+    A panic rewrite feels productive. A triage that restores deploy confidence
+    usually ships value sooner.
+  </blockquote>
+
+  <h2>When to call for rescue</h2>
+  <p>
+    If you can’t cold-start the repo, can’t explain a critical path, or every
+    small change breaks three others, you’re in
+    <a href="/services/vibe-code-rescue">rescue territory</a>. Run the
+    <a href="/tools/vibe-code-health-check">free scorecard</a> first—then book a
+    short call if the score says salvageable or high rewrite risk.
+  </p>
+  <p>
+    For a deeper decision framework, see
+    <a href="/compare/rescue-vs-rewrite">rescue vs rewrite</a> and
+    <a href="/blogs/vibe-coded-mvp-rewrite-or-rescue">our rewrite-or-rescue guide</a>.
+  </p>
+</BlogLayout>

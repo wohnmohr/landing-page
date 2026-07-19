@@ -47,13 +47,21 @@ import Container from "../shared/Container.astro";
             Recommended package if you want help
           </li>
         </ul>
-        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <BtnLink
             text="Request health check"
             href="#health-check-form"
             variant="bright"
             className="w-full sm:w-auto"
             track="health_check_click"
+            trackLocation="lead_magnet"
+          />
+          <BtnLink
+            text="Try the free scorecard"
+            href="/tools/vibe-code-health-check"
+            variant="ghost"
+            className="w-full sm:w-auto"
+            track="health_tool_click"
             trackLocation="lead_magnet"
           />
           <BtnLink

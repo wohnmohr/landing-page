@@ -1,0 +1,120 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/elements/Navbar.astro";
+import Footer from "../components/elements/Footer.astro";
+import BtnLink from "../components/shared/BtnLink.astro";
+import Container from "../components/shared/Container.astro";
+import { faqs } from "../utils/data";
+
+const title = "FAQ | wohnmohr AI Consulting";
+const description =
+  "Answers about vibe-code rescue, AI product builds, ownership, timelines, and pricing from wohnmohr.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <Navbar variant="overlay" />
+  <main>
+    <header
+      class="relative overflow-hidden bg-ink pb-14 pt-32 text-white sm:pb-16 sm:pt-36"
+    >
+      <div class="absolute inset-0" aria-hidden="true">
+        <div
+          class="absolute inset-0 bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-coral via-gold to-aqua"
+        >
+        </div>
+      </div>
+      <Container className="relative max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+          FAQ
+        </p>
+        <h1
+          class="mt-3 font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-5xl"
+        >
+          Straight answers before you book
+        </h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          Scope, ownership, timelines, and what we won’t pretend to do.
+        </p>
+      </Container>
+    </header>
+
+    <section class="py-14 md:py-20">
+      <Container className="max-w-3xl">
+        <div class="space-y-3">
+          {
+            faqs.map((item, index) => (
+              <details
+                class="group rounded-xl border border-line bg-white px-5 py-4 open:shadow-[0_16px_40px_-28px_rgba(10,22,40,0.35)]"
+                data-reveal
+                style={`--reveal-delay: ${index * 60}ms`}
+                open={index === 0}
+              >
+                <summary class="cursor-pointer list-none font-display text-lg font-semibold text-ink marker:content-none [&::-webkit-details-marker]:hidden">
+                  <span class="flex items-center justify-between gap-4">
+                    {item.question}
+                    <span
+                      class="shrink-0 text-accent transition group-open:rotate-45"
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                  </span>
+                </summary>
+                <p class="mt-3 text-base leading-relaxed text-slate">
+                  {item.answer}
+                </p>
+              </details>
+            ))
+          }
+        </div>
+
+        <div
+          class="mt-12 rounded-2xl border border-line bg-sand/70 px-6 py-8 sm:px-8"
+          data-reveal
+        >
+          <h2 class="font-display text-2xl font-semibold text-ink">
+            Still unsure?
+          </h2>
+          <p class="mt-3 text-base text-slate">
+            Run the free scorecard or book a short intro call—we’ll tell you
+            what’s salvageable.
+          </p>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <BtnLink
+              text="Vibe-code health tool"
+              href="/tools/vibe-code-health-check"
+              variant="primary"
+              track="health_tool_click"
+              trackLocation="faq"
+            />
+            <BtnLink
+              text="Book a call"
+              href="/#contact"
+              variant="secondary"
+              track="contact_cta_click"
+              trackLocation="faq"
+            />
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+  <Footer />
+</Layout>

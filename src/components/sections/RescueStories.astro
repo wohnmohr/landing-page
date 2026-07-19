@@ -55,6 +55,12 @@ import { rescueScenarios } from "../../utils/data";
                 <p class="mt-1.5 font-medium text-ink">{item.outcome}</p>
               </div>
             </div>
+            <a
+              href={`/work/${item.slug}`}
+              class="mt-5 inline-flex text-sm font-semibold text-accent-deep underline-offset-4 transition hover:underline"
+            >
+              Read the full pattern →
+            </a>
           </li>
         ))
       }

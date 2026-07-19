@@ -1,0 +1,386 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/elements/Navbar.astro";
+import Footer from "../../components/elements/Footer.astro";
+import BtnLink from "../../components/shared/BtnLink.astro";
+import Container from "../../components/shared/Container.astro";
+import { healthCheckItems } from "../../utils/healthCheck";
+
+const title = "Free Vibe-Code Health Check Scorecard | wohnmohr";
+const description =
+  "Score your AI-generated or vibe-coded MVP on auth, secrets, tests, deploy, and AI risk—then get a clear next step from wohnmohr.";
+---
+
+<Layout title={title} description={description}>
+  <Navbar variant="overlay" />
+  <main>
+    <header
+      class="relative overflow-hidden bg-ink pb-14 pt-32 text-white sm:pb-16 sm:pt-36"
+    >
+      <div class="absolute inset-0" aria-hidden="true">
+        <div
+          class="absolute inset-0 bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-coral via-gold to-aqua"
+        >
+        </div>
+      </div>
+      <Container className="relative max-w-3xl">
+        <p class="font-display text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
+          wohnmohr
+        </p>
+        <h1
+          class="mt-4 font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-[2.6rem] md:leading-[1.15]"
+        >
+          Vibe-code health check
+        </h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          Eight questions. One score. A clear read on whether to harden, rescue,
+          or rethink before you scale.
+        </p>
+      </Container>
+    </header>
+
+    <section class="py-14 md:py-20" aria-labelledby="checklist-heading">
+      <Container className="max-w-3xl">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2
+              id="checklist-heading"
+              class="font-display text-2xl font-semibold text-ink sm:text-3xl"
+            >
+              Score your MVP
+            </h2>
+            <p class="mt-2 text-base text-slate">
+              Answer honestly—partial counts. Takes about two minutes.
+            </p>
+          </div>
+          <p
+            id="progress-label"
+            class="text-sm font-semibold text-slate"
+            aria-live="polite"
+          >
+            0 / {healthCheckItems.length} answered
+          </p>
+        </div>
+
+        <div
+          class="mt-3 h-1.5 overflow-hidden rounded-full bg-line"
+          aria-hidden="true"
+        >
+          <div
+            id="progress-bar"
+            class="h-full w-0 rounded-full bg-accent transition-[width] duration-300 ease-out"
+          >
+          </div>
+        </div>
+
+        <form id="health-check-form" class="mt-10 space-y-8" novalidate>
+          {
+            healthCheckItems.map((item, index) => (
+              <fieldset
+                class="border-b border-line pb-8 last:border-0"
+                data-item-id={item.id}
+              >
+                <legend class="w-full">
+                  <span class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span class="mt-2 block font-display text-xl font-semibold text-ink">
+                    {item.title}
+                  </span>
+                  <span class="mt-2 block text-sm leading-relaxed text-slate sm:text-base">
+                    {item.description}
+                  </span>
+                </legend>
+                <div
+                  class="mt-5 flex flex-wrap gap-2"
+                  role="group"
+                  aria-label={`Answer for ${item.title}`}
+                >
+                  {(
+                    [
+                      ["yes", "Yes"],
+                      ["partial", "Partial"],
+                      ["no", "No"],
+                    ] as const
+                  ).map(([value, label]) => (
+                    <label class="answer-option">
+                      <input
+                        type="radio"
+                        name={item.id}
+                        value={value}
+                        class="peer sr-only"
+                        required
+                      />
+                      <span class="answer-chip peer-checked:border-accent peer-checked:bg-accent peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-coral">
+                        {label}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            ))
+          }
+
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <button
+              type="submit"
+              id="see-score-btn"
+              class="inline-flex items-center justify-center rounded-md bg-coral px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_32px_-12px_rgba(255,107,53,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#e85a28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+              data-track="health_tool_submit"
+              data-track-location="tool"
+            >
+              See my score
+            </button>
+            <button
+              type="button"
+              id="reset-btn"
+              class="text-sm font-semibold text-slate underline-offset-4 transition hover:text-ink hover:underline"
+            >
+              Reset answers
+            </button>
+          </div>
+        </form>
+
+        <div
+          id="results"
+          class="mt-12 hidden rounded-2xl border border-line bg-white px-6 py-8 sm:px-8"
+          aria-live="polite"
+          tabindex="-1"
+        >
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-coral">
+            Your score
+          </p>
+          <div class="mt-3 flex flex-wrap items-baseline gap-3">
+            <p
+              id="score-value"
+              class="font-display text-5xl font-semibold tracking-[-0.03em] text-ink"
+            >
+              0
+            </p>
+            <p class="text-lg text-slate">/ 100</p>
+          </div>
+          <h3
+            id="tier-label"
+            class="mt-4 font-display text-2xl font-semibold text-ink"
+          >
+          </h3>
+          <p id="tier-summary" class="mt-3 text-base leading-relaxed text-slate">
+          </p>
+          <p id="tier-hint" class="mt-3 text-sm font-medium text-ink"></p>
+
+          <div id="gaps-block" class="mt-8 hidden">
+            <h4 class="text-sm font-semibold uppercase tracking-[0.14em] text-slate">
+              Top gaps to fix first
+            </h4>
+            <ul id="gaps-list" class="mt-3 space-y-2 text-base text-slate"></ul>
+          </div>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <BtnLink
+              text="Request human health check"
+              href="/#health-check"
+              variant="primary"
+              track="health_check_click"
+              trackLocation="health_tool"
+            />
+            <BtnLink
+              text="Book a call"
+              href="https://calendly.com/wohnmohr-contact/30min"
+              variant="secondary"
+              external
+              track="calendly_click"
+              trackLocation="health_tool"
+            />
+            <BtnLink
+              text="WhatsApp us"
+              href="https://wa.me/918248438399?text=Hi%20wohnmohr%20—%20I%20ran%20the%20vibe-code%20health%20check%20and%20want%20a%20review."
+              variant="secondary"
+              external
+              track="whatsapp_click"
+              trackLocation="health_tool"
+            />
+            <a
+              href="/services/vibe-code-rescue"
+              class="inline-flex items-center justify-center rounded-md border border-line bg-transparent px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent/40 hover:bg-sand"
+              data-track="service_click"
+              data-track-location="health_tool"
+            >
+              Vibe-code rescue
+            </a>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .answer-chip {
+    display: inline-flex;
+    min-width: 5.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-line);
+    background: white;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .answer-option:hover .answer-chip {
+    border-color: rgba(15, 159, 144, 0.45);
+    transform: translateY(-1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .answer-option:hover .answer-chip {
+      transform: none;
+    }
+
+    #progress-bar {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import {
+    healthCheckItems,
+    answerScore,
+    getTier,
+    type HealthAnswer,
+  } from "../../utils/healthCheck";
+
+  const form = document.getElementById(
+    "health-check-form"
+  ) as HTMLFormElement | null;
+  const results = document.getElementById("results");
+  const progressLabel = document.getElementById("progress-label");
+  const progressBar = document.getElementById("progress-bar");
+  const scoreValue = document.getElementById("score-value");
+  const tierLabel = document.getElementById("tier-label");
+  const tierSummary = document.getElementById("tier-summary");
+  const tierHint = document.getElementById("tier-hint");
+  const gapsBlock = document.getElementById("gaps-block");
+  const gapsList = document.getElementById("gaps-list");
+  const resetBtn = document.getElementById("reset-btn");
+
+  const total = healthCheckItems.length;
+
+  const getAnswers = (): Record<string, HealthAnswer> => {
+    const answers: Record<string, HealthAnswer> = {};
+    if (!form) return answers;
+    for (const item of healthCheckItems) {
+      const checked = form.querySelector<HTMLInputElement>(
+        `input[name="${item.id}"]:checked`
+      );
+      if (checked?.value) {
+        answers[item.id] = checked.value as HealthAnswer;
+      }
+    }
+    return answers;
+  };
+
+  const updateProgress = () => {
+    const answered = Object.keys(getAnswers()).length;
+    if (progressLabel) {
+      progressLabel.textContent = `${answered} / ${total} answered`;
+    }
+    if (progressBar) {
+      progressBar.style.width = `${(answered / total) * 100}%`;
+    }
+  };
+
+  const trackComplete = (score: number, tierId: string) => {
+    const w = window as Window & {
+      posthog?: {
+        capture: (event: string, properties?: Record<string, string | number>) => void;
+      };
+    };
+    if (typeof w.posthog?.capture === "function") {
+      w.posthog.capture("health_tool_complete", { score, tier: tierId });
+    }
+  };
+
+  const showResults = () => {
+    const answers = getAnswers();
+    if (Object.keys(answers).length < total || !results) return;
+
+    let score = 0;
+    const gaps: { title: string; answer: HealthAnswer }[] = [];
+
+    for (const item of healthCheckItems) {
+      const answer = answers[item.id];
+      score += answerScore(answer);
+      if (answer !== "yes") {
+        gaps.push({ title: item.title, answer });
+      }
+    }
+
+    score = Math.round(score);
+    const tier = getTier(score);
+
+    if (scoreValue) scoreValue.textContent = String(score);
+    if (tierLabel) tierLabel.textContent = tier.label;
+    if (tierSummary) tierSummary.textContent = tier.summary;
+    if (tierHint) tierHint.textContent = tier.ctaHint;
+
+    if (gapsList && gapsBlock) {
+      gapsList.innerHTML = "";
+      const topGaps = gaps.slice(0, 3);
+      if (topGaps.length === 0) {
+        gapsBlock.classList.add("hidden");
+      } else {
+        gapsBlock.classList.remove("hidden");
+        for (const gap of topGaps) {
+          const li = document.createElement("li");
+          li.className = "flex gap-2";
+          const mark = gap.answer === "partial" ? "Partial" : "Missing";
+          li.innerHTML = `<span class="text-coral" aria-hidden="true">→</span><span><strong class="font-semibold text-ink">${gap.title}</strong> — ${mark}</span>`;
+          gapsList.appendChild(li);
+        }
+      }
+    }
+
+    results.classList.remove("hidden");
+    results.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "nearest",
+    });
+    results.focus({ preventScroll: true });
+    trackComplete(score, tier.id);
+  };
+
+  form?.addEventListener("change", updateProgress);
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    showResults();
+  });
+
+  resetBtn?.addEventListener("click", () => {
+    form?.reset();
+    results?.classList.add("hidden");
+    updateProgress();
+  });
+
+  updateProgress();
+</script>

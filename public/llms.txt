@@ -1,0 +1,20 @@
+# wohnmohr
+
+> AI consulting startup that builds AI products, automations, and test systems—and rescues vibe-coded projects when they go bad.
+
+## Site
+- Home: https://wohnmohr.com/
+- Pricing: https://wohnmohr.com/pricing/
+- Blog: https://wohnmohr.com/blogs/
+- FAQ: https://wohnmohr.com/faq/
+- Free vibe-code health scorecard: https://wohnmohr.com/tools/vibe-code-health-check/
+
+## Services
+- Vibe-code rescue: https://wohnmohr.com/services/vibe-code-rescue/
+- AI automation: https://wohnmohr.com/services/ai-automation/
+- AI testing: https://wohnmohr.com/services/ai-testing/
+- AI product development: https://wohnmohr.com/services/ai-product-development/
+
+## Contact
+- Book a call: https://calendly.com/wohnmohr-contact/30min
+- WhatsApp: https://wa.me/918248438399

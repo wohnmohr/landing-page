@@ -18,9 +18,32 @@ const title =
   "wohnmohr | AI Consulting Startup—Build, Automate, Test & Fix Vibe Coding";
 const description =
   "wohnmohr is an AI consulting startup. We build AI products, automations, and test systems—and rescue projects when vibe coding goes bad. Book a free intro call.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "wohnmohr",
+  description,
+  url: "https://wohnmohr.com",
+  image: "https://wohnmohr.com/images/landing-image.webp",
+  areaServed: "Worldwide",
+  serviceType: [
+    "AI Consulting",
+    "AI Product Development",
+    "AI Automation",
+    "AI Testing",
+    "Vibe Code Rescue",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    url: "https://calendly.com/wohnmohr-contact/30min",
+    availableLanguage: ["English"],
+  },
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} jsonLd={jsonLd}>
   <Navbar />
   <main>
     <Hero />

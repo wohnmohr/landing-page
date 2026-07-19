@@ -1,0 +1,150 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/elements/Navbar.astro";
+import Footer from "../../components/elements/Footer.astro";
+import BtnLink from "../../components/shared/BtnLink.astro";
+import Container from "../../components/shared/Container.astro";
+import { rescueScenarios } from "../../utils/data";
+
+export function getStaticPaths() {
+  return rescueScenarios.map((story) => ({
+    params: { slug: story.slug },
+    props: { story },
+  }));
+}
+
+const { story } = Astro.props;
+
+const title = `${story.title} | Case Pattern | wohnmohr`;
+const description = `${story.outcome} — how wohnmohr approaches this rescue pattern.`;
+
+const approachBySlug: Record<string, string[]> = {
+  "vibe-coded-mvp-deploy-failure": [
+    "Cold-start the repo: install, env, run, note every manual hack",
+    "Lock secrets and kill client-exposed keys",
+    "Restore a reproducible staging deploy and basic CI",
+    "Stabilize the hottest click-paths before new features",
+  ],
+  "ai-automation-hallucinations": [
+    "Map where the bot can write or send without approval",
+    "Add human-in-the-loop on high-stakes actions",
+    "Ship a small eval suite for the failure modes you’ve already seen",
+    "Monitor false actions and tighten prompts/tools from real data",
+  ],
+  "ai-feature-demo-to-ship": [
+    "Replace brittle free-text with structured outputs where possible",
+    "Add release gates: smoke tests + basic AI evals",
+    "Baseline latency and token cost under realistic load",
+    "Hand over a path the team can change without fear",
+  ],
+};
+
+const approach = approachBySlug[story.slug] ?? [];
+---
+
+<Layout title={title} description={description}>
+  <Navbar variant="overlay" />
+  <main>
+    <header
+      class="relative overflow-hidden bg-ink pb-14 pt-32 text-white sm:pb-16 sm:pt-36"
+    >
+      <div class="absolute inset-0" aria-hidden="true">
+        <div
+          class="absolute inset-0 bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-coral via-gold to-aqua"
+        >
+        </div>
+      </div>
+      <Container className="relative max-w-3xl">
+        <a
+          href="/#rescue-stories"
+          class="text-sm font-semibold text-white/70 transition hover:text-gold"
+        >
+          ← Rescue patterns
+        </a>
+        <p class="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+          Case pattern
+        </p>
+        <h1
+          class="mt-3 font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-[2.6rem] md:leading-[1.15]"
+        >
+          {story.title}
+        </h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          Anonymized pattern we see often. Same playbook: diagnose, stabilize,
+          harden, hand over.
+        </p>
+      </Container>
+    </header>
+
+    <section class="py-14 md:py-20">
+      <Container className="max-w-3xl">
+        <div class="space-y-10">
+          <div data-reveal>
+            <h2 class="font-display text-2xl font-semibold text-ink">
+              Before
+            </h2>
+            <p class="mt-3 text-base leading-relaxed text-slate md:text-lg">
+              {story.before}
+            </p>
+          </div>
+          <div data-reveal>
+            <h2 class="font-display text-2xl font-semibold text-ink">
+              How we approached it
+            </h2>
+            <ol class="mt-4 space-y-3">
+              {
+                approach.map((step, i) => (
+                  <li class="flex gap-3 text-base text-slate">
+                    <span class="font-display font-semibold text-accent">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span>{step}</span>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+          <div data-reveal>
+            <h2 class="font-display text-2xl font-semibold text-ink">After</h2>
+            <p class="mt-3 text-base leading-relaxed text-slate md:text-lg">
+              {story.after}
+            </p>
+          </div>
+          <div
+            class="rounded-2xl border border-line bg-sand/70 px-6 py-6"
+            data-reveal
+          >
+            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+              Outcome
+            </p>
+            <p class="mt-2 font-display text-xl font-semibold text-ink">
+              {story.outcome}
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-12 flex flex-col gap-3 sm:flex-row" data-reveal>
+          <BtnLink
+            text="Score your MVP"
+            href="/tools/vibe-code-health-check"
+            variant="primary"
+            track="health_tool_click"
+            trackLocation="work"
+          />
+          <BtnLink
+            text="Book a Rescue Sprint call"
+            href="/#contact"
+            variant="secondary"
+            track="contact_cta_click"
+            trackLocation="work"
+          />
+        </div>
+      </Container>
+    </section>
+  </main>
+  <Footer />
+</Layout>

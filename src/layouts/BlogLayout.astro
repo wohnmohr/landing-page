@@ -18,9 +18,39 @@ const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
 });
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: post.description,
+  datePublished: post.date,
+  dateModified: post.date,
+  author: {
+    "@type": "Organization",
+    name: "wohnmohr",
+    url: "https://wohnmohr.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "wohnmohr",
+    url: "https://wohnmohr.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://wohnmohr.com/logos/main-logo.png",
+    },
+  },
+  mainEntityOfPage: `https://wohnmohr.com/blogs/${post.slug}/`,
+  keywords: post.tags.join(", "),
+};
 ---
 
-<Layout title={`${post.title} | wohnmohr`} description={post.description}>
+<Layout
+  title={`${post.title} | wohnmohr`}
+  description={post.description}
+  ogType="article"
+  jsonLd={jsonLd}
+>
   <Navbar variant="overlay" />
   <main>
     <article>
@@ -89,11 +119,18 @@ const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
               wohnmohr builds AI products, automations, and tests—and rescues
               vibe-coded projects when they go sideways.
             </p>
-            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <BtnLink
+                text="Free vibe-code scorecard"
+                href="/tools/vibe-code-health-check"
+                variant="primary"
+                track="health_tool_click"
+                trackLocation="blog"
+              />
               <BtnLink
                 text="Book a free intro call"
                 href="/#contact"
-                variant="primary"
+                variant="secondary"
                 track="contact_cta_click"
                 trackLocation="blog"
               />

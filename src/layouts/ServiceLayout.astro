@@ -13,9 +13,28 @@ export interface Props {
 
 const { service } = Astro.props;
 const others = servicePages.filter((s) => s.slug !== service.slug);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: service.title,
+  description: service.metaDescription,
+  url: `https://wohnmohr.com/services/${service.slug}/`,
+  provider: {
+    "@type": "ProfessionalService",
+    name: "wohnmohr",
+    url: "https://wohnmohr.com",
+  },
+  areaServed: "Worldwide",
+  serviceType: service.title,
+};
 ---
 
-<Layout title={service.metaTitle} description={service.metaDescription}>
+<Layout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  jsonLd={jsonLd}
+>
   <Navbar variant="overlay" />
   <main>
     <section class="relative overflow-hidden bg-ink pb-16 pt-32 text-white sm:pb-20 sm:pt-36">

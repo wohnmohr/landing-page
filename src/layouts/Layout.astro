@@ -2,42 +2,29 @@
 export interface Props {
   title: string;
   description?: string;
+  ogType?: "website" | "article";
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[] | null;
 }
 
 const {
   title,
   description = "wohnmohr is an AI consulting startup that builds AI products, automations, and test systems—and fixes vibe coding gone bad.",
+  ogType = "website",
+  jsonLd = null,
 } = Astro.props;
 
 const siteUrl = "https://wohnmohr.com";
-const canonical = Astro.url.href;
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
 const ogImage = `${siteUrl}/images/landing-image.webp`;
 const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY ?? "";
 const posthogHost =
   import.meta.env.PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "wohnmohr",
-  description,
-  url: siteUrl,
-  image: ogImage,
-  areaServed: "Worldwide",
-  serviceType: [
-    "AI Consulting",
-    "AI Product Development",
-    "AI Automation",
-    "AI Testing",
-    "Vibe Code Rescue",
-  ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "sales",
-    url: "https://calendly.com/wohnmohr-contact/30min",
-    availableLanguage: ["English"],
-  },
-};
+const jsonLdBlocks = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
 ---
 
 <!doctype html>
@@ -58,7 +45,7 @@ const jsonLd = {
     <meta name="author" content="wohnmohr" />
     <meta name="theme-color" content="#07111f" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="wohnmohr" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -71,6 +58,8 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <link rel="alternate" type="application/rss+xml" title="wohnmohr Blog" href="/blogs/rss.xml" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -78,7 +67,14 @@ const jsonLd = {
       rel="stylesheet"
     />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {
+      jsonLdBlocks.map((block) => (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(block)}
+        />
+      ))
+    }
     {
       posthogKey && (
         <script

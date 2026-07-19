@@ -1,0 +1,62 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getBlogPost } from "../../utils/blogs";
+
+const post = getBlogPost("ai-agent-vs-workflow-automation")!;
+---
+
+<BlogLayout post={post}>
+  <p>
+    “Let’s add an agent” is the hottest sentence in startup roadmaps right now.
+    Sometimes it’s right. Often you need a boring workflow with a small AI
+    step—and the agent can wait.
+  </p>
+
+  <h2>What an agent is good at</h2>
+  <p>
+    Agents shine when the path isn’t fully known: research, multi-step tooling,
+    or tasks where the model must choose the next action. They’re weaker when
+    every step must be correct, audited, and cheap.
+  </p>
+
+  <h2>What workflow automation is good at</h2>
+  <p>
+    Workflows win when the process is mostly known: intake → enrich → approve →
+    write to CRM. You can insert AI for drafting or classification, then keep
+    humans on high-stakes writes. Failures are easier to see and test.
+  </p>
+
+  <h2>Build this first</h2>
+  <ul>
+    <li>
+      <strong>Start with a workflow</strong> if the steps are clear and mistakes
+      are expensive (billing, customer email, CRM updates).
+    </li>
+    <li>
+      <strong>Add an agent</strong> when exploration or tool choice is the
+      product—and you’ve already gated writes.
+    </li>
+    <li>
+      <strong>Never skip evals</strong> for either path. Unconstrained bots
+      create cleanup work that eats the hours you hoped to save.
+    </li>
+  </ul>
+
+  <h2>A 15-minute decision test</h2>
+  <ol>
+    <li>Can you draw the happy path on one page?</li>
+    <li>What’s the worst wrong action the system could take?</li>
+    <li>Who approves that action today?</li>
+    <li>How will you know it failed tomorrow morning?</li>
+  </ol>
+  <p>
+    If you can’t answer those, don’t start with a free-roaming agent. Start with
+    <a href="/services/ai-automation">guardrailed automation</a>, then expand.
+  </p>
+  <p>
+    For production failure modes, read
+    <a href="/blogs/ai-automation-without-hallucinations"
+      >AI automation without the hallucination hangover</a
+    >.
+  </p>
+</BlogLayout>

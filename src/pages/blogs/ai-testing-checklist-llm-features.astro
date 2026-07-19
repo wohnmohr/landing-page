@@ -1,0 +1,67 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getBlogPost } from "../../utils/blogs";
+
+const post = getBlogPost("ai-testing-checklist-llm-features")!;
+---
+
+<BlogLayout post={post}>
+  <p>
+    Shipping an LLM feature without tests is like shipping payments without
+    receipts. It might work in the demo—and quietly fail for users in ways your
+    logs never catch.
+  </p>
+  <p>
+    Use this checklist before you flip the switch. Steal it, print it, argue with
+    it—but don’t skip it.
+  </p>
+
+  <h2>1. Define “wrong” before you define “smart”</h2>
+  <p>
+    Write 10–20 examples of bad outputs you refuse to ship: invented facts,
+    policy violations, empty answers, wrong tool calls. Those become your first
+    eval set.
+  </p>
+
+  <h2>2. Cover the critical path, not the whole model</h2>
+  <ul>
+    <li>Smoke tests for the non-AI plumbing (auth, routing, persistence)</li>
+    <li>Golden-set evals for the AI steps that touch users or data</li>
+    <li>Regression pack that runs on every prompt or tool change</li>
+  </ul>
+
+  <h2>3. Gate high-stakes actions</h2>
+  <p>
+    If the feature can send email, update CRM, refund, or delete—require a human
+    approval or a strict schema. Testing alone won’t save you from an unbounded
+    write.
+  </p>
+
+  <h2>4. Baseline latency and cost</h2>
+  <p>
+    Measure p50/p95 latency and tokens per successful task under a realistic
+    load. Set a budget alarm. “It felt fine in the hallway demo” is not a
+    baseline.
+  </p>
+
+  <h2>5. Watch production like a product surface</h2>
+  <ul>
+    <li>Log inputs/outputs with privacy redaction</li>
+    <li>Sample failures weekly into the eval set</li>
+    <li>Track refusal rate, tool-error rate, and human overrides</li>
+  </ul>
+
+  <blockquote>
+    The goal isn’t perfect AI. It’s knowing when it’s wrong—and stopping the
+    damage.
+  </blockquote>
+
+  <h2>Need this built into your release process?</h2>
+  <p>
+    <a href="/services/ai-testing">wohnmohr’s AI testing work</a> sets up evals,
+    regression gates, and release checks so your team can change prompts without
+    fear. Pair it with the
+    <a href="/tools/vibe-code-health-check">vibe-code health scorecard</a> if the
+    surrounding product is also AI-generated and fragile.
+  </p>
+</BlogLayout>

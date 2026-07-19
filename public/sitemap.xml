@@ -11,9 +11,39 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://wohnmohr.com/tools/vibe-code-health-check/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/faq/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://wohnmohr.com/blogs/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/blogs/vibe-coding-cursor-lovable-bolt-when-it-breaks/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/blogs/ai-agent-vs-workflow-automation/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/blogs/ai-testing-checklist-llm-features/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://wohnmohr.com/blogs/vibe-coded-mvp-rewrite-or-rescue/</loc>
@@ -22,6 +52,36 @@
   </url>
   <url>
     <loc>https://wohnmohr.com/blogs/ai-automation-without-hallucinations/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/compare/rescue-vs-rewrite/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/compare/ai-consultant-vs-freelancer/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/work/vibe-coded-mvp-deploy-failure/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/work/ai-automation-hallucinations/</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wohnmohr.com/work/ai-feature-demo-to-ship/</loc>
+    <lastmod>2026-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

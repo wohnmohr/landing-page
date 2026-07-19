@@ -223,10 +223,27 @@ export const techStack = [
 ];
 
 export type RescueScenario = {
+  slug: string;
   title: string;
   before: string;
   after: string;
   outcome: string;
+};
+
+export type ComparePage = {
+  slug: string;
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  headline: string;
+  intro: string;
+  leftTitle: string;
+  leftPoints: string[];
+  rightTitle: string;
+  rightPoints: string[];
+  verdict: string;
+  ctaLabel: string;
+  ctaHref: string;
 };
 
 export type FaqItem = {
@@ -251,6 +268,7 @@ export type ServicePage = {
 
 export const rescueScenarios: RescueScenario[] = [
   {
+    slug: "vibe-coded-mvp-deploy-failure",
     title: "Vibe-coded MVP that wouldn’t deploy",
     before:
       "A founder shipped a Cursor/ChatGPT-built app that worked locally—then failed CI, leaked keys, and broke on every second click.",
@@ -259,6 +277,7 @@ export const rescueScenarios: RescueScenario[] = [
     outcome: "Stable staging deploy + a clear keep/rewrite map for the next sprint.",
   },
   {
+    slug: "ai-automation-hallucinations",
     title: "AI automation that hallucinated in prod",
     before:
       "An ops bot drafted emails and CRM updates with confident wrong answers—and no evals to catch it.",
@@ -267,12 +286,72 @@ export const rescueScenarios: RescueScenario[] = [
     outcome: "Fewer false actions, measurable eval coverage, and a safer automation loop.",
   },
   {
+    slug: "ai-feature-demo-to-ship",
     title: "AI feature demo that couldn’t ship",
     before:
       "A polished agent demo with brittle prompts, no tests, and zero cost controls—great for investors, scary for users.",
     after:
       "We hardened the product path: structured outputs, testing gates, latency/cost baselines, and a real handoff.",
     outcome: "A launch-ready feature the team could change without fear.",
+  },
+];
+
+export const comparePages: ComparePage[] = [
+  {
+    slug: "rescue-vs-rewrite",
+    metaTitle: "Rescue vs Rewrite for Vibe-Coded MVPs | wohnmohr",
+    metaDescription:
+      "Should you rescue or rewrite an AI-generated MVP? Compare cost, risk, and speed—then pick the cheaper path to a shippable product.",
+    eyebrow: "Compare",
+    headline: "Rescue vs rewrite: which path costs less?",
+    intro:
+      "Most vibe-coded MVPs don’t need a full rewrite on day one. They need an honest triage: what to stabilize, what to replace, and what to stop shipping on.",
+    leftTitle: "Choose rescue when",
+    leftPoints: [
+      "Core flows work most of the time",
+      "The product idea is validated; engineering is the bottleneck",
+      "You can still run and explain the main paths",
+      "You need a stable deploy before the next demo or users",
+    ],
+    rightTitle: "Choose rewrite when",
+    rightPoints: [
+      "Nobody can explain critical paths—including the “author”",
+      "Secrets were leaked or auth is fundamentally broken",
+      "Every small change breaks unrelated features",
+      "Stack choices fight hosting, team skills, or cost reality",
+    ],
+    verdict:
+      "Start with a Rescue Sprint triage. You often rewrite the hot path and rescue the rest—cheaper than a blank-slate rebuild, safer than pretending the demo is production.",
+    ctaLabel: "Run the free scorecard",
+    ctaHref: "/tools/vibe-code-health-check",
+  },
+  {
+    slug: "ai-consultant-vs-freelancer",
+    metaTitle: "AI Consultant vs Freelancer for Startups | wohnmohr",
+    metaDescription:
+      "Hiring an AI freelancer or an AI consulting team? Compare ownership, rescue depth, testing, and when each model fits a startup.",
+    eyebrow: "Compare",
+    headline: "AI consultant vs freelancer: what startups actually need",
+    intro:
+      "Both can ship. The difference shows up when the demo meets production—evals, cost controls, handoff, and who owns the messy middle.",
+    leftTitle: "A consulting team fits when",
+    leftPoints: [
+      "You need build + rescue + testing under one roof",
+      "The codebase is already messy or investor-demo fragile",
+      "You want architecture decisions with delivery, not slides alone",
+      "Handover, docs, and maintainability matter as much as speed",
+    ],
+    rightTitle: "A freelancer fits when",
+    rightPoints: [
+      "Scope is a thin, well-defined feature",
+      "Your team can review AI risk and own production ops",
+      "You’re not mid-rescue on a failing vibe-coded MVP",
+      "You have strong internal product/engineering leadership",
+    ],
+    verdict:
+      "If you’re past “add a chat widget” and into “this has to work for users,” a small consulting team that ships and rescues usually beats a lone sprint with no evals or handoff.",
+    ctaLabel: "Book a free intro call",
+    ctaHref: "/#contact",
   },
 ];
 
