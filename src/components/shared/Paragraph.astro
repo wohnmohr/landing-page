@@ -3,9 +3,9 @@ export interface Props {
   className?: string;
 }
 
-const { className } = Astro.props;
+const { className = "" } = Astro.props;
 ---
 
-<p class={`md:text-lg text-heading-3 ${className}`}>
+<p class={`text-base leading-relaxed text-slate md:text-lg ${className}`}>
   <slot />
 </p>

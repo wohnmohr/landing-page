@@ -1,70 +1,106 @@
 ---
+import BtnLink from "../shared/BtnLink.astro";
 import Container from "../shared/Container.astro";
 import Paragraph from "../shared/Paragraph.astro";
+import Title from "../shared/Title.astro";
 ---
 
-<section id="contactus" class="pb-20">
+<section id="contact" class="scroll-mt-24 pb-20 md:pb-28" aria-labelledby="contact-heading">
   <Container>
     <div
-      class="w-full relative py-8 md:py-10 px-6 md:px-8 rounded-2xl bg-gradient-to-tr from-gray-100 to-gray-200 dark:from-gray-900"
+      class="relative overflow-hidden rounded-2xl px-6 py-12 text-white sm:px-10 md:px-14 md:py-16"
+      style="background: linear-gradient(135deg, #07111f 0%, #0a3d4a 45%, #0f766e 78%, #ff6b35 140%);"
+      data-reveal="scale"
     >
-      <div class="absolute right-0 top-0 h-full w-full flex justify-end">
-        <div class="w-28 h-28 overflow-auto flex rounded-xl relative blur-2xl">
-          <span class="absolute w-16 h-16 -top-1 -right-1 rounded-md rotate-45"
-          ></span>
-          <span
-            class="absolute w-16 h-16 -bottom-1 -right-1 rounded-md rotate-45"
-          ></span>
-          <span
-            class="absolute w-16 h-16 -bottom-1 -left-1 rounded-md rotate-45"
-          ></span>
+      <div
+        class="pointer-events-none absolute -right-16 top-0 h-64 w-64 rounded-full bg-gold/40 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute -left-10 bottom-0 h-56 w-56 rounded-full bg-aqua/35 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="relative mx-auto max-w-2xl text-center">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+          Let’s talk
+        </p>
+        <Title as="h2" id="contact-heading" className="mt-3 text-white">
+          Building AI—or stuck after vibe coding?
+        </Title>
+        <Paragraph className="mx-auto mt-4 max-w-xl text-white/80">
+          Tell us what you’re shipping (or what’s broken). We’ll recommend a
+          Rescue Sprint, Build & Ship engagement, or ongoing Automate & Assure
+          support.
+        </Paragraph>
+
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <BtnLink
+            text="Book a free intro call"
+            href="https://calendly.com/wohnmohr-contact/30min"
+            variant="bright"
+            external
+            className="w-full sm:w-auto"
+            track="calendly_click"
+            trackLocation="contact"
+          />
+          <BtnLink
+            text="Message on WhatsApp"
+            href="https://wa.me/918248438399"
+            variant="ghost"
+            external
+            className="w-full sm:w-auto"
+            track="whatsapp_click"
+            trackLocation="contact"
+          />
         </div>
       </div>
 
-      <div class="absolute left-0 bottom-0 h-full w-full flex items-end">
-        <div class="w-28 h-28 overflow-auto flex rounded-xl relative blur-2xl">
-          <span class="absolute w-16 h-16 -top-1 -right-1 rounded-md rotate-45"
-          ></span>
-          <span
-            class="absolute w-16 h-16 -bottom-1 -right-1 rounded-md rotate-45"
-          ></span>
-          <span
-            class="absolute w-16 h-16 -bottom-1 -left-1 rounded-md rotate-45"
-          ></span>
-        </div>
-      </div>
-      <div class="mx-auto text-center max-w-xl md:max-w-2xl relative">
-        <h1
-          class="text-3xl/tight sm:text-4xl/tight md:text-5xl/tight
-          font-bold text-heading-1"
-        >
-          From <span
-            class="text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 from-20% via-primary via-30% to-green-600"
-            >Concept to Code</span
-          >, Where Your Ideas Come to Life.
-        </h1>
-        <Paragraph className={"pt-10"}>
-          Bring your ideas—watch them become reality with us.
-        </Paragraph>
-        <div class="mx-auto max-w-md sm:max-w-xl pt-10">
-          <iframe
-            data-tally-src="https://tally.so/embed/wv4Jv0?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-            loading="lazy"
-            width="100%"
-            height="300"
-            title="Wohnmohr Contact Form"></iframe>
-        </div>
-      </div>
-      <!-- Calendly block -->
-      <div class="mt-6 text-center relative" id="software_solutions">
-        <h2 class="text-lg md:text-xl font-semibold text-heading-2">
-          Ready to create? Let's build your dream!
-        </h2>
+      <div class="relative mx-auto mt-12 grid max-w-5xl gap-10 lg:grid-cols-2 lg:gap-12">
         <div
-          class="calendly-inline-widget pr-8"
-          data-url="https://calendly.com/wohnmohr-contact/30min"
-          style="min-width:320px;height:700px;"
+          class="rounded-xl bg-white p-4 shadow-xl shadow-ink/25 sm:p-6"
+          data-reveal
+          style="--reveal-delay: 100ms"
         >
+          <h3 class="font-display text-lg font-bold text-ink">
+            Send a quick brief
+          </h3>
+          <p class="mt-1 text-sm text-slate">
+            Product idea, automation need, or “please fix this vibe-coded
+            repo”—drop a few lines and we’ll reply.
+          </p>
+          <div class="mt-4">
+            <iframe
+              data-tally-src="https://tally.so/embed/wv4Jv0?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              loading="lazy"
+              width="100%"
+              height="320"
+              title="wohnmohr contact form"
+              class="min-h-[280px] w-full border-0"></iframe>
+          </div>
+        </div>
+
+        <div
+          class="rounded-xl bg-white/10 p-2 backdrop-blur-sm sm:p-3"
+          data-reveal
+          style="--reveal-delay: 180ms"
+        >
+          <h3 class="px-3 pt-3 font-display text-lg font-bold text-white sm:px-4">
+            Or pick a time
+          </h3>
+          <p class="px-3 pt-1 text-sm text-white/75 sm:px-4">
+            30 minutes to map build, automate, test—or rescue.
+          </p>
+          <div
+            class="calendly-inline-widget mt-2"
+            data-url="https://calendly.com/wohnmohr-contact/30min"
+            style="min-width:280px;height:640px;"
+            role="region"
+            aria-label="Calendly booking calendar"
+          >
+          </div>
         </div>
       </div>
     </div>

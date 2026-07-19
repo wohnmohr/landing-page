@@ -1,0 +1,90 @@
+---
+import BtnLink from "../shared/BtnLink.astro";
+import Container from "../shared/Container.astro";
+import Paragraph from "../shared/Paragraph.astro";
+import Title from "../shared/Title.astro";
+import { engagements } from "../../utils/data";
+---
+
+<section
+  id="engagements"
+  class="scroll-mt-24 py-20 md:py-28"
+  aria-labelledby="engagements-heading"
+>
+  <Container>
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+        Ways to start
+      </p>
+      <Title as="h2" id="engagements-heading" className="mt-3">
+        Rescue it. Build it. Keep it running.
+      </Title>
+      <Paragraph className="mt-4">
+        Pick the lane that matches where you are—stuck after vibe coding, ready
+        to ship an AI product, or needing ongoing automation and testing help.
+      </Paragraph>
+    </div>
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-3">
+      {
+        engagements.map((item, index) => (
+          <article
+            class:list={[
+              "hover-lift flex flex-col rounded-2xl p-7 sm:p-8",
+              index === 1
+                ? "bg-gradient-to-br from-ink via-[#12324a] to-accent text-white shadow-[0_24px_50px_-24px_rgba(10,22,40,0.65)]"
+                : "border border-line bg-white text-ink",
+            ]}
+            data-reveal="scale"
+            style={`--reveal-delay: ${index * 110}ms`}
+          >
+            <p
+              class:list={[
+                "text-xs font-semibold uppercase tracking-[0.16em]",
+                index === 1 ? "text-gold" : "text-coral",
+              ]}
+            >
+              {item.duration}
+            </p>
+            <h3 class="mt-3 font-display text-2xl font-bold">{item.title}</h3>
+            <p
+              class:list={[
+                "mt-3 text-sm leading-relaxed",
+                index === 1 ? "text-white/75" : "text-slate",
+              ]}
+            >
+              {item.description}
+            </p>
+            <ul class="mt-6 flex-1 space-y-3">
+              {item.points.map((point) => (
+                <li
+                  class:list={[
+                    "flex items-start gap-2 text-sm",
+                    index === 1 ? "text-white/90" : "text-ink/85",
+                  ]}
+                >
+                  <span
+                    class:list={[
+                      "mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full",
+                      index === 1 ? "bg-aqua" : "bg-accent",
+                    ]}
+                    aria-hidden="true"
+                  />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row"
+      data-reveal
+    >
+      <BtnLink text="See pricing" href="/pricing" variant="primary" />
+      <BtnLink text="Talk to us" href="#contact" variant="secondary" />
+    </div>
+  </Container>
+</section>

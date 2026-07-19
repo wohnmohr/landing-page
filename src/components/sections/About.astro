@@ -1,0 +1,80 @@
+---
+import Container from "../shared/Container.astro";
+import Paragraph from "../shared/Paragraph.astro";
+import Title from "../shared/Title.astro";
+import { audiences, principles } from "../../utils/data";
+---
+
+<section id="about" class="scroll-mt-24 py-20 md:py-28" aria-labelledby="about-heading">
+  <Container>
+    <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <div data-reveal>
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+          Who we are
+        </p>
+        <Title as="h2" id="about-heading" className="mt-3">
+          An AI consulting startup for builders who need it done right
+        </Title>
+        <Paragraph className="mt-4">
+          wohnmohr helps teams ship AI products, automations, and test systems—
+          or rescue projects when vibe coding got you 80% there and 100% stuck.
+        </Paragraph>
+        <Paragraph className="mt-4">
+          We’re not a slide-deck agency. We write code, harden AI workflows, and
+          leave you with something you can actually maintain.
+        </Paragraph>
+
+        <div class="mt-10 grid gap-5 sm:grid-cols-2">
+          {
+            principles.map((item, index) => (
+              <div
+                class="border-t-4 border-accent pt-4"
+                data-reveal
+                style={`--reveal-delay: ${120 + index * 80}ms`}
+              >
+                <h3 class="font-display text-lg font-bold text-ink">
+                  {item.title}
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate">
+                  {item.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <aside
+        class="relative overflow-hidden rounded-2xl bg-ink px-7 py-8 text-white sm:px-8"
+        data-reveal="right"
+        style="--reveal-delay: 120ms"
+      >
+        <div
+          class="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full bg-coral/50 blur-2xl"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="pointer-events-none absolute bottom-0 left-0 h-36 w-36 rounded-full bg-aqua/40 blur-2xl"
+          aria-hidden="true"
+        >
+        </div>
+        <p class="relative text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+          We help
+        </p>
+        <ul class="relative mt-6 space-y-6">
+          {
+            audiences.map((item) => (
+              <li>
+                <h3 class="font-display text-xl font-bold">{item.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/75">
+                  {item.description}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+  </Container>
+</section>

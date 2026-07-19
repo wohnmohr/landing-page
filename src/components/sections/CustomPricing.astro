@@ -1,0 +1,123 @@
+---
+import BtnLink from "../shared/BtnLink.astro";
+import Container from "../shared/Container.astro";
+---
+
+<section
+  id="enterprise"
+  class="scroll-mt-24 pb-20 md:pb-28"
+  aria-labelledby="enterprise-heading"
+>
+  <Container>
+    <div
+      class="relative overflow-hidden rounded-2xl px-6 py-12 text-white sm:px-10 md:px-14 md:py-16"
+      style="background: linear-gradient(135deg, #07111f 0%, #0a3d4a 48%, #0f9f90 85%, #ff6b35 150%);"
+      data-reveal="scale"
+    >
+      <div
+        class="pointer-events-none absolute -right-12 top-0 h-56 w-56 rounded-full bg-gold/35 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="relative mx-auto max-w-2xl text-center">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+          Enterprise plan
+        </p>
+        <h2
+          id="enterprise-heading"
+          class="mt-3 font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl"
+        >
+          Bigger AI programs? Contact us.
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
+          Multi-product AI builds, org-wide automation, serious testing programs,
+          or large rescue efforts—get a custom Enterprise plan. Contact us and
+          we’ll scope it with you.
+        </p>
+      </div>
+
+      <ul
+        class="relative mx-auto mt-10 grid max-w-4xl gap-4 text-left sm:grid-cols-3"
+      >
+        <li
+          class="hover-lift rounded-xl bg-white/10 px-5 py-4 backdrop-blur-sm"
+          data-reveal
+          style="--reveal-delay: 80ms"
+        >
+          <p class="font-display text-lg font-semibold">Complex scope</p>
+          <p class="mt-2 text-sm text-white/75">
+            Multiple products, migrations, or cross-team AI rollouts.
+          </p>
+        </li>
+        <li
+          class="hover-lift rounded-xl bg-white/10 px-5 py-4 backdrop-blur-sm"
+          data-reveal
+          style="--reveal-delay: 160ms"
+        >
+          <p class="font-display text-lg font-semibold">Security & SLAs</p>
+          <p class="mt-2 text-sm text-white/75">
+            Compliance reviews, reporting, and dedicated response windows.
+          </p>
+        </li>
+        <li
+          class="hover-lift rounded-xl bg-white/10 px-5 py-4 backdrop-blur-sm"
+          data-reveal
+          style="--reveal-delay: 240ms"
+        >
+          <p class="font-display text-lg font-semibold">Custom commercials</p>
+          <p class="mt-2 text-sm text-white/75">
+            Fixed fee, T&M, or milestone models matched to your budget cycle.
+          </p>
+        </li>
+      </ul>
+
+      <div
+        class="relative mx-auto mt-10 flex max-w-xl flex-col items-center justify-center gap-3 sm:flex-row"
+        data-reveal
+      >
+        <BtnLink
+          text="Contact us for Enterprise"
+          href="https://calendly.com/wohnmohr-contact/30min"
+          variant="bright"
+          external
+          className="w-full sm:w-auto"
+          track="calendly_click"
+          trackLocation="enterprise"
+        />
+        <BtnLink
+          text="WhatsApp"
+          href="https://wa.me/918248438399"
+          variant="ghost"
+          external
+          className="w-full sm:w-auto"
+          track="whatsapp_click"
+          trackLocation="enterprise"
+        />
+      </div>
+
+      <div
+        class="relative mx-auto mt-12 max-w-xl rounded-xl bg-white p-4 shadow-xl shadow-ink/25 sm:p-6"
+        data-reveal
+        style="--reveal-delay: 120ms"
+      >
+        <h3 class="font-display text-lg font-semibold text-ink">
+          Enterprise contact form
+        </h3>
+        <p class="mt-1 text-sm text-slate">
+          Tell us your company, regions, and requirements—we’ll follow up with a
+          custom plan.
+        </p>
+        <div class="mt-4">
+          <iframe
+            data-tally-src="https://tally.so/embed/wv4Jv0?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="320"
+            title="wohnmohr enterprise contact form"
+            class="min-h-[280px] w-full border-0"></iframe>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

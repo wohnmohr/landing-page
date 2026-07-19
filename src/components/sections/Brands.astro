@@ -1,113 +1,44 @@
 ---
 import Container from "../shared/Container.astro";
 import Title from "../shared/Title.astro";
+import { techStack } from "../../utils/data";
 ---
 
-<section>
-  <Container className="space-y-8">
-    <div class="text-center max-w-3xl mx-auto">
-      <Title> A Glimpse Of Our Tech Ecosystem</Title>
+<section id="stack" class="scroll-mt-24 py-20 md:py-24" aria-labelledby="stack-heading">
+  <Container className="space-y-10">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-coral">
+        Stack
+      </p>
+      <Title as="h2" id="stack-heading" className="mt-3">
+        Built with tools your team can keep
+      </Title>
+      <p class="mt-4 text-base text-slate md:text-lg">
+        Whether we’re shipping an AI product or untangling vibe-coded output, we
+        use practical stacks you can own after we hand over.
+      </p>
     </div>
-    <div class="flex justify-center flex-wrap gap-4">
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/python.svg"
-          width="100"
-          height="60"
-          alt="spotify"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/node.svg"
-          width="100"
-          height="60"
-          alt="slack"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/aws.svg"
-          width="100"
-          height="60"
-          alt="paypal"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/google_cloud.svg"
-          width="100"
-          height="60"
-          alt="spotify"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/docker.svg"
-          width="100"
-          height="60"
-          alt="slack"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/react.svg"
-          width="100"
-          height="60"
-          alt="paypal"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/javascript.svg"
-          width="100"
-          height="60"
-          alt="spotify"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/next.svg"
-          width="100"
-          height="60"
-          alt="slack"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/figma.svg"
-          width="100"
-          height="60"
-          alt="paypal"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/selenium.svg"
-          width="100"
-          height="60"
-          alt="paypal"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-4 sm:p-5 rounded-xl bg-body border border-box-border group">
-        <img
-          src="/logos/cypress.svg"
-          width="100"
-          height="60"
-          alt="paypal"
-          class="h-7 sm:h-10 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
-        />
-      </div>
-    </div>
+
+    <ul class="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+      {
+        techStack.map((tech, index) => (
+          <li
+            class="hover-lift inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-3 shadow-[0_10px_24px_-20px_rgba(10,22,40,0.45)] hover:border-accent/40"
+            data-reveal
+            style={`--reveal-delay: ${(index % 6) * 50}ms`}
+          >
+            <img
+              src={tech.src}
+              width="100"
+              height="40"
+              alt={`${tech.name} logo`}
+              class="h-8 w-auto sm:h-9"
+              loading="lazy"
+            />
+            <span class="sr-only">{tech.name}</span>
+          </li>
+        ))
+      }
+    </ul>
   </Container>
 </section>

@@ -1,18 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/elements/Navbar.astro";
+import Footer from "../components/elements/Footer.astro";
 import Hero from "../components/sections/Hero.astro";
-import Services from "../components/sections/Whyus.astro";
-import Features from "../components/sections/Pipeline.astro";
-import CTA from "../components/sections/CTA.astro";
+import About from "../components/sections/About.astro";
+import Capabilities from "../components/sections/Capabilities.astro";
+import RescueStories from "../components/sections/RescueStories.astro";
+import Workflow from "../components/sections/Workflow.astro";
+import Engagements from "../components/sections/Engagements.astro";
+import Team from "../components/sections/Team.astro";
+import LeadMagnet from "../components/sections/LeadMagnet.astro";
+import FAQ from "../components/sections/FAQ.astro";
 import Brands from "../components/sections/Brands.astro";
+import CTA from "../components/sections/CTA.astro";
+
+const title =
+  "wohnmohr | AI Consulting Startup—Build, Automate, Test & Fix Vibe Coding";
+const description =
+  "wohnmohr is an AI consulting startup. We build AI products, automations, and test systems—and rescue projects when vibe coding goes bad. Book a free intro call.";
 ---
 
-<Layout title="Welcome to Wohnmohr, Best software builders for startup.">
-  <main class="flex flex-col gap-y-20 md:gap-y-32 overflow-hidden">
+<Layout title={title} description={description}>
+  <Navbar />
+  <main>
     <Hero />
-    <Services />
-    <Features />
+    <About />
+    <Capabilities />
+    <RescueStories />
+    <Workflow />
+    <Engagements />
+    <Team />
+    <LeadMagnet />
+    <FAQ />
     <Brands />
     <CTA />
   </main>
+  <Footer />
 </Layout>

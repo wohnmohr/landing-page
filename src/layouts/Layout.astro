@@ -1,155 +1,409 @@
 ---
-import Footer from "../components/elements/Footer.astro";
-import Navbar from "../components/elements/Navbar.astro";
-
 export interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = "wohnmohr is an AI consulting startup that builds AI products, automations, and test systems—and fixes vibe coding gone bad.",
+} = Astro.props;
+
+const siteUrl = "https://wohnmohr.com";
+const canonical = Astro.url.href;
+const ogImage = `${siteUrl}/images/landing-image.webp`;
+const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY ?? "";
+const posthogHost =
+  import.meta.env.PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "wohnmohr",
+  description,
+  url: siteUrl,
+  image: ogImage,
+  areaServed: "Worldwide",
+  serviceType: [
+    "AI Consulting",
+    "AI Product Development",
+    "AI Automation",
+    "AI Testing",
+    "Vibe Code Rescue",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    url: "https://calendly.com/wohnmohr-contact/30min",
+    availableLanguage: ["English"],
+  },
+};
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/ico" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="wohnmohr - best technology solutions." />
-    <title>wohnmohr - Empower Your Ideas with Expert Engineering Support</title>
-    <meta
-      name="description"
-      content="We provide tailored software and services for startup founders, solopreneurs, and first-time entrepreneurs. Grow your business with our expert solutions."
-    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="startup software, entrepreneur services, solopreneur tools, business growth"
+      content="AI consulting startup, vibe code rescue, AI automation, AI testing, AI product development, fix AI generated code, wohnmohr"
     />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="wohnmohr" />
+    <meta name="theme-color" content="#07111f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="wohnmohr" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {
+      posthogKey && (
+        <script
+          define:vars={{ posthogKey, posthogHost }}
+          is:inline
+        >
+          !(function (t, e) {
+            var o, n, p, r;
+            e.__SV ||
+              ((window.posthog = e),
+              (e._i = []),
+              (e.init = function (i, s, a) {
+                function g(t, e) {
+                  var o = e.split(".");
+                  2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                    (t[e] = function () {
+                      t.push(
+                        [e].concat(Array.prototype.slice.call(arguments, 0))
+                      );
+                    });
+                }
+                ((p = t.createElement("script")).type = "text/javascript"),
+                  (p.crossOrigin = "anonymous"),
+                  (p.async = !0),
+                  (p.src =
+                    s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") +
+                    "/static/array.js"),
+                  (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(
+                    p,
+                    r
+                  );
+                var u = e;
+                void 0 !== a ? (u = e[a] = []) : (a = "posthog");
+                u.people = u.people || [];
+                u.toString = function (t) {
+                  var e = "posthog";
+                  return (
+                    "posthog" !== a && (e += "." + a),
+                    t || (e += " (stub)"),
+                    e
+                  );
+                };
+                u.people.toString = function () {
+                  return u.toString(1) + ".people (stub)";
+                };
+                o =
+                  "init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(
+                    " "
+                  );
+                for (n = 0; n < o.length; n++) g(u, o[n]);
+                e._i.push([i, s, a]);
+              }),
+              (e.__SV = 1));
+          })(document, window.posthog || []);
+          posthog.init(posthogKey, {
+            api_host: posthogHost,
+            person_profiles: "identified_only",
+            capture_pageview: true,
+            capture_pageleave: true,
+          });
+        </script>
+      )
+    }
     <script
       type="text/javascript"
       src="https://assets.calendly.com/assets/external/widget.js"
       async></script>
+    <script src="https://tally.so/widgets/embed.js" defer></script>
   </head>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <script src="https://tally.so/widgets/embed.js"></script>
 
-  <body class="overflow-hidden overflow-y-auto bg-body">
-    <Navbar />
+  <body class="bg-mist text-ink antialiased">
+    <a
+      href="#contact"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-white"
+    >
+      Skip to contact
+    </a>
     <slot />
-    <Footer />
   </body>
-  <script>
-    const switchTheme = document.querySelector(
-      "[data-switch-theme]"
-    ) as HTMLButtonElement;
 
-    if (
-      localStorage.getItem("appTheme") === "light" ||
-      (!("appTheme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("light");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    if (switchTheme) {
-      switchTheme.addEventListener("click", (e) => {
-        e.preventDefault();
-        const doc = document.documentElement;
-        if (doc) {
-          if (localStorage.getItem("appTheme")) {
-            if (localStorage.getItem("appTheme") === "light") {
-              doc.classList.add("dark");
-              localStorage.setItem("appTheme", "dark");
-            } else {
-              document.documentElement.classList.remove("dark");
-              localStorage.setItem("appTheme", "light");
-            }
-          } else {
-            if (doc.classList.contains("dark")) {
-              doc.classList.remove("dark");
-              localStorage.setItem("appTheme", "light");
-            } else {
-              doc.classList.add("dark");
-              localStorage.setItem("appTheme", "dark");
-            }
-          }
-        }
-      });
-    }
-  </script>
   <script>
     const toggleMenu = document.querySelector(
       "[data-toggle-nav]"
-    ) as HTMLButtonElement;
-    const navbar = document.querySelector("[data-navbar]") as HTMLDivElement;
+    ) as HTMLButtonElement | null;
+    const navbar = document.querySelector(
+      "[data-navbar]"
+    ) as HTMLDivElement | null;
     const overlayNav = document.querySelector(
       "[data-nav-overlay]"
-    ) as HTMLDivElement;
-    if (toggleMenu) {
+    ) as HTMLDivElement | null;
+
+    const closeNav = () => {
+      if (!toggleMenu || !navbar || !overlayNav) return;
+      toggleMenu.setAttribute("data-open-nav", "false");
+      toggleMenu.setAttribute("aria-expanded", "false");
+      navbar.setAttribute("data-open", "false");
+      overlayNav.setAttribute("data-is-visible", "false");
+      document.body.classList.remove("!overflow-y-hidden");
+      navbar.style.height = "0px";
+    };
+
+    if (toggleMenu && navbar && overlayNav) {
       toggleMenu.addEventListener("click", (e) => {
         e.preventDefault();
-        if (toggleMenu.getAttribute("data-open-nav") === "false") {
+        const isClosed = toggleMenu.getAttribute("data-open-nav") === "false";
+        if (isClosed) {
           toggleMenu.setAttribute("data-open-nav", "true");
+          toggleMenu.setAttribute("aria-expanded", "true");
+          navbar.setAttribute("data-open", "true");
           overlayNav.setAttribute("data-is-visible", "true");
           document.body.classList.add("!overflow-y-hidden");
           navbar.style.height = `${navbar.scrollHeight}px`;
         } else {
-          toggleMenu.setAttribute("data-open-nav", "false");
-          overlayNav.setAttribute("data-is-visible", "false");
-          document.body.classList.remove("!overflow-y-hidden");
-          navbar.style.height = "0px";
+          closeNav();
         }
       });
 
-      navbar.addEventListener("click", () => {
-        toggleMenu.setAttribute("data-open-nav", "false");
-        overlayNav.setAttribute("data-is-visible", "false");
-        document.body.classList.remove("!overflow-y-hidden");
-        navbar.style.height = "0px";
+      navbar.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement | null;
+        if (target?.closest("a")) closeNav();
       });
-
-      overlayNav.addEventListener("click", () => {
-        toggleMenu.setAttribute("data-open-nav", "false");
-        overlayNav.setAttribute("data-is-visible", "false");
-        document.body.classList.remove("!overflow-y-hidden");
-        navbar.style.height = "0px";
-      });
+      overlayNav.addEventListener("click", closeNav);
     }
+
+    const year = document.getElementById("year");
+    if (year) year.textContent = String(new Date().getFullYear());
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    requestAnimationFrame(() => {
+      document.documentElement.classList.add("motion-ready");
+    });
+
+    const revealEls = document.querySelectorAll<HTMLElement>("[data-reveal]");
+
+    if (reduceMotion) {
+      revealEls.forEach((el) => el.classList.add("is-revealed"));
+    } else if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("is-revealed"));
+    }
+
+    // Smooth in-page hash navigation (including from /pricing)
+    document.querySelectorAll('a[href^="/#"], a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = (link as HTMLAnchorElement).getAttribute("href");
+        if (!href) return;
+        const hash = href.includes("#") ? `#${href.split("#")[1]}` : "";
+        if (!hash || hash === "#") return;
+        const onHome =
+          window.location.pathname === "/" ||
+          window.location.pathname === "/index.html";
+        if (href.startsWith("/#") && !onHome) return;
+        const el = document.querySelector(hash);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+        history.pushState(null, "", hash);
+        closeNav();
+      });
+    });
+
+    type TrackProps = Record<string, string>;
+
+    const trackEvent = (name: string, props: TrackProps = {}) => {
+      const w = window as Window & {
+        posthog?: { capture: (event: string, properties?: TrackProps) => void };
+      };
+      if (typeof w.posthog?.capture === "function") {
+        w.posthog.capture(name, props);
+      }
+    };
+
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement | null;
+      const el = target?.closest<HTMLElement>("[data-track]");
+      if (!el) return;
+      const name = el.dataset.track;
+      if (!name) return;
+      const props: TrackProps = {};
+      if (el.dataset.trackLocation) {
+        props.location = el.dataset.trackLocation;
+      }
+      const href = el.getAttribute("href");
+      if (href) props.href = href;
+      trackEvent(name, props);
+    });
   </script>
 
   <style is:global>
     :root {
-      --color-bg: 255 255 255;
-      --color-border: 255 255 255;
-      --color-box: 255 255 255;
-      --box-border: 229 231 235;
-      --box-sd: 226 232 240 / 0.5;
-      --heading-1: 23 37 84;
-      --heading-2: 31 41 55;
-      --heading-3: 55 65 81;
-    }
-
-    .dark {
-      --color-bg: 3 7 18;
-      --color-box: 17 24 39;
-      --box-border: 243 244 246/0.1;
-      --box-sd: transparent;
-
-      --heading-1: 255 255 255;
-      --heading-2: 243 244 246;
-      --heading-3: 209 213 219;
+      --color-ink: #07111f;
+      --color-mist: #f4f7fb;
+      --color-sand: #e8f0f4;
+      --color-slate: #44566a;
+      --color-accent: #0f9f90;
+      --color-accent-deep: #0b7a70;
+      --color-coral: #ff6b35;
+      --color-gold: #f5a623;
+      --color-aqua: #2ec4b6;
+      --color-line: rgba(7, 17, 31, 0.12);
+      --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     html {
       scroll-behavior: smooth;
     }
+
     body {
-      font-family: "Raleway", sans-serif;
+      font-family: "Source Sans 3", sans-serif;
+      background-image:
+        radial-gradient(
+          ellipse 70% 45% at 0% 0%,
+          rgba(46, 196, 182, 0.16),
+          transparent 55%
+        ),
+        radial-gradient(
+          ellipse 55% 40% at 100% 5%,
+          rgba(255, 107, 53, 0.12),
+          transparent 50%
+        ),
+        radial-gradient(
+          ellipse 40% 30% at 70% 100%,
+          rgba(245, 166, 35, 0.1),
+          transparent 55%
+        ),
+        linear-gradient(180deg, #f7fafc 0%, #f4f7fb 45%, #eef4f7 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    ::selection {
+      background: rgba(255, 107, 53, 0.25);
+      color: #07111f;
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translate3d(0, 32px, 0);
+      filter: blur(2px);
+      transition:
+        opacity 0.8s var(--ease-out-soft),
+        transform 0.8s var(--ease-out-soft),
+        filter 0.8s var(--ease-out-soft);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform, filter;
+    }
+
+    [data-reveal="left"] {
+      transform: translate3d(-32px, 0, 0);
+    }
+
+    [data-reveal="right"] {
+      transform: translate3d(32px, 0, 0);
+    }
+
+    [data-reveal="scale"] {
+      transform: translate3d(0, 20px, 0) scale(0.96);
+    }
+
+    [data-reveal].is-revealed {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0);
+    }
+
+    .nav-animate {
+      opacity: 0;
+      transform: translate3d(0, -10px, 0);
+    }
+
+    .motion-ready .nav-animate {
+      animation: nav-in 0.7s var(--ease-out-soft) both;
+      animation-delay: var(--nav-delay, 0ms);
+    }
+
+    @keyframes nav-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, -10px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    [data-pricing-panel] {
+      animation: panel-in 0.45s var(--ease-out-soft) both;
+    }
+
+    @keyframes panel-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 14px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .hover-lift {
+      transition:
+        transform 0.35s var(--ease-out-soft),
+        box-shadow 0.35s var(--ease-out-soft),
+        border-color 0.35s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px -24px rgba(7, 17, 31, 0.45);
     }
 
     [data-toggle-nav][data-open-nav="true"] #line1 {
@@ -163,9 +417,35 @@ const { title } = Astro.props;
       transform: translateY(-0.375rem) rotate(-40deg);
     }
 
+    [data-navbar][data-open="true"] {
+      border: 1px solid var(--color-line);
+      box-shadow: 0 16px 40px -24px rgba(11, 31, 28, 0.45);
+    }
+
     [data-nav-overlay][data-is-visible="true"] {
       visibility: visible;
       display: flex;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      [data-reveal],
+      [data-pricing-panel],
+      .hover-lift,
+      .nav-animate,
+      .animate-fade-up,
+      .animate-fade-in,
+      .animate-hero-pan,
+      .animate-accent-line {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
     }
   </style>
 </html>

@@ -1,0 +1,94 @@
+---
+import BtnLink from "../shared/BtnLink.astro";
+import Container from "../shared/Container.astro";
+---
+
+<section
+  id="health-check"
+  class="scroll-mt-24 py-16 md:py-20"
+  aria-labelledby="health-check-heading"
+>
+  <Container>
+    <div
+      class="relative overflow-hidden rounded-2xl border border-line bg-ink px-6 py-10 text-white sm:px-10 md:flex md:items-center md:justify-between md:gap-10 md:py-12"
+      data-reveal="scale"
+    >
+      <div
+        class="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full bg-coral/40 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative max-w-xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+          Free health check
+        </p>
+        <h2
+          id="health-check-heading"
+          class="mt-3 font-display text-2xl font-semibold tracking-[-0.02em] sm:text-3xl"
+        >
+          Not ready to book a full engagement?
+        </h2>
+        <p class="mt-3 text-base leading-relaxed text-white/75">
+          Get a free AI / vibe-code health check. Share your repo situation or
+          idea—we’ll reply with what’s risky, what’s salvageable, and a sensible
+          next step.
+        </p>
+        <ul class="mt-5 space-y-2 text-sm text-white/80">
+          <li class="flex gap-2">
+            <span class="text-aqua" aria-hidden="true">→</span>
+            Quick triage of build vs rescue
+          </li>
+          <li class="flex gap-2">
+            <span class="text-aqua" aria-hidden="true">→</span>
+            Top risks (deploy, quality, cost, security)
+          </li>
+          <li class="flex gap-2">
+            <span class="text-aqua" aria-hidden="true">→</span>
+            Recommended package if you want help
+          </li>
+        </ul>
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+          <BtnLink
+            text="Request health check"
+            href="#health-check-form"
+            variant="bright"
+            className="w-full sm:w-auto"
+            track="health_check_click"
+            trackLocation="lead_magnet"
+          />
+          <BtnLink
+            text="WhatsApp the brief"
+            href="https://wa.me/918248438399?text=Hi%20wohnmohr%20—%20I%27d%20like%20a%20free%20AI%20%2F%20vibe-code%20health%20check."
+            variant="ghost"
+            external
+            className="w-full sm:w-auto"
+            track="whatsapp_click"
+            trackLocation="lead_magnet"
+          />
+        </div>
+      </div>
+
+      <div
+        id="health-check-form"
+        class="relative mt-8 w-full max-w-md scroll-mt-28 rounded-xl bg-white p-4 text-ink shadow-xl shadow-ink/30 sm:p-5 md:mt-0"
+      >
+        <h3 class="font-display text-lg font-semibold">
+          Request your free check
+        </h3>
+        <p class="mt-1 text-sm text-slate">
+          Drop details below—or message us on WhatsApp if that’s faster.
+        </p>
+        <div class="mt-3">
+          <iframe
+            data-tally-src="https://tally.so/embed/wv4Jv0?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="280"
+            title="wohnmohr free AI health check form"
+            class="min-h-[240px] w-full border-0"
+            data-track="health_check_form"></iframe>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

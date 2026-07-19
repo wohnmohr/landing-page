@@ -1,0 +1,145 @@
+---
+import Layout from "./Layout.astro";
+import Navbar from "../components/elements/Navbar.astro";
+import Footer from "../components/elements/Footer.astro";
+import BtnLink from "../components/shared/BtnLink.astro";
+import Container from "../components/shared/Container.astro";
+import type { ServicePage } from "../utils/data";
+import { servicePages } from "../utils/data";
+
+export interface Props {
+  service: ServicePage;
+}
+
+const { service } = Astro.props;
+const others = servicePages.filter((s) => s.slug !== service.slug);
+---
+
+<Layout title={service.metaTitle} description={service.metaDescription}>
+  <Navbar variant="overlay" />
+  <main>
+    <section class="relative overflow-hidden bg-ink pb-16 pt-32 text-white sm:pb-20 sm:pt-36">
+      <div class="absolute inset-0" aria-hidden="true">
+        <div
+          class="absolute inset-0 bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-coral via-gold to-aqua"
+        >
+        </div>
+      </div>
+      <Container className="relative max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+          {service.eyebrow}
+        </p>
+        <h1
+          class="mt-3 font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-5xl"
+        >
+          {service.headline}
+        </h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          {service.intro}
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <BtnLink
+            text={service.ctaLabel}
+            href="/#contact"
+            variant="primary"
+          />
+          <BtnLink text="See pricing" href="/pricing" variant="ghost" />
+        </div>
+      </Container>
+    </section>
+
+    <section class="py-16 md:py-24">
+      <Container className="grid gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <h2 class="font-display text-2xl font-semibold text-ink sm:text-3xl">
+            The problem
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate md:text-lg">
+            {service.problem}
+          </p>
+        </div>
+        <div data-reveal style="--reveal-delay: 80ms">
+          <h2 class="font-display text-2xl font-semibold text-ink sm:text-3xl">
+            How we approach it
+          </h2>
+          <ol class="mt-4 space-y-3">
+            {
+              service.approach.map((step, i) => (
+                <li class="flex gap-3 text-base text-slate">
+                  <span class="font-display font-semibold text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </Container>
+    </section>
+
+    <section class="border-y border-line bg-sand/60 py-16 md:py-20">
+      <Container>
+        <div class="max-w-2xl" data-reveal>
+          <h2 class="font-display text-2xl font-semibold text-ink sm:text-3xl">
+            What you get
+          </h2>
+          <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+            {
+              service.deliverables.map((item) => (
+                <li class="flex items-start gap-2 rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row" data-reveal>
+          <BtnLink text={service.ctaLabel} href="/#contact" variant="primary" />
+          <BtnLink
+            text="Free health check"
+            href="/#health-check"
+            variant="secondary"
+          />
+        </div>
+      </Container>
+    </section>
+
+    <section class="py-16 md:py-20">
+      <Container>
+        <h2
+          class="font-display text-2xl font-semibold text-ink"
+          data-reveal
+        >
+          Related services
+        </h2>
+        <ul class="mt-6 grid gap-4 sm:grid-cols-3">
+          {
+            others.map((item) => (
+              <li data-reveal>
+                <a
+                  href={`/services/${item.slug}`}
+                  class="hover-lift block rounded-xl border border-line bg-white px-5 py-5 transition hover:border-accent/40"
+                >
+                  <p class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                    {item.eyebrow}
+                  </p>
+                  <p class="mt-2 font-display text-lg font-semibold text-ink">
+                    {item.title}
+                  </p>
+                  <p class="mt-2 text-sm text-slate line-clamp-2">{item.intro}</p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </Container>
+    </section>
+  </main>
+  <Footer />
+</Layout>

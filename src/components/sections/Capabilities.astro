@@ -1,0 +1,72 @@
+---
+import Container from "../shared/Container.astro";
+import Paragraph from "../shared/Paragraph.astro";
+import Title from "../shared/Title.astro";
+import { capabilities } from "../../utils/data";
+
+const accents = [
+  "border-coral",
+  "border-accent",
+  "border-gold",
+  "border-aqua",
+  "border-coral",
+  "border-accent",
+  "border-gold",
+];
+---
+
+<section
+  id="capabilities"
+  class="scroll-mt-24 bg-sand/70 py-20 md:py-28"
+  aria-labelledby="capabilities-heading"
+>
+  <Container>
+    <div class="max-w-2xl" data-reveal>
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-coral">
+        What we do
+      </p>
+      <Title as="h2" id="capabilities-heading" className="mt-3">
+        AI products. Automation. Testing. Rescues.
+      </Title>
+      <Paragraph className="mt-4">
+        If it’s AI software—building it, automating with it, testing it, or
+        fixing a vibe-coded mess—we handle it end to end.
+      </Paragraph>
+    </div>
+
+    <ol class="mt-14 grid gap-6 md:grid-cols-2">
+      {
+        capabilities.map((item, index) => (
+          <li
+            class={`hover-lift rounded-2xl border border-line bg-white p-6 shadow-[0_18px_40px_-28px_rgba(10,22,40,0.35)] sm:p-7 border-t-4 ${accents[index % accents.length]}`}
+            data-reveal
+            style={`--reveal-delay: ${(index % 2) * 90}ms`}
+          >
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="font-display text-xl font-bold text-ink">
+                {item.title}
+              </h3>
+              <span class="font-display text-sm font-bold text-accent">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <p class="mt-3 text-base leading-relaxed text-slate">
+              {item.description}
+            </p>
+            <ul class="mt-5 space-y-2 border-t border-line pt-4">
+              {item.outcomes.map((outcome) => (
+                <li class="flex items-start gap-2 text-sm text-ink/85">
+                  <span
+                    class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-coral"
+                    aria-hidden="true"
+                  />
+                  {outcome}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</section>

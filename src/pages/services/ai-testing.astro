@@ -1,0 +1,8 @@
+---
+import ServiceLayout from "../../layouts/ServiceLayout.astro";
+import { servicePages } from "../../utils/data";
+
+const service = servicePages.find((s) => s.slug === "ai-testing")!;
+---
+
+<ServiceLayout service={service} />

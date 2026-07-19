@@ -1,0 +1,68 @@
+---
+import Container from "../shared/Container.astro";
+import Paragraph from "../shared/Paragraph.astro";
+import Title from "../shared/Title.astro";
+import { workflow } from "../../utils/data";
+---
+
+<section
+  id="workflow"
+  class="scroll-mt-24 overflow-hidden bg-ink py-20 text-white md:py-28"
+  aria-labelledby="workflow-heading"
+>
+  <Container>
+    <div class="relative mx-auto max-w-2xl text-center" data-reveal>
+      <div
+        class="pointer-events-none absolute -left-20 -top-16 h-40 w-40 rounded-full bg-coral/30 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <p class="relative text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+        How we work
+      </p>
+      <Title as="h2" id="workflow-heading" className="relative mt-3 text-white">
+        From “it’s broken” or “we have an idea” to shipped
+      </Title>
+      <Paragraph className="relative mt-4 text-white/75">
+        Same playbook whether we’re building greenfield AI or cleaning up after
+        vibe coding went bad.
+      </Paragraph>
+    </div>
+
+    <ol class="relative mt-16 grid gap-6 md:grid-cols-5 md:gap-4">
+      <div
+        class="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-aqua/60 to-transparent md:block"
+        aria-hidden="true"
+      >
+      </div>
+      {
+        workflow.map((item, index) => (
+          <li
+            class="relative text-left md:text-center"
+            data-reveal
+            style={`--reveal-delay: ${index * 100}ms`}
+          >
+            <div class="flex items-center gap-3 md:flex-col md:gap-4">
+              <span
+                class:list={[
+                  "relative z-10 inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full font-display text-sm font-bold text-ink shadow-[0_12px_30px_-16px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-105",
+                  index % 2 === 0 ? "bg-coral" : "bg-gold",
+                ]}
+              >
+                {item.step}
+              </span>
+              <div>
+                <h3 class="font-display text-lg font-bold text-white">
+                  {item.title}
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/70 md:text-[0.95rem]">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</section>

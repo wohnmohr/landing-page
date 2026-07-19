@@ -1,0 +1,42 @@
+---
+import Container from "../shared/Container.astro";
+---
+
+<section class="relative overflow-hidden bg-ink pb-16 pt-32 text-white sm:pb-20 sm:pt-36">
+  <div class="absolute inset-0" aria-hidden="true">
+    <div
+      class="absolute inset-0 animate-hero-pan bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+    >
+    </div>
+    <div
+      class="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-coral/40 to-transparent"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-0 h-1 w-full origin-left animate-accent-line bg-gradient-to-r from-coral via-gold to-aqua"
+    >
+    </div>
+  </div>
+
+  <Container className="relative max-w-3xl">
+    <p
+      class="animate-fade-up text-sm font-semibold uppercase tracking-[0.18em] text-gold"
+      style="animation-delay: 0.05s"
+    >
+      Pricing
+    </p>
+    <h1
+      class="mt-3 animate-fade-up font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-5xl"
+      style="animation-delay: 0.16s"
+    >
+      Startup pricing for AI build, automation, testing—and rescues
+    </h1>
+    <p
+      class="mt-5 max-w-2xl animate-fade-up text-base leading-relaxed text-white/80 sm:text-lg"
+      style="animation-delay: 0.28s"
+    >
+      Regional guide rates for Rescue Sprint, Build & Ship, and Automate &
+      Assure. Enterprise is custom—contact us.
+    </p>
+  </Container>
+</section>

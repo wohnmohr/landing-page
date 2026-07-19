@@ -1,0 +1,63 @@
+---
+import Container from "../shared/Container.astro";
+import Paragraph from "../shared/Paragraph.astro";
+import Title from "../shared/Title.astro";
+import { rescueScenarios } from "../../utils/data";
+---
+
+<section
+  id="rescue-stories"
+  class="scroll-mt-24 bg-sand/70 py-20 md:py-28"
+  aria-labelledby="rescue-stories-heading"
+>
+  <Container>
+    <div class="max-w-2xl" data-reveal>
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-coral">
+        Proof patterns
+      </p>
+      <Title as="h2" id="rescue-stories-heading" className="mt-3">
+        When vibe coding goes bad—here’s what rescue looks like
+      </Title>
+      <Paragraph className="mt-4">
+        Anonymized problem patterns we see often. Same playbook: diagnose,
+        stabilize, harden, hand over.
+      </Paragraph>
+    </div>
+
+    <ul class="mt-14 grid gap-6 lg:grid-cols-3">
+      {
+        rescueScenarios.map((item, index) => (
+          <li
+            class="hover-lift flex flex-col rounded-2xl border border-line bg-white p-6 sm:p-7"
+            data-reveal
+            style={`--reveal-delay: ${index * 100}ms`}
+          >
+            <h3 class="font-display text-xl font-semibold text-ink">
+              {item.title}
+            </h3>
+            <div class="mt-5 space-y-4 text-sm leading-relaxed">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.14em] text-coral">
+                  Before
+                </p>
+                <p class="mt-1.5 text-slate">{item.before}</p>
+              </div>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                  After
+                </p>
+                <p class="mt-1.5 text-slate">{item.after}</p>
+              </div>
+              <div class="border-t border-line pt-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+                  Outcome
+                </p>
+                <p class="mt-1.5 font-medium text-ink">{item.outcome}</p>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</section>

@@ -1,3 +1,16 @@
-<h1 class="text-heading-1 font-semibold text-2xl sm:text-3xl md:text-4xl">
-    <slot/>
-</h1>
+---
+export interface Props {
+  as?: "h1" | "h2" | "h3";
+  className?: string;
+  id?: string;
+}
+
+const { as: Tag = "h2", className = "", id } = Astro.props;
+---
+
+<Tag
+  id={id}
+  class={`font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-[2.5rem] md:leading-[1.2] ${className.includes("text-") ? "" : "text-ink"} ${className}`}
+>
+  <slot />
+</Tag>

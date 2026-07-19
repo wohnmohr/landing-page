@@ -1,0 +1,210 @@
+---
+import BtnLink from "../shared/BtnLink.astro";
+import Container from "../shared/Container.astro";
+import { pricingRegions } from "../../utils/data";
+---
+
+<section
+  id="regional-pricing"
+  class="scroll-mt-24 py-16 md:py-24"
+  aria-labelledby="regional-pricing-heading"
+>
+  <Container>
+    <div class="max-w-2xl" data-reveal>
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-coral">
+        Regional packages
+      </p>
+      <h2
+        id="regional-pricing-heading"
+        class="mt-3 font-display text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl"
+      >
+        Choose your country or region
+      </h2>
+      <p class="mt-4 text-base leading-relaxed text-slate md:text-lg">
+        Startup-friendly guide prices by region. Rescue vibe-coded messes, ship
+        AI products & automations, or keep testing ongoing—Enterprise is quote-based.
+      </p>
+    </div>
+
+    <div
+      class="mt-8 flex flex-wrap gap-2"
+      role="tablist"
+      aria-label="Pricing regions"
+      data-pricing-tabs
+      data-reveal
+      style="--reveal-delay: 80ms"
+    >
+      {
+        pricingRegions.map((region, index) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${region.id}`}
+            aria-controls={`panel-${region.id}`}
+            aria-selected={index === 0 ? "true" : "false"}
+            data-region={region.id}
+            class="rounded-md border border-line bg-white px-3.5 py-2 text-sm font-semibold text-ink transition-all duration-300 data-[active=true]:border-accent data-[active=true]:bg-accent data-[active=true]:text-white hover:border-accent/50 hover:-translate-y-0.5"
+            data-active={index === 0 ? "true" : "false"}
+          >
+            {region.label}
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      pricingRegions.map((region, index) => (
+        <div
+          id={`panel-${region.id}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${region.id}`}
+          data-pricing-panel={region.id}
+          class:list={["mt-10", index === 0 ? "" : "hidden"]}
+        >
+          <div class="flex flex-col gap-4 rounded-2xl border border-line bg-sand/60 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+            <div>
+              <p class="font-display text-xl font-semibold text-ink">
+                {region.label}
+              </p>
+              <p class="mt-1 text-sm text-slate">{region.countries}</p>
+            </div>
+            <div class="flex flex-wrap gap-6 text-sm">
+              <div>
+                <p class="font-semibold uppercase tracking-[0.12em] text-accent">
+                  Day rate
+                </p>
+                <p class="mt-1 font-semibold text-ink">{region.dayRate}</p>
+              </div>
+              <div>
+                <p class="font-semibold uppercase tracking-[0.12em] text-accent">
+                  Hourly
+                </p>
+                <p class="mt-1 font-semibold text-ink">{region.hourlyRate}</p>
+              </div>
+              <div>
+                <p class="font-semibold uppercase tracking-[0.12em] text-accent">
+                  Currency
+                </p>
+                <p class="mt-1 font-semibold text-ink">{region.currency}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {region.packages.map((pkg) => (
+              <article
+                class:list={[
+                  "hover-lift flex flex-col rounded-2xl p-5 sm:p-6",
+                  pkg.name === "Enterprise"
+                    ? "border-2 border-coral bg-white text-ink"
+                    : pkg.featured
+                      ? "bg-ink text-white shadow-[0_24px_50px_-24px_rgba(10,22,40,0.65)]"
+                      : "border border-line bg-white text-ink",
+                ]}
+              >
+                <p
+                  class:list={[
+                    "text-xs font-semibold uppercase tracking-[0.16em]",
+                    pkg.name === "Enterprise"
+                      ? "text-coral"
+                      : pkg.featured
+                        ? "text-gold"
+                        : "text-coral",
+                  ]}
+                >
+                  {pkg.duration}
+                </p>
+                <h3 class="mt-3 font-display text-xl font-semibold sm:text-2xl">
+                  {pkg.name}
+                </h3>
+                <p class="mt-3 font-display text-xl font-semibold tracking-tight sm:text-2xl">
+                  {pkg.price}
+                </p>
+                <p
+                  class:list={[
+                    "mt-2 text-sm",
+                    pkg.featured && pkg.name !== "Enterprise"
+                      ? "text-white/70"
+                      : "text-slate",
+                  ]}
+                >
+                  {pkg.note}
+                </p>
+                <ul class="mt-5 flex-1 space-y-2.5">
+                  {pkg.includes.map((item) => (
+                    <li
+                      class:list={[
+                        "flex items-start gap-2 text-sm",
+                        pkg.featured && pkg.name !== "Enterprise"
+                          ? "text-white/90"
+                          : "text-ink/85",
+                      ]}
+                    >
+                      <span
+                        class:list={[
+                          "mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full",
+                          pkg.featured && pkg.name !== "Enterprise"
+                            ? "bg-aqua"
+                            : "bg-accent",
+                        ]}
+                        aria-hidden="true"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div class="mt-7">
+                  <BtnLink
+                    text={pkg.cta}
+                    href={pkg.ctaHref}
+                    variant={
+                      pkg.name === "Enterprise"
+                        ? "primary"
+                        : pkg.featured
+                          ? "bright"
+                          : "primary"
+                    }
+                    className="w-full"
+                  />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <p class="mt-8 text-sm text-slate">
+      Guide prices exclude taxes and third-party tools. Final quotes depend on
+      scope. For Enterprise plans, use Contact us below.
+    </p>
+  </Container>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>("[data-region]");
+  const panels = document.querySelectorAll<HTMLElement>("[data-pricing-panel]");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const id = tab.dataset.region;
+      if (!id) return;
+
+      tabs.forEach((t) => {
+        const active = t === tab;
+        t.setAttribute("aria-selected", active ? "true" : "false");
+        t.dataset.active = active ? "true" : "false";
+      });
+
+      panels.forEach((panel) => {
+        const show = panel.dataset.pricingPanel === id;
+        panel.classList.toggle("hidden", !show);
+        if (show) {
+          panel.style.animation = "none";
+          void panel.offsetWidth;
+          panel.style.animation = "";
+        }
+      });
+    });
+  });
+</script>

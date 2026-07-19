@@ -1,34 +1,59 @@
 ---
-export interface Props{
-    href:string,
-    text:string,
-    className?:string,
-    variant:"primary"|"secondary"
+export interface Props {
+  href: string;
+  text: string;
+  className?: string;
+  variant?: "primary" | "secondary" | "ghost" | "bright";
+  external?: boolean;
+  track?: string;
+  trackLocation?: string;
 }
 
-const {href, text,className, variant} = Astro.props
+const {
+  href,
+  text,
+  className = "",
+  variant = "primary",
+  external = false,
+  track,
+  trackLocation,
+} = Astro.props;
 
-const getThemeStyle = (variant:"primary"|"secondary")=>{
-    if (variant === "primary") {
-        return "bg-primary border-transparent relative after:bg-[#172554] hover:border-[#172554]"
+const styles = {
+  primary:
+    "bg-coral text-white hover:bg-[#e85a28] shadow-[0_12px_32px_-12px_rgba(255,107,53,0.7)] hover:shadow-[0_16px_36px_-12px_rgba(255,107,53,0.85)]",
+  bright:
+    "bg-gold text-ink hover:bg-[#f0b429] shadow-[0_12px_32px_-12px_rgba(245,166,35,0.65)] hover:shadow-[0_16px_36px_-12px_rgba(245,166,35,0.8)]",
+  secondary:
+    "bg-white text-ink border border-transparent hover:bg-sand shadow-[0_10px_28px_-14px_rgba(10,22,40,0.35)]",
+  ghost:
+    "bg-transparent text-white border border-white/40 hover:bg-white/12 hover:border-white/70",
+};
+
+const classes = `inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 font-sans text-sm font-semibold tracking-[0.02em] transition-all duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral ${styles[variant]} ${className}`;
+
+const trackAttrs = track
+  ? {
+      "data-track": track,
+      ...(trackLocation ? { "data-track-location": trackLocation } : {}),
     }
-    return "text-primary"
-}
-
-const getTextColor = (variant:"primary"|"secondary") =>{
-    if (variant === "primary") {
-        return "text-white"
-    }
-    return "text-primary"
-}
-
-
+  : {};
 ---
 
-<a href={href} class={`px-6 py-3 rounded-full outline-none relative overflow-hidden border duration-300 ease-linear
-                    after:absolute after:inset-x-0 after:aspect-square after:scale-0 after:opacity-70 after:origin-center after:duration-300 after:ease-linear after:rounded-full after:top-0 after:left-0 after:bg-[#172554]
-                    ${getThemeStyle(variant)} hover:after:opacity-100 hover:after:scale-[2.5] ${className}`}>
-    <span class={`relative ${getTextColor(variant)} z-10`}>
-        {text}
-    </span>
-</a>
+{
+  external ? (
+    <a
+      href={href}
+      class={classes}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...trackAttrs}
+    >
+      {text}
+    </a>
+  ) : (
+    <a href={href} class={classes} {...trackAttrs}>
+      {text}
+    </a>
+  )
+}
