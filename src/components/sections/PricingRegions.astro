@@ -61,31 +61,31 @@ import { pricingRegions } from "../../utils/data";
           data-pricing-panel={region.id}
           class:list={["mt-10", index === 0 ? "" : "hidden"]}
         >
-          <div class="flex flex-col gap-4 rounded-2xl border border-line bg-sand/60 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
-            <div>
+          <div class="flex min-w-0 flex-col gap-4 rounded-2xl border border-line bg-sand/60 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+            <div class="min-w-0">
               <p class="font-display text-xl font-semibold text-ink">
                 {region.label}
               </p>
               <p class="mt-1 text-sm text-slate">{region.countries}</p>
             </div>
-            <div class="flex flex-wrap gap-6 text-sm">
-              <div>
+            <div class="grid grid-cols-3 gap-3 text-sm sm:flex sm:flex-wrap sm:gap-6">
+              <div class="min-w-0">
                 <p class="font-semibold uppercase tracking-[0.12em] text-accent">
                   Day rate
                 </p>
-                <p class="mt-1 font-semibold text-ink">{region.dayRate}</p>
+                <p class="mt-1 break-words font-semibold text-ink">{region.dayRate}</p>
               </div>
-              <div>
+              <div class="min-w-0">
                 <p class="font-semibold uppercase tracking-[0.12em] text-accent">
                   Hourly
                 </p>
-                <p class="mt-1 font-semibold text-ink">{region.hourlyRate}</p>
+                <p class="mt-1 break-words font-semibold text-ink">{region.hourlyRate}</p>
               </div>
-              <div>
+              <div class="min-w-0">
                 <p class="font-semibold uppercase tracking-[0.12em] text-accent">
                   Currency
                 </p>
-                <p class="mt-1 font-semibold text-ink">{region.currency}</p>
+                <p class="mt-1 break-words font-semibold text-ink">{region.currency}</p>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@ import { pricingRegions } from "../../utils/data";
             {region.packages.map((pkg) => (
               <article
                 class:list={[
-                  "hover-lift flex flex-col rounded-2xl p-5 sm:p-6",
+                  "hover-lift flex min-w-0 flex-col rounded-2xl p-4 sm:p-6",
                   pkg.name === "Enterprise"
                     ? "border-2 border-coral bg-white text-ink"
                     : pkg.featured

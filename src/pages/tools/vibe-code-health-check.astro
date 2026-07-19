@@ -13,9 +13,9 @@ const description =
 
 <Layout title={title} description={description}>
   <Navbar variant="overlay" />
-  <main>
+  <main class="min-w-0 overflow-x-clip">
     <header
-      class="relative overflow-hidden bg-ink pb-14 pt-32 text-white sm:pb-16 sm:pt-36"
+      class="relative overflow-hidden bg-ink pb-12 pt-28 text-white sm:pb-16 sm:pt-36"
     >
       <div class="absolute inset-0" aria-hidden="true">
         <div
@@ -28,38 +28,44 @@ const description =
         </div>
       </div>
       <Container className="relative max-w-3xl">
-        <p class="font-display text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
+        <p
+          class="font-display text-xl font-semibold tracking-[-0.02em] sm:text-2xl md:text-3xl"
+        >
           wohnmohr
         </p>
         <h1
-          class="mt-4 font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-[2.6rem] md:leading-[1.15]"
+          class="mt-3 font-display text-[1.75rem] font-semibold leading-tight tracking-[-0.02em] sm:mt-4 sm:text-4xl md:text-[2.6rem] md:leading-[1.15]"
         >
           Vibe-code health check
         </h1>
-        <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+        <p
+          class="mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:mt-5 sm:text-lg"
+        >
           Eight questions. One score. A clear read on whether to harden, rescue,
           or rethink before you scale.
         </p>
       </Container>
     </header>
 
-    <section class="py-14 md:py-20" aria-labelledby="checklist-heading">
+    <section class="py-10 sm:py-14 md:py-20" aria-labelledby="checklist-heading">
       <Container className="max-w-3xl">
-        <div class="flex flex-wrap items-end justify-between gap-4">
-          <div>
+        <div
+          class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-4"
+        >
+          <div class="min-w-0">
             <h2
               id="checklist-heading"
               class="font-display text-2xl font-semibold text-ink sm:text-3xl"
             >
               Score your MVP
             </h2>
-            <p class="mt-2 text-base text-slate">
+            <p class="mt-2 text-sm text-slate sm:text-base">
               Answer honestly—partial counts. Takes about two minutes.
             </p>
           </div>
           <p
             id="progress-label"
-            class="text-sm font-semibold text-slate"
+            class="shrink-0 text-sm font-semibold text-slate"
             aria-live="polite"
           >
             0 / {healthCheckItems.length} answered
@@ -77,26 +83,26 @@ const description =
           </div>
         </div>
 
-        <form id="health-check-form" class="mt-10 space-y-8" novalidate>
+        <form id="health-check-form" class="mt-8 space-y-8 sm:mt-10" novalidate>
           {
             healthCheckItems.map((item, index) => (
-              <fieldset
-                class="border-b border-line pb-8 last:border-0"
+              <div
+                class="min-w-0 border-b border-line pb-8 last:border-0"
                 data-item-id={item.id}
               >
-                <legend class="w-full">
-                  <span class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
                     {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span class="mt-2 block font-display text-xl font-semibold text-ink">
+                  </p>
+                  <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
                     {item.title}
-                  </span>
-                  <span class="mt-2 block text-sm leading-relaxed text-slate sm:text-base">
+                  </h3>
+                  <p class="mt-2 text-sm leading-relaxed text-slate sm:text-base">
                     {item.description}
-                  </span>
-                </legend>
+                  </p>
+                </div>
                 <div
-                  class="mt-5 flex flex-wrap gap-2"
+                  class="mt-4 grid grid-cols-3 gap-2 sm:mt-5 sm:flex sm:flex-wrap"
                   role="group"
                   aria-label={`Answer for ${item.title}`}
                 >
@@ -107,7 +113,7 @@ const description =
                       ["no", "No"],
                     ] as const
                   ).map(([value, label]) => (
-                    <label class="answer-option">
+                    <label class="answer-option min-w-0">
                       <input
                         type="radio"
                         name={item.id}
@@ -121,7 +127,7 @@ const description =
                     </label>
                   ))}
                 </div>
-              </fieldset>
+              </div>
             ))
           }
 
@@ -129,7 +135,7 @@ const description =
             <button
               type="submit"
               id="see-score-btn"
-              class="inline-flex items-center justify-center rounded-md bg-coral px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_32px_-12px_rgba(255,107,53,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#e85a28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+              class="inline-flex w-full items-center justify-center rounded-md bg-coral px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_32px_-12px_rgba(255,107,53,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#e85a28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:w-auto"
               data-track="health_tool_submit"
               data-track-location="tool"
             >
@@ -138,7 +144,7 @@ const description =
             <button
               type="button"
               id="reset-btn"
-              class="text-sm font-semibold text-slate underline-offset-4 transition hover:text-ink hover:underline"
+              class="text-center text-sm font-semibold text-slate underline-offset-4 transition hover:text-ink hover:underline sm:text-left"
             >
               Reset answers
             </button>
@@ -147,43 +153,53 @@ const description =
 
         <div
           id="results"
-          class="mt-12 hidden rounded-2xl border border-line bg-white px-6 py-8 sm:px-8"
+          class="mt-10 hidden min-w-0 rounded-2xl border border-line bg-white px-4 py-6 sm:mt-12 sm:px-6 sm:py-8 md:px-8"
           aria-live="polite"
           tabindex="-1"
         >
           <p class="text-sm font-semibold uppercase tracking-[0.18em] text-coral">
             Your score
           </p>
-          <div class="mt-3 flex flex-wrap items-baseline gap-3">
+          <div class="mt-3 flex flex-wrap items-baseline gap-2 sm:gap-3">
             <p
               id="score-value"
-              class="font-display text-5xl font-semibold tracking-[-0.03em] text-ink"
+              class="font-display text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl"
             >
               0
             </p>
-            <p class="text-lg text-slate">/ 100</p>
+            <p class="text-base text-slate sm:text-lg">/ 100</p>
           </div>
           <h3
             id="tier-label"
-            class="mt-4 font-display text-2xl font-semibold text-ink"
+            class="mt-4 font-display text-xl font-semibold text-ink sm:text-2xl"
           >
           </h3>
-          <p id="tier-summary" class="mt-3 text-base leading-relaxed text-slate">
+          <p
+            id="tier-summary"
+            class="mt-3 text-sm leading-relaxed text-slate sm:text-base"
+          >
           </p>
           <p id="tier-hint" class="mt-3 text-sm font-medium text-ink"></p>
 
           <div id="gaps-block" class="mt-8 hidden">
-            <h4 class="text-sm font-semibold uppercase tracking-[0.14em] text-slate">
+            <h4
+              class="text-sm font-semibold uppercase tracking-[0.14em] text-slate"
+            >
               Top gaps to fix first
             </h4>
-            <ul id="gaps-list" class="mt-3 space-y-2 text-base text-slate"></ul>
+            <ul
+              id="gaps-list"
+              class="mt-3 space-y-2 text-sm text-slate sm:text-base"
+            >
+            </ul>
           </div>
 
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div class="mt-8 grid gap-3 sm:flex sm:flex-row sm:flex-wrap">
             <BtnLink
               text="Request human health check"
               href="/#health-check"
               variant="primary"
+              className="w-full sm:w-auto"
               track="health_check_click"
               trackLocation="health_tool"
             />
@@ -192,6 +208,7 @@ const description =
               href="https://calendly.com/wohnmohr-contact/30min"
               variant="secondary"
               external
+              className="w-full sm:w-auto"
               track="calendly_click"
               trackLocation="health_tool"
             />
@@ -200,12 +217,13 @@ const description =
               href="https://wa.me/918248438399?text=Hi%20wohnmohr%20—%20I%20ran%20the%20vibe-code%20health%20check%20and%20want%20a%20review."
               variant="secondary"
               external
+              className="w-full sm:w-auto"
               track="whatsapp_click"
               trackLocation="health_tool"
             />
             <a
               href="/services/vibe-code-rescue"
-              class="inline-flex items-center justify-center rounded-md border border-line bg-transparent px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent/40 hover:bg-sand"
+              class="inline-flex w-full items-center justify-center rounded-md border border-line bg-transparent px-6 py-3 text-center text-sm font-semibold text-ink transition hover:border-accent/40 hover:bg-sand sm:w-auto"
               data-track="service_click"
               data-track-location="health_tool"
             >
@@ -222,14 +240,15 @@ const description =
 <style>
   .answer-chip {
     display: inline-flex;
-    min-width: 5.5rem;
+    width: 100%;
+    min-width: 0;
     align-items: center;
     justify-content: center;
     border-radius: 0.375rem;
     border: 1px solid var(--color-line);
     background: white;
-    padding: 0.625rem 1rem;
-    font-size: 0.875rem;
+    padding: 0.625rem 0.5rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     color: var(--color-ink);
     cursor: pointer;
@@ -238,6 +257,15 @@ const description =
       border-color 0.2s ease,
       color 0.2s ease,
       transform 0.2s ease;
+  }
+
+  @media (min-width: 640px) {
+    .answer-chip {
+      width: auto;
+      min-width: 5.5rem;
+      padding: 0.625rem 1rem;
+      font-size: 0.875rem;
+    }
   }
 
   .answer-option:hover .answer-chip {
@@ -307,7 +335,10 @@ const description =
   const trackComplete = (score: number, tierId: string) => {
     const w = window as Window & {
       posthog?: {
-        capture: (event: string, properties?: Record<string, string | number>) => void;
+        capture: (
+          event: string,
+          properties?: Record<string, string | number>
+        ) => void;
       };
     };
     if (typeof w.posthog?.capture === "function") {
@@ -349,7 +380,7 @@ const description =
           const li = document.createElement("li");
           li.className = "flex gap-2";
           const mark = gap.answer === "partial" ? "Partial" : "Missing";
-          li.innerHTML = `<span class="text-coral" aria-hidden="true">→</span><span><strong class="font-semibold text-ink">${gap.title}</strong> — ${mark}</span>`;
+          li.innerHTML = `<span class="shrink-0 text-coral" aria-hidden="true">→</span><span class="min-w-0"><strong class="font-semibold text-ink">${gap.title}</strong> — ${mark}</span>`;
           gapsList.appendChild(li);
         }
       }

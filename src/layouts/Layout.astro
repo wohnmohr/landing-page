@@ -294,6 +294,7 @@ const jsonLdBlocks = jsonLd
 
     html {
       scroll-behavior: smooth;
+      overflow-x: clip;
     }
 
     body {
@@ -315,8 +316,42 @@ const jsonLdBlocks = jsonLd
           transparent 55%
         ),
         linear-gradient(180deg, #f7fafc 0%, #f4f7fb 45%, #eef4f7 100%);
-      background-attachment: fixed;
+      background-attachment: scroll;
       min-height: 100vh;
+      min-width: 0;
+      overflow-x: clip;
+    }
+
+    img,
+    video,
+    iframe,
+    embed,
+    object,
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    iframe {
+      display: block;
+    }
+
+    fieldset {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .calendly-inline-widget,
+    .calendly-inline-widget iframe {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        background-attachment: fixed;
+      }
     }
 
     ::selection {

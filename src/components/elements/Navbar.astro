@@ -29,12 +29,12 @@ const bookCallHref = "https://calendly.com/wohnmohr-contact/30min";
 >
   <Container>
     <nav
-      class="relative grid w-full grid-cols-[1fr_auto] items-center gap-x-4 lg:grid-cols-[1fr_auto_1fr]"
+      class="relative grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 sm:gap-x-4 lg:grid-cols-[1fr_auto_1fr]"
       data-nav-root
     >
       <a
         href="/"
-        class="nav-animate inline-flex h-10 items-center gap-3 justify-self-start"
+        class="nav-animate inline-flex min-w-0 h-10 items-center gap-2 justify-self-start sm:gap-3"
         style="--nav-delay: 0ms"
       >
         <img
@@ -42,11 +42,11 @@ const bookCallHref = "https://calendly.com/wohnmohr-contact/30min";
           alt="wohnmohr logo"
           width="40"
           height="40"
-          class="h-10 w-10 rounded-lg object-contain"
+          class="h-9 w-9 shrink-0 rounded-lg object-contain sm:h-10 sm:w-10"
         />
         <span
           class:list={[
-            "font-display text-xl font-semibold leading-none tracking-[-0.02em]",
+            "truncate font-display text-lg font-semibold leading-none tracking-[-0.02em] sm:text-xl",
             isOverlay ? "text-white" : "text-ink",
           ]}
         >
@@ -127,16 +127,16 @@ const bookCallHref = "https://calendly.com/wohnmohr-contact/30min";
       <div
         data-navbar
         data-open="false"
-        class="absolute left-0 right-0 top-full z-50 col-span-2 flex h-0 w-full flex-col overflow-hidden rounded-b-xl bg-mist shadow-lg duration-300 ease-out lg:hidden"
+        class="absolute left-0 right-0 top-full z-50 col-span-full flex h-0 w-full min-w-0 flex-col overflow-hidden rounded-b-xl bg-mist shadow-lg duration-300 ease-out lg:hidden"
       >
-        <ul class="flex flex-col gap-y-1 px-6 pt-5 text-ink">
+        <ul class="flex flex-col gap-y-1 px-4 pt-5 text-ink sm:px-6">
           {
             navItems.map((item) => (
               <Navitem {...item} overlay={false} />
             ))
           }
         </ul>
-        <div class="px-6 pb-6 pt-4">
+        <div class="px-4 pb-6 pt-4 sm:px-6">
           <BtnLink
             text="Book a call"
             href={bookCallHref}

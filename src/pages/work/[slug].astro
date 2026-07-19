@@ -46,7 +46,7 @@ const approach = approachBySlug[story.slug] ?? [];
   <Navbar variant="overlay" />
   <main>
     <header
-      class="relative overflow-hidden bg-ink pb-14 pt-32 text-white sm:pb-16 sm:pt-36"
+      class="relative overflow-hidden bg-ink pb-12 pt-28 text-white sm:pb-16 sm:pt-36"
     >
       <div class="absolute inset-0" aria-hidden="true">
         <div
@@ -69,7 +69,7 @@ const approach = approachBySlug[story.slug] ?? [];
           Case pattern
         </p>
         <h1
-          class="mt-3 font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-[2.6rem] md:leading-[1.15]"
+          class="mt-3 break-words font-display text-[1.65rem] font-semibold leading-tight tracking-[-0.02em] sm:text-4xl md:text-[2.6rem] md:leading-[1.15]"
         >
           {story.title}
         </h1>
@@ -132,6 +132,7 @@ const approach = approachBySlug[story.slug] ?? [];
             text="Score your MVP"
             href="/tools/vibe-code-health-check"
             variant="primary"
+            className="w-full sm:w-auto"
             track="health_tool_click"
             trackLocation="work"
           />
@@ -139,6 +140,7 @@ const approach = approachBySlug[story.slug] ?? [];
             text="Book a Rescue Sprint call"
             href="/#contact"
             variant="secondary"
+            className="w-full sm:w-auto"
             track="contact_cta_click"
             trackLocation="work"
           />

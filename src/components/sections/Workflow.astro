@@ -29,33 +29,33 @@ import { workflow } from "../../utils/data";
       </Paragraph>
     </div>
 
-    <ol class="relative mt-16 grid gap-6 md:grid-cols-5 md:gap-4">
+    <ol class="relative mt-12 grid gap-6 sm:mt-16 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
       <div
-        class="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-aqua/60 to-transparent md:block"
+        class="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-aqua/60 to-transparent lg:block"
         aria-hidden="true"
       >
       </div>
       {
         workflow.map((item, index) => (
           <li
-            class="relative text-left md:text-center"
+            class="relative min-w-0 text-left lg:text-center"
             data-reveal
             style={`--reveal-delay: ${index * 100}ms`}
           >
-            <div class="flex items-center gap-3 md:flex-col md:gap-4">
+            <div class="flex items-start gap-3 sm:items-center lg:flex-col lg:gap-4">
               <span
                 class:list={[
-                  "relative z-10 inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full font-display text-sm font-bold text-ink shadow-[0_12px_30px_-16px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-105",
+                  "relative z-10 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-display text-sm font-bold text-ink shadow-[0_12px_30px_-16px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-105 sm:h-14 sm:w-14",
                   index % 2 === 0 ? "bg-coral" : "bg-gold",
                 ]}
               >
                 {item.step}
               </span>
-              <div>
-                <h3 class="font-display text-lg font-bold text-white">
+              <div class="min-w-0">
+                <h3 class="font-display text-base font-bold text-white sm:text-lg">
                   {item.title}
                 </h3>
-                <p class="mt-2 text-sm leading-relaxed text-white/70 md:text-[0.95rem]">
+                <p class="mt-2 text-sm leading-relaxed text-white/70 lg:text-[0.95rem]">
                   {item.description}
                 </p>
               </div>
