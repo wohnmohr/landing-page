@@ -324,7 +324,6 @@ const jsonLdBlocks = jsonLd
 
     img,
     video,
-    iframe,
     embed,
     object,
     svg {
@@ -334,6 +333,7 @@ const jsonLdBlocks = jsonLd
 
     iframe {
       display: block;
+      max-width: 100%;
     }
 
     fieldset {
@@ -341,11 +341,32 @@ const jsonLdBlocks = jsonLd
       max-width: 100%;
     }
 
-    .calendly-inline-widget,
+    .calendly-inline-widget {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      min-height: 700px;
+      height: 700px;
+      overflow: visible;
+    }
+
     .calendly-inline-widget iframe {
+      width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
-      width: 100% !important;
+      height: 100% !important;
+      min-height: 700px !important;
+    }
+
+    @media (max-width: 639px) {
+      .calendly-inline-widget {
+        min-height: 920px;
+        height: 920px;
+      }
+
+      .calendly-inline-widget iframe {
+        min-height: 920px !important;
+      }
     }
 
     @media (min-width: 768px) {
