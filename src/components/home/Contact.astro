@@ -39,12 +39,12 @@ import { company } from "../../utils/company";
             class="min-h-[240px] w-full max-w-full border-0 sm:min-h-[280px]"></iframe>
         </div>
       </div>
-      <div class="min-w-0 rounded-brand border border-white/10 bg-ink-2 p-2 sm:p-3" data-reveal style="--reveal-delay: 100ms">
+      <div class="min-w-0 overflow-hidden rounded-brand border border-white/10 bg-ink-2 p-1 sm:p-3" data-reveal style="--reveal-delay: 100ms">
         <h3 class="px-3 pt-3 font-display text-xl font-bold tracking-tight sm:px-4">Or pick a time</h3>
         <div
           class="calendly-inline-widget mt-2"
           data-url={company.calendly}
-          style="min-width:320px;height:700px;"
+          style="height:700px;"
           role="region"
           aria-label="Calendly booking calendar"
         >

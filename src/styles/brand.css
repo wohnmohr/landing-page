@@ -89,6 +89,13 @@ fieldset {
   outline-color: rgb(var(--lime));
 }
 
+/* ---------- Layout safety ---------- */
+/* Grid/flex children default to min-width:auto, so one long unbreakable line
+   (a URL, a nowrap label) can stretch a column past the phone screen. */
+.grid > * {
+  min-width: 0;
+}
+
 /* ---------- Surfaces ---------- */
 .surface-ink {
   background-color: rgb(var(--ink));

@@ -15,7 +15,7 @@ const { showIntro = true } = Astro.props;
   <Container>
     {
       showIntro && (
-        <div class="grid gap-6 md:grid-cols-[1fr_0.8fr] md:items-end" data-reveal>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-[1fr_0.8fr] md:items-end" data-reveal>
           <div>
             <Eyebrow index="01">Products</Eyebrow>
             <h2 id="products-heading" class="mt-4 font-display text-display-lg font-bold">
@@ -37,7 +37,7 @@ const { showIntro = true } = Astro.props;
           return (
             <article
               class:list={[
-                "relative grid overflow-hidden rounded-[2rem] p-6 sm:p-10 lg:grid-cols-2 lg:gap-10 lg:p-14",
+                "relative grid grid-cols-1 overflow-hidden rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-10 lg:grid-cols-2 lg:gap-10 lg:p-14",
                 dark ? "surface-ink grain" : "border border-line bg-white",
               ]}
               data-reveal="scale"
@@ -49,7 +49,7 @@ const { showIntro = true } = Astro.props;
               <div class:list={["relative flex flex-col", i % 2 === 1 && "lg:order-2"]}>
                 <div class="flex flex-wrap items-center gap-3">
                   <span class:list={["font-mono text-xs", dark ? "text-fog" : "text-graphite"]}>{p.index} / {p.name}</span>
-                  <span class:list={["rounded-full px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em]", dark ? "border border-lime/50 text-lime" : "bg-cobalt text-white"]}>
+                  <span class:list={["rounded-full px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.1em]", dark ? "border border-lime/50 text-lime" : "bg-cobalt text-white"]}>
                     {p.status}
                   </span>
                 </div>
@@ -63,7 +63,7 @@ const { showIntro = true } = Astro.props;
                     <li class:list={["rounded-full px-3 py-1.5 text-xs font-medium", dark ? "bg-white/[0.06] text-white/85" : "bg-paper text-ink"]}>{f}</li>
                   ))}
                 </ul>
-                <div class="mt-auto flex flex-col gap-3 pt-10 sm:flex-row">
+                <div class="mt-auto flex flex-col gap-3 pt-8 sm:flex-row sm:pt-10">
                   <BtnLink text={p.cta} href={p.url} external variant={dark ? "bright" : "primary"} track="brand_click" trackLocation={p.slug} />
                   <BtnLink text="How it works" href={`/products/${p.slug}`} variant={dark ? "ghost" : "outline"} arrow={false} />
                 </div>
