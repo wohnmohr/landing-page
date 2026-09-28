@@ -19,11 +19,11 @@ const description =
     >
       <div class="absolute inset-0" aria-hidden="true">
         <div
-          class="absolute inset-0 bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+          class="absolute inset-0 bg-[linear-gradient(120deg,#0B0D10_0%,#13161B_55%,#1E43D6_100%)]"
         >
         </div>
         <div
-          class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-coral via-gold to-aqua"
+          class="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-to-r from-cobalt to-lime"
         >
         </div>
       </div>
@@ -135,7 +135,7 @@ const description =
             <button
               type="submit"
               id="see-score-btn"
-              class="inline-flex w-full items-center justify-center rounded-md bg-coral px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_32px_-12px_rgba(255,107,53,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#e85a28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:w-auto"
+              class="inline-flex w-full items-center justify-center rounded-md bg-coral px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_32px_-12px_rgba(43,91,255,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1E43D6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:w-auto"
               data-track="health_tool_submit"
               data-track-location="tool"
             >
@@ -197,7 +197,7 @@ const description =
           <div class="mt-8 grid gap-3 sm:flex sm:flex-row sm:flex-wrap">
             <BtnLink
               text="Request human health check"
-              href="/#health-check"
+              href="/tools/vibe-code-health-check"
               variant="primary"
               className="w-full sm:w-auto"
               track="health_check_click"
@@ -269,7 +269,7 @@ const description =
   }
 
   .answer-option:hover .answer-chip {
-    border-color: rgba(15, 159, 144, 0.45);
+    border-color: rgba(43, 91, 255, 0.4);
     transform: translateY(-1px);
   }
 

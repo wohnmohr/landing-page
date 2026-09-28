@@ -1,25 +1,26 @@
 ---
 import BtnLink from "../shared/BtnLink.astro";
 import Container from "../shared/Container.astro";
-import Navitem from "../shared/Navitem.astro";
+import Logo from "../brand/Logo.astro";
+import { company } from "../../utils/company";
 
 export interface Props {
+  /** overlay: transparent over a dark hero. solid: paper bar for light pages. */
   variant?: "overlay" | "solid";
 }
 
 const { variant = "overlay" } = Astro.props;
 const isOverlay = variant === "overlay";
+const path = Astro.url.pathname;
 
 const navItems = [
-  { href: "/#products", text: "Products" },
-  { href: "/#about", text: "About" },
-  { href: "/services/vibe-code-rescue", text: "Services" },
-  { href: "/blogs", text: "Blog" },
-  { href: "/pricing", text: "Pricing" },
-  { href: "/#contact", text: "Contact" },
+  { href: "/products", text: "Products" },
+  { href: "/company", text: "Company" },
+  { href: "/work-with-us", text: "Work with us" },
+  { href: "/blogs", text: "Journal" },
 ];
 
-const bookCallHref = "https://calendly.com/wohnmohr-contact/30min";
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
 ---
 
 <header
@@ -27,123 +28,94 @@ const bookCallHref = "https://calendly.com/wohnmohr-contact/30min";
   data-variant={variant}
   class:list={[
     "inset-x-0 top-0 z-50 py-4",
-    isOverlay ? "fixed" : "sticky border-b border-line bg-mist/95 backdrop-blur",
+    isOverlay ? "fixed text-white" : "sticky border-b border-line bg-paper/90 text-ink backdrop-blur",
   ]}
 >
   <Container>
-    <nav
-      class="relative grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 sm:gap-x-4 lg:grid-cols-[1fr_auto_1fr]"
-      data-nav-root
-    >
-      <a
-        href="/"
-        class="nav-animate inline-flex min-w-0 h-10 items-center gap-2 justify-self-start sm:gap-3"
-        style="--nav-delay: 0ms"
-      >
-        <img
-          src="/logos/main-logo.png"
-          alt="wohnmohr logo"
-          width="40"
-          height="40"
-          class="h-9 w-9 shrink-0 rounded-lg object-contain sm:h-10 sm:w-10"
-        />
-        <span
-          class:list={[
-            "truncate font-display text-lg font-semibold leading-none tracking-[-0.02em] sm:text-xl",
-            isOverlay ? "text-white" : "text-ink",
-          ]}
-        >
-          wohnmohr
-        </span>
+    <nav class="relative flex items-center justify-between gap-4" aria-label="Main">
+      <a href="/" class="nav-animate relative z-50 inline-flex h-10 items-center" style="--nav-delay: 0ms" aria-label="wohnmohr home">
+        <Logo size={22} tone={isOverlay ? "color" : "color"} animated />
       </a>
 
-      <!-- Desktop links -->
       <ul
         class:list={[
-          "nav-animate hidden h-10 items-center justify-center gap-x-7 lg:flex",
-          isOverlay ? "text-white/90" : "text-ink/80",
+          "nav-animate hidden items-center gap-1 rounded-full p-1 lg:flex",
+          isOverlay ? "border border-white/10 bg-white/[0.04]" : "border border-line bg-white/60",
         ]}
         style="--nav-delay: 80ms"
       >
         {
           navItems.map((item) => (
-            <Navitem {...item} overlay={isOverlay} />
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "inline-flex h-9 items-center rounded-full px-4 text-sm font-medium transition-colors duration-300",
+                  isActive(item.href)
+                    ? isOverlay ? "bg-white text-ink" : "bg-ink text-white"
+                    : isOverlay ? "text-white/75 hover:text-white" : "text-ink/70 hover:text-ink",
+                ]}
+                aria-current={isActive(item.href) ? "page" : undefined}
+              >
+                {item.text}
+              </a>
+            </li>
           ))
         }
       </ul>
 
-      <div
-        class="nav-animate flex h-10 items-center justify-self-end gap-3"
-        style="--nav-delay: 140ms"
-      >
+      <div class="nav-animate relative z-50 flex items-center gap-2" style="--nav-delay: 140ms">
         <BtnLink
           text="Book a call"
-          href={bookCallHref}
-          variant="primary"
+          href={company.calendly}
+          variant={isOverlay ? "bright" : "ink"}
           external
-          className="hidden h-10 items-center !px-5 !py-0 leading-none lg:inline-flex"
+          className="hidden !py-1.5 text-sm lg:inline-flex"
           track="calendly_click"
           trackLocation="navbar"
         />
-
         <button
           data-toggle-nav
           data-open-nav="false"
-          class="inline-flex h-10 w-10 items-center justify-center outline-none lg:hidden"
+          class:list={[
+            "inline-flex h-10 w-10 items-center justify-center rounded-full lg:hidden",
+            isOverlay ? "bg-white/10" : "bg-ink/5",
+          ]}
           aria-label="Toggle navigation"
           aria-expanded="false"
         >
-          <span class="flex w-6 flex-col">
-            <span
-              id="line1"
-              class:list={[
-                "h-0.5 w-6 rounded-full transition-all duration-300",
-                isOverlay ? "bg-white" : "bg-ink",
-              ]}
-            ></span>
-            <span
-              id="line2"
-              class:list={[
-                "mt-1 h-0.5 w-6 rounded-full transition-all duration-300",
-                isOverlay ? "bg-white" : "bg-ink",
-              ]}
-            ></span>
-            <span
-              id="line3"
-              class:list={[
-                "mt-1 h-0.5 w-6 rounded-full transition-all duration-300",
-                isOverlay ? "bg-white" : "bg-ink",
-              ]}
-            ></span>
+          <span class="flex w-5 flex-col">
+            <span id="line1" class="h-0.5 w-5 rounded-full bg-current transition-all duration-300"></span>
+            <span id="line2" class="mt-1 h-0.5 w-5 rounded-full bg-current transition-all duration-300"></span>
+            <span id="line3" class="mt-1 h-0.5 w-5 rounded-full bg-current transition-all duration-300"></span>
           </span>
         </button>
       </div>
 
-      <!-- Mobile menu -->
-      <div
-        data-nav-overlay
-        aria-hidden="true"
-        class="fixed inset-0 z-40 hidden bg-ink/45 backdrop-blur-md lg:!hidden"
-      >
-      </div>
+      <div data-nav-overlay aria-hidden="true" class="fixed inset-0 z-40 hidden bg-ink/60 backdrop-blur-sm lg:!hidden"></div>
 
       <div
         data-navbar
         data-open="false"
-        class="absolute left-0 right-0 top-full z-50 col-span-full flex h-0 w-full min-w-0 flex-col overflow-hidden rounded-b-xl bg-mist shadow-lg duration-300 ease-out lg:hidden"
+        class="absolute left-0 right-0 top-[calc(100%+0.75rem)] z-50 flex h-0 flex-col overflow-hidden rounded-brand bg-ink-2 text-white shadow-2xl transition-[height] duration-300 ease-loop lg:hidden"
       >
-        <ul class="flex flex-col gap-y-1 px-4 pt-5 text-ink sm:px-6">
+        <ul class="flex flex-col px-3 pt-3">
           {
-            navItems.map((item) => (
-              <Navitem {...item} overlay={false} />
+            navItems.map((item, i) => (
+              <li>
+                <a href={item.href} class="flex items-center justify-between rounded-xl px-3 py-3.5 font-display text-xl font-semibold tracking-tight hover:bg-white/5">
+                  {item.text}
+                  <span class="font-mono text-xs text-fog">0{i + 1}</span>
+                </a>
+              </li>
             ))
           }
         </ul>
-        <div class="px-4 pb-6 pt-4 sm:px-6">
+        <div class="p-4">
           <BtnLink
             text="Book a call"
-            href={bookCallHref}
-            variant="primary"
+            href={company.calendly}
+            variant="bright"
             external
             className="w-full"
             track="calendly_click"

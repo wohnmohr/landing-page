@@ -1,0 +1,36 @@
+---
+import Container from "../shared/Container.astro";
+import Eyebrow from "../ui/Eyebrow.astro";
+import { principles } from "../../utils/company";
+
+export interface Props {
+  index?: string;
+}
+const { index = "03" } = Astro.props;
+---
+
+<section class="py-20 sm:py-28" aria-labelledby="principles-heading">
+  <Container>
+    <div class="max-w-2xl" data-reveal>
+      <Eyebrow index={index}>What we believe</Eyebrow>
+      <h2 id="principles-heading" class="mt-4 font-display text-display-lg font-bold">
+        Software people <span class="marker">actually</span> use.
+      </h2>
+    </div>
+    <ul class="mt-14 grid border-t border-line sm:grid-cols-2">
+      {
+        principles.map((p, i) => (
+          <li
+            class:list={["border-b border-line py-8 sm:pr-10", i % 2 === 1 && "sm:border-l sm:pl-10"]}
+            data-reveal
+            style={`--reveal-delay: ${i * 80}ms`}
+          >
+            <span class="font-mono text-xs text-cobalt">0{i + 1}</span>
+            <h3 class="mt-3 font-display text-2xl font-bold tracking-tight">{p.title}</h3>
+            <p class="mt-3 max-w-md leading-relaxed text-graphite">{p.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</section>

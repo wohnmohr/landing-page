@@ -1,9 +1,13 @@
 # wohnmohr
 
-> AI product studio and consulting startup that builds AI products, automations, and test systems—and rescues vibe-coded projects when they go bad.
+> wohnmohr is an AI product company. It builds and runs NicheLinq and Split Biller, and takes on a few fixed-scope client builds each month (AI products, automation, testing, and vibe-code rescue).
 
 ## Site
 - Home: https://wohnmohr.com/
+- Products: https://wohnmohr.com/products/
+- Company: https://wohnmohr.com/company/
+- Work with us: https://wohnmohr.com/work-with-us/
+- Brand & design system: https://wohnmohr.com/brand/
 - Pricing: https://wohnmohr.com/pricing/
 - Blog: https://wohnmohr.com/blogs/
 - FAQ: https://wohnmohr.com/faq/
@@ -16,8 +20,8 @@
 - AI product development: https://wohnmohr.com/services/ai-product-development/
 
 ## Our products
-- Split Biller (split shared bills and expenses): https://splitbiller.com
-- NicheLinq (niche discovery and matching platform): https://nichelinq.com
+- NicheLinq — make Reels ads from a product link, for streetwear & fashion labels (early access): https://nichelinq.com
+- Split Biller — split bills in ₹ and settle with UPI; no signup, no app download: https://www.splitbiller.com
 
 ## Contact
 - Book a call: https://calendly.com/wohnmohr-contact/30min

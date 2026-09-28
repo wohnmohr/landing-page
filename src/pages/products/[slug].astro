@@ -1,0 +1,132 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/elements/Navbar.astro";
+import Footer from "../../components/elements/Footer.astro";
+import BtnLink from "../../components/shared/BtnLink.astro";
+import Container from "../../components/shared/Container.astro";
+import Eyebrow from "../../components/ui/Eyebrow.astro";
+import ProductVisual from "../../components/brand/ProductVisual.astro";
+import Contact from "../../components/home/Contact.astro";
+import { company, products, type Product } from "../../utils/company";
+
+export function getStaticPaths() {
+  return products.map((product) => ({ params: { slug: product.slug }, props: { product } }));
+}
+
+const { product } = Astro.props as { product: Product };
+const other = products.filter((p) => p.slug !== product.slug);
+const dark = product.signal === "lime";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: product.name,
+  url: product.url,
+  description: product.metaDescription,
+  applicationCategory: "WebApplication",
+  operatingSystem: "Web",
+  publisher: { "@type": "Organization", name: company.name, url: company.url },
+};
+---
+
+<Layout title={product.metaTitle} description={product.metaDescription} jsonLd={jsonLd}>
+  <Navbar />
+  <main>
+    <section class="surface-ink grain relative overflow-hidden">
+      <div class:list={["pointer-events-none absolute -right-32 -top-32 h-[32rem] w-[32rem] rounded-full blur-[120px]", dark ? "bg-lime/15" : "bg-cobalt/30"]} aria-hidden="true"></div>
+      <Container className="relative grid items-center gap-14 pb-20 pt-36 sm:pt-44 lg:grid-cols-2">
+        <div>
+          <div class="flex flex-wrap items-center gap-3 animate-fade-up">
+            <Eyebrow tone="ink" index={product.index}>{product.name}</Eyebrow>
+            <span class:list={["rounded-full px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em]", product.status === "Live" ? "bg-lime text-ink" : "border border-lime/50 text-lime"]}>
+              {product.status}
+            </span>
+          </div>
+          <p class:list={["mt-6 text-sm font-medium animate-fade-up", dark ? "text-lime" : "text-cobalt-soft"]} style="animation-delay: .1s">{product.audience}</p>
+          <h1 class="mt-3 font-display text-display-lg font-bold">
+            {product.headline.map((line, i) => (
+              <span class="line-mask"><span style={`--d: ${150 + i * 100}ms`}>{line}</span></span>
+            ))}
+          </h1>
+          <p class="mt-6 max-w-lg animate-fade-up text-lg leading-relaxed text-fog" style="animation-delay: .4s">{product.summary}</p>
+          <div class="mt-9 flex flex-col gap-3 animate-fade-up sm:flex-row" style="animation-delay: .5s">
+            <BtnLink text={product.cta} href={product.url} external variant="bright" track="brand_click" trackLocation={`product_page_${product.slug}`} />
+            <BtnLink text="How it works" href="#how" variant="ghost" arrow={false} />
+          </div>
+          <p class="mt-6 font-mono text-xs text-fog">{product.domain}</p>
+        </div>
+        <div class:list={["animate-fade-in", !dark && "rounded-[2rem] bg-paper p-6 sm:p-10"]} style="animation-delay: .3s">
+          <ProductVisual slug={product.slug} />
+        </div>
+      </Container>
+    </section>
+
+    <section id="how" class="scroll-mt-20 py-20 sm:py-28" aria-labelledby="how-heading">
+      <Container>
+        <div data-reveal>
+          <Eyebrow index="01">How it works</Eyebrow>
+          <h2 id="how-heading" class="mt-4 font-display text-display-lg font-bold">Three steps. That’s it.</h2>
+        </div>
+        <ol class="mt-14 grid gap-4 md:grid-cols-3">
+          {product.steps.map((step, i) => (
+            <li class="relative rounded-brand border border-line bg-white p-7 sm:p-8" data-reveal style={`--reveal-delay: ${i * 100}ms`}>
+              <span class:list={["grid h-11 w-11 place-items-center rounded-full font-display text-lg font-bold", i === 2 ? "bg-lime text-ink" : "bg-ink text-white"]}>{i + 1}</span>
+              <h3 class="mt-8 font-display text-2xl font-bold tracking-tight">{step.title}</h3>
+              <p class="mt-3 leading-relaxed text-graphite">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </section>
+
+    <section class="bg-paper-2 py-20 sm:py-24" aria-labelledby="features-heading">
+      <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div data-reveal>
+          <Eyebrow index="02">Why {product.name}</Eyebrow>
+          <h2 id="features-heading" class="mt-4 font-display text-display-md font-bold">Built around one job, done properly.</h2>
+        </div>
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {product.features.map((f, i) => (
+            <li class="flex items-center gap-4 rounded-2xl bg-white px-5 py-5" data-reveal style={`--reveal-delay: ${i * 60}ms`}>
+              <span class:list={["h-2.5 w-2.5 shrink-0 rounded-[3px]", i % 2 ? "bg-lime" : "bg-cobalt"]} aria-hidden="true" />
+              <span class="font-display text-lg font-semibold tracking-tight">{f}</span>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+
+    <section class="py-20 sm:py-24">
+      <Container>
+        <div class="flex flex-col items-start justify-between gap-8 rounded-[2rem] bg-ink p-8 text-white sm:p-12 md:flex-row md:items-center" data-reveal>
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.14em] text-fog">Try it now</p>
+            <p class="mt-3 max-w-xl font-display text-display-sm font-bold">{product.oneLiner}</p>
+          </div>
+          <BtnLink text={product.cta} href={product.url} external variant="bright" track="brand_click" trackLocation={`product_page_footer_${product.slug}`} />
+        </div>
+
+        {other.length > 0 && (
+          <div class="mt-16" data-reveal>
+            <p class="font-mono text-xs uppercase tracking-[0.14em] text-graphite">Also from wohnmohr</p>
+            <ul class="mt-4 border-t border-line">
+              {other.map((p) => (
+                <li class="border-b border-line">
+                  <a href={`/products/${p.slug}`} class="group flex items-center gap-4 py-6">
+                    <span class="font-mono text-xs text-graphite">{p.index} /</span>
+                    <span class="font-display text-2xl font-bold tracking-tight group-hover:text-cobalt">{p.name}</span>
+                    <span class="hidden text-graphite sm:inline">— {p.oneLiner}</span>
+                    <span class="ml-auto transition-transform group-hover:translate-x-1">→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </Container>
+    </section>
+
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

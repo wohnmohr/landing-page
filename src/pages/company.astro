@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/elements/Navbar.astro";
+import Footer from "../components/elements/Footer.astro";
+import Container from "../components/shared/Container.astro";
+import Eyebrow from "../components/ui/Eyebrow.astro";
+import PageHero from "../components/ui/PageHero.astro";
+import LoopDiagram from "../components/brand/LoopDiagram.astro";
+import Principles from "../components/home/Principles.astro";
+import WorkWithUs from "../components/home/WorkWithUs.astro";
+import Contact from "../components/home/Contact.astro";
+import { company, loop, products } from "../utils/company";
+---
+
+<Layout
+  title="Company | wohnmohr — an AI product company"
+  description={`${company.mission} wohnmohr builds and runs ${products.map((p) => p.name).join(" and ")}.`}
+>
+  <Navbar />
+  <main>
+    <PageHero eyebrow="Company" title="We’re wohnmohr.<br />We build AI products." />
+
+    <section class="py-20 sm:py-28" aria-labelledby="mission-heading">
+      <Container className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
+        <div data-reveal>
+          <Eyebrow index="01">Mission</Eyebrow>
+        </div>
+        <div data-reveal>
+          <h2 id="mission-heading" class="font-display text-display-md font-bold leading-[1.15]">
+            {company.mission}
+          </h2>
+          <div class="mt-10 grid gap-8 text-lg leading-relaxed text-graphite sm:grid-cols-2">
+            <p>
+              We started by building AI software for other teams—and kept seeing
+              the same thing: the demo was easy, the product was hard. So we
+              started shipping our own.
+            </p>
+            <p>
+              Today we run {products.map((p) => p.name).join(" and ")}, and take on
+              a small number of client builds each month. Both sides make the
+              other better: products keep us honest, client work keeps us sharp.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="surface-ink py-20 sm:py-28" aria-labelledby="loop-heading">
+      <Container className="grid items-center gap-14 lg:grid-cols-2">
+        <div data-reveal>
+          <Eyebrow index="02" tone="ink">The loop</Eyebrow>
+          <h2 id="loop-heading" class="mt-4 font-display text-display-lg font-bold">Our logo is<br />our process.</h2>
+          <ol class="mt-10 space-y-6">
+            {loop.map((s) => (
+              <li class="grid grid-cols-[3rem_1fr] gap-4">
+                <span class="font-mono text-sm text-lime">{s.index}</span>
+                <div>
+                  <h3 class="font-display text-xl font-bold">{s.title}</h3>
+                  <p class="mt-1 leading-relaxed text-fog">{s.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div data-reveal="scale">
+          <LoopDiagram />
+        </div>
+      </Container>
+    </section>
+
+    <Principles index="03" />
+    <WorkWithUs index="04" />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

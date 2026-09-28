@@ -1,0 +1,81 @@
+---
+import BtnLink from "../shared/BtnLink.astro";
+import Container from "../shared/Container.astro";
+import Eyebrow from "../ui/Eyebrow.astro";
+import ProductVisual from "../brand/ProductVisual.astro";
+import { products } from "../../utils/company";
+
+export interface Props {
+  showIntro?: boolean;
+}
+const { showIntro = true } = Astro.props;
+---
+
+<section id="products" class="scroll-mt-20 py-20 sm:py-28" aria-labelledby="products-heading">
+  <Container>
+    {
+      showIntro && (
+        <div class="grid gap-6 md:grid-cols-[1fr_0.8fr] md:items-end" data-reveal>
+          <div>
+            <Eyebrow index="01">Products</Eyebrow>
+            <h2 id="products-heading" class="mt-4 font-display text-display-lg font-bold">
+              Two products.<br />One loop.
+            </h2>
+          </div>
+          <p class="max-w-md text-lg leading-relaxed text-graphite">
+            Each one does a single job, end to end—and gets better every time we
+            go round the loop.
+          </p>
+        </div>
+      )
+    }
+
+    <div class:list={["space-y-6", showIntro && "mt-14"]}>
+      {
+        products.map((p, i) => {
+          const dark = p.signal === "lime";
+          return (
+            <article
+              class:list={[
+                "relative grid overflow-hidden rounded-[2rem] p-6 sm:p-10 lg:grid-cols-2 lg:gap-10 lg:p-14",
+                dark ? "surface-ink grain" : "border border-line bg-white",
+              ]}
+              data-reveal="scale"
+              aria-labelledby={`product-${p.slug}`}
+            >
+              {dark && <div class="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-lime/15 blur-[100px]" aria-hidden="true" />}
+              {!dark && <div class="dot-grid-paper pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_60%_70%_at_80%_50%,#000,transparent)]" aria-hidden="true" />}
+
+              <div class:list={["relative flex flex-col", i % 2 === 1 && "lg:order-2"]}>
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class:list={["font-mono text-xs", dark ? "text-fog" : "text-graphite"]}>{p.index} / {p.name}</span>
+                  <span class:list={["rounded-full px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em]", dark ? "border border-lime/50 text-lime" : "bg-cobalt text-white"]}>
+                    {p.status}
+                  </span>
+                </div>
+                <p class:list={["mt-6 text-sm font-medium", dark ? "text-lime" : "text-cobalt"]}>{p.audience}</p>
+                <h3 id={`product-${p.slug}`} class="mt-2 font-display text-display-md font-bold">
+                  {p.headline.map((line) => <span class="block">{line}</span>)}
+                </h3>
+                <p class:list={["mt-5 max-w-md text-[1.05rem] leading-relaxed", dark ? "text-fog" : "text-graphite"]}>{p.summary}</p>
+                <ul class="mt-6 flex flex-wrap gap-2">
+                  {p.features.map((f) => (
+                    <li class:list={["rounded-full px-3 py-1.5 text-xs font-medium", dark ? "bg-white/[0.06] text-white/85" : "bg-paper text-ink"]}>{f}</li>
+                  ))}
+                </ul>
+                <div class="mt-auto flex flex-col gap-3 pt-10 sm:flex-row">
+                  <BtnLink text={p.cta} href={p.url} external variant={dark ? "bright" : "primary"} track="brand_click" trackLocation={p.slug} />
+                  <BtnLink text="How it works" href={`/products/${p.slug}`} variant={dark ? "ghost" : "outline"} arrow={false} />
+                </div>
+              </div>
+
+              <div class:list={["relative mt-12 flex items-center justify-center lg:mt-0", i % 2 === 1 && "lg:order-1"]}>
+                <ProductVisual slug={p.slug} />
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </Container>
+</section>
