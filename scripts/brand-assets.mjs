@@ -79,10 +79,13 @@ const ogCard = ({ label, lines, sub, pill }) => `
     </div>
   </div>`;
 
-const square = (size, bg, { scale = 0.62, ship, build } = {}) => `
-  <div style="width:${size}px;height:${size}px;background:${bg};display:grid;place-items:center">
-    ${mark(size * scale, { ship, build })}
+const square = (size, bg, { scale = 0.62, ship, build, stroke, radius = 0 } = {}) => `
+  <div style="width:${size}px;height:${size}px;background:${bg};border-radius:${radius}px;display:grid;place-items:center">
+    ${mark(size * scale, { ship, build, stroke })}
   </div>`;
+
+// Favicon tiles match public/favicon.svg: rounded, bold stroke, mark fills the tile.
+const favicon = (size) => square(size, C.ink, { scale: 0.9, stroke: 6, radius: size * 0.22 });
 
 const wordmark = (color, { ship, build } = {}) => `
   <div style="display:inline-flex;align-items:center;gap:36px;padding:40px 48px">
@@ -105,8 +108,8 @@ const jobs = [
   { out: "icon-192.png", w: 192, h: 192, html: square(192, C.ink) },
   { out: "icon-512.png", w: 512, h: 512, html: square(512, C.ink) },
   { out: "icon-maskable-512.png", w: 512, h: 512, html: square(512, C.ink, { scale: 0.5 }) },
-  { out: ".ico-32.png", w: 32, h: 32, html: square(32, C.ink, { scale: 0.8 }), temp: true },
-  { out: ".ico-48.png", w: 48, h: 48, html: square(48, C.ink, { scale: 0.8 }), temp: true },
+  { out: ".ico-32.png", w: 32, h: 32, html: favicon(32), temp: true, transparent: true },
+  { out: ".ico-48.png", w: 48, h: 48, html: favicon(48), temp: true, transparent: true },
 
   // Email avatars — mark sized to sit inside the circular crop Gmail/Outlook apply
   { out: "brand/wohnmohr-avatar.png", w: 1024, h: 1024, html: square(1024, C.ink, { scale: 0.6 }) },
