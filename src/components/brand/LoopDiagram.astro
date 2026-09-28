@@ -1,0 +1,88 @@
+---
+/**
+ * Build → Ship → Learn, drawn as the wohnmohr infinity loop with a
+ * travelling signal. The brand's signature motion.
+ */
+export interface Props {
+  className?: string;
+  tone?: "ink" | "paper";
+}
+const { className = "", tone = "ink" } = Astro.props;
+
+const d =
+  "M240 120C280 65 320 40 360 40C404 40 440 76 440 120C440 164 404 200 360 200C320 200 280 175 240 120C200 65 160 40 120 40C76 40 40 76 40 120C40 164 76 200 120 200C160 200 200 175 240 120Z";
+
+const track = tone === "ink" ? "rgb(255 255 255 / 0.1)" : "rgb(var(--ink) / 0.1)";
+const text = tone === "ink" ? "#fff" : "rgb(var(--ink))";
+const muted = tone === "ink" ? "rgb(var(--fog))" : "rgb(var(--graphite))";
+
+const nodes = [
+  { x: 40, y: 120, label: "Build", sub: "the smallest useful thing", color: "rgb(var(--cobalt))", anchor: "start", lx: 40, ly: 236 },
+  { x: 240, y: 120, label: "Ship", sub: "to real people, early", color: "rgb(var(--lime))", anchor: "middle", lx: 240, ly: 22 },
+  { x: 440, y: 120, label: "Learn", sub: "then go round again", color: text, anchor: "end", lx: 440, ly: 236 },
+];
+---
+
+<figure class={`loop-diagram relative ${className}`}>
+  <svg viewBox="0 -8 480 262" fill="none" class="h-auto w-full overflow-visible" role="img" aria-label="The wohnmohr loop: build, ship, learn, repeat.">
+    <path d={d} stroke={track} stroke-width="18" stroke-linejoin="round" />
+    <path d={d} stroke={track} stroke-width="1" stroke-dasharray="2 6" transform="translate(0 0)" />
+    <path d={d} class="loop-comet" pathLength="1000" stroke="url(#comet)" stroke-width="18" stroke-linecap="round" />
+    <path d={d} class="loop-comet loop-comet--head" pathLength="1000" stroke="rgb(var(--lime))" stroke-width="18" stroke-linecap="round" />
+    <defs>
+      <linearGradient id="comet" x1="0" x2="480" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="rgb(var(--cobalt))" />
+        <stop offset="1" stop-color="rgb(var(--lime))" />
+      </linearGradient>
+    </defs>
+    {
+      nodes.map((n, i) => (
+        <g class="loop-node" style={`--i: ${i}`}>
+          <circle cx={n.x} cy={n.y} r="16" fill={tone === "ink" ? "rgb(var(--ink))" : "rgb(var(--paper))"} stroke={n.color} stroke-width="3" />
+          <circle cx={n.x} cy={n.y} r="5" fill={n.color} class="loop-node-dot" />
+          <text x={n.lx} y={n.ly} text-anchor={n.anchor} fill={text} font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17" letter-spacing="-0.3">
+            {`0${i + 1} ${n.label}`}
+          </text>
+          <text x={n.lx} y={n.ly + 16} text-anchor={n.anchor} fill={muted} font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="0.4">
+            {n.sub}
+          </text>
+        </g>
+      ))
+    }
+  </svg>
+</figure>
+
+<style>
+  .loop-comet {
+    stroke-dasharray: 150 850;
+    animation: comet 6s linear infinite;
+    opacity: 0.9;
+  }
+  .loop-comet--head {
+    stroke-dasharray: 4 996;
+    stroke-dashoffset: -146;
+    animation-name: comet-head;
+    filter: drop-shadow(0 0 8px rgb(var(--lime)));
+  }
+  @keyframes comet {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -1000; }
+  }
+  @keyframes comet-head {
+    from { stroke-dashoffset: -146; }
+    to { stroke-dashoffset: -1146; }
+  }
+  .loop-node-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: node-pulse 2.4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.8s);
+  }
+  @keyframes node-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.6); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .loop-comet, .loop-node-dot { animation: none !important; }
+  }
+</style>

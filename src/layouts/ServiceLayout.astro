@@ -20,11 +20,7 @@ const jsonLd = {
   name: service.title,
   description: service.metaDescription,
   url: `https://wohnmohr.com/services/${service.slug}/`,
-  provider: {
-    "@type": "ProfessionalService",
-    name: "wohnmohr",
-    url: "https://wohnmohr.com",
-  },
+  provider: { "@id": "https://wohnmohr.com/#organization" },
   areaServed: "Worldwide",
   serviceType: service.title,
 };
@@ -34,17 +30,19 @@ const jsonLd = {
   title={service.metaTitle}
   description={service.metaDescription}
   jsonLd={jsonLd}
+  ogImage="/og/work-with-us.png"
+  breadcrumbs={[{ name: "Work with us", path: "/work-with-us/" }, { name: service.navLabel, path: `/services/${service.slug}/` }]}
 >
   <Navbar variant="overlay" />
   <main>
     <section class="relative overflow-hidden bg-ink pb-12 pt-28 text-white sm:pb-20 sm:pt-36">
       <div class="absolute inset-0" aria-hidden="true">
         <div
-          class="absolute inset-0 bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+          class="absolute inset-0 bg-[linear-gradient(120deg,#0B0D10_0%,#13161B_55%,#1E43D6_100%)]"
         >
         </div>
         <div
-          class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-coral via-gold to-aqua"
+          class="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-to-r from-cobalt to-lime"
         >
         </div>
       </div>
@@ -133,7 +131,7 @@ const jsonLd = {
           />
           <BtnLink
             text="Free health check"
-            href="/#health-check"
+            href="/tools/vibe-code-health-check"
             variant="secondary"
             className="w-full sm:w-auto"
           />

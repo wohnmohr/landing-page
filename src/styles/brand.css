@@ -1,0 +1,342 @@
+/*
+ * wohnmohr design system — "The Loop"
+ * Build → ship → learn → repeat. One looping motif, two signal colours.
+ *
+ * Colours are RGB channels so Tailwind can apply opacity (see tailwind.config.cjs).
+ */
+:root {
+  /* Surfaces */
+  --ink: 11 13 16;          /* #0B0D10  night — primary dark surface & text on paper */
+  --ink-2: 19 22 27;        /* #13161B  raised dark surface */
+  --ink-3: 28 32 39;        /* #1C2027  cards on dark */
+  --paper: 243 244 238;     /* #F3F4EE  light surface */
+  --paper-2: 231 233 224;   /* #E7E9E0  sunken light surface */
+
+  /* Text */
+  --fog: 160 167 178;       /* #A0A7B2  muted text on ink */
+  --graphite: 74 81 92;     /* #4A515C  muted text on paper */
+
+  /* Signal colours */
+  --lime: 198 244 50;       /* #C6F432  the "ship" signal — use on ink, never as text on paper */
+  --lime-deep: 106 140 0;   /* #6A8C00  lime for text on paper */
+  --cobalt: 43 91 255;      /* #2B5BFF  the "build" signal — links & accents on paper */
+  --cobalt-deep: 30 67 214; /* #1E43D6  hover / pressed */
+  --cobalt-soft: 125 155 255; /* #7D9BFF cobalt for text on ink */
+
+  /* Motion */
+  --ease-loop: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-base: 420ms;
+  --dur-slow: 800ms;
+
+  /* Legacy names still referenced by older inline styles */
+  --color-ink: rgb(var(--ink));
+  --color-mist: rgb(var(--paper));
+  --color-accent: rgb(var(--cobalt));
+  --color-coral: rgb(var(--cobalt));
+  --color-gold: rgb(var(--lime));
+  --color-aqua: rgb(var(--cobalt-soft));
+  --color-line: rgb(var(--ink) / 0.12);
+  --ease-out-soft: var(--ease-loop);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: rgb(var(--paper));
+  color: rgb(var(--ink));
+  min-height: 100vh;
+  min-width: 0;
+  overflow-x: clip;
+  font-feature-settings: "ss01", "cv11";
+}
+
+h1, h2, h3, h4, .font-display {
+  font-feature-settings: "ss01", "ss02";
+}
+
+img, video, embed, object, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+fieldset {
+  min-width: 0;
+  max-width: 100%;
+}
+
+::selection {
+  background: rgb(var(--lime));
+  color: rgb(var(--ink));
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--cobalt));
+  outline-offset: 3px;
+}
+
+.surface-ink :focus-visible {
+  outline-color: rgb(var(--lime));
+}
+
+/* ---------- Surfaces ---------- */
+.surface-ink {
+  background-color: rgb(var(--ink));
+  color: #fff;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.dot-grid-paper {
+  background-image: radial-gradient(rgb(var(--ink) / 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Lime "marker" highlight behind a word */
+.marker {
+  position: relative;
+  white-space: nowrap;
+  color: rgb(var(--ink));
+  padding: 0 0.12em;
+  isolation: isolate;
+}
+
+.marker::before {
+  content: "";
+  position: absolute;
+  inset: 0.08em -0.02em 0.02em;
+  background: rgb(var(--lime));
+  z-index: -1;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: marker-in 0.9s var(--ease-loop) 0.5s forwards;
+}
+
+@keyframes marker-in {
+  to { transform: scaleX(1); }
+}
+
+/* ---------- Scroll reveal ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity var(--dur-slow) var(--ease-loop),
+    transform var(--dur-slow) var(--ease-loop);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="left"] { transform: translate3d(-28px, 0, 0); }
+[data-reveal="right"] { transform: translate3d(28px, 0, 0); }
+[data-reveal="scale"] { transform: translate3d(0, 16px, 0) scale(0.97); }
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+.no-js [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Split-line headline reveal */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.line-mask > span {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  animation: line-up 1s var(--ease-loop) forwards;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes line-up {
+  to { transform: none; }
+}
+
+.nav-animate {
+  opacity: 0;
+  transform: translate3d(0, -10px, 0);
+}
+
+.motion-ready .nav-animate {
+  animation: nav-in 0.7s var(--ease-loop) both;
+  animation-delay: var(--nav-delay, 0ms);
+}
+
+@keyframes nav-in {
+  to { opacity: 1; transform: none; }
+}
+
+[data-pricing-panel] {
+  animation: panel-in 0.45s var(--ease-loop) both;
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+.hover-lift {
+  transition:
+    transform 0.35s var(--ease-loop),
+    box-shadow 0.35s var(--ease-loop),
+    border-color 0.35s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -24px rgb(var(--ink) / 0.45);
+}
+
+/* ---------- Scroll progress ---------- */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 60;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: rgb(var(--lime));
+  pointer-events: none;
+}
+
+/* ---------- Header ---------- */
+[data-header] {
+  transition:
+    background-color var(--dur-base) var(--ease-loop),
+    box-shadow var(--dur-base) var(--ease-loop),
+    padding var(--dur-base) var(--ease-loop);
+}
+
+[data-header][data-variant="overlay"][data-scrolled] {
+  background-color: rgb(var(--ink) / 0.82);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.06);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+[data-toggle-nav][data-open-nav="true"] #line1 {
+  transform: translateY(0.375rem) rotate(45deg);
+}
+[data-toggle-nav][data-open-nav="true"] #line2 {
+  transform: scaleX(0);
+  opacity: 0;
+}
+[data-toggle-nav][data-open-nav="true"] #line3 {
+  transform: translateY(-0.375rem) rotate(-45deg);
+}
+
+[data-navbar][data-open="true"] {
+  border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+[data-nav-overlay][data-is-visible="true"] {
+  visibility: visible;
+  display: flex;
+}
+
+/* ---------- Loop mark signal ---------- */
+.loop-signal {
+  offset-rotate: 0deg;
+}
+
+/* ---------- Marquee ---------- */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Third-party embeds ---------- */
+.calendly-inline-widget {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 700px;
+  height: 700px;
+  overflow: visible;
+}
+
+.calendly-inline-widget iframe {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  min-height: 700px !important;
+}
+
+@media (max-width: 639px) {
+  .calendly-inline-widget { min-height: 920px; height: 920px; }
+  .calendly-inline-widget iframe { min-height: 920px !important; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  [data-reveal],
+  .nav-animate,
+  .line-mask > span {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .marker::before { transform: scaleX(1); }
+  .loop-signal, .marquee-track { animation: none !important; }
+  .scroll-progress { display: none; }
+}
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }

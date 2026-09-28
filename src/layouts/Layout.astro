@@ -1,30 +1,103 @@
 ---
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/space-grotesk/700.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+import "../styles/brand.css";
+import displayFont from "@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2?url";
+import bodyFont from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import { company, products } from "../utils/company";
+
+export type Crumb = { name: string; path: string };
+
 export interface Props {
   title: string;
   description?: string;
   ogType?: "website" | "article";
+  /** Path under /public, e.g. "/og/nichelinq.png". */
+  ogImage?: string;
+  ogImageAlt?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[] | null;
+  /** Trail below Home, e.g. [{ name: "Products", path: "/products/" }]. */
+  breadcrumbs?: Crumb[];
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = "wohnmohr is an AI consulting startup that builds AI products, automations, and test systems—and fixes vibe coding gone bad.",
+  description = company.shortDescription,
   ogType = "website",
+  ogImage: ogImagePath = "/og/default.png",
+  ogImageAlt = "wohnmohr — We build AI products that keep shipping.",
   jsonLd = null,
+  breadcrumbs = [],
+  noindex = false,
 } = Astro.props;
 
-const siteUrl = "https://wohnmohr.com";
+const siteUrl = company.url;
 const canonical = new URL(Astro.url.pathname, siteUrl).href;
-const ogImage = `${siteUrl}/images/landing-image.webp`;
+const ogImage = new URL(ogImagePath, siteUrl).href;
+
+// Site-wide entity graph: who we are and what the site is.
+const orgId = `${siteUrl}/#organization`;
+const siteLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": orgId,
+      name: company.name,
+      url: `${siteUrl}/`,
+      logo: { "@type": "ImageObject", url: `${siteUrl}/logo.png`, width: 512, height: 512 },
+      image: `${siteUrl}/og/default.png`,
+      slogan: company.tagline,
+      description: company.shortDescription,
+      brand: products.map((p) => ({ "@type": "Brand", name: p.name, url: p.url })),
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        url: company.calendly,
+        availableLanguage: ["English"],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: company.name,
+      publisher: { "@id": orgId },
+      inLanguage: "en",
+    },
+  ],
+};
+
+const breadcrumbLd =
+  breadcrumbs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [{ name: "Home", path: "/" }, ...breadcrumbs].map((c, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: c.name,
+          item: new URL(c.path, siteUrl).href,
+        })),
+      }
+    : null;
 const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY ?? "";
 const posthogHost =
   import.meta.env.PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
 
-const jsonLdBlocks = jsonLd
-  ? Array.isArray(jsonLd)
-    ? jsonLd
-    : [jsonLd]
-  : [];
+const jsonLdBlocks = [
+  siteLd,
+  ...(breadcrumbLd ? [breadcrumbLd] : []),
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+];
 ---
 
 <!doctype html>
@@ -32,18 +105,20 @@ const jsonLdBlocks = jsonLd
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta
-      name="keywords"
-      content="AI consulting startup, vibe code rescue, AI automation, AI testing, AI product development, fix AI generated code, wohnmohr"
+      name="robots"
+      content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"}
     />
-    <meta name="robots" content="index, follow" />
     <meta name="author" content="wohnmohr" />
-    <meta name="theme-color" content="#07111f" />
+    <meta name="theme-color" content="#0B0D10" />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="wohnmohr" />
@@ -51,21 +126,22 @@ const jsonLdBlocks = jsonLd
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
-    <link rel="alternate" type="application/rss+xml" title="wohnmohr Blog" href="/blogs/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="wohnmohr Journal" href="/blogs/rss.xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
 
     {
       jsonLdBlocks.map((block) => (
@@ -138,20 +214,16 @@ const jsonLdBlocks = jsonLd
         </script>
       )
     }
-    <script
-      type="text/javascript"
-      src="https://assets.calendly.com/assets/external/widget.js"
-      async></script>
-    <script src="https://tally.so/widgets/embed.js" defer></script>
   </head>
 
-  <body class="bg-mist text-ink antialiased">
+  <body class="bg-paper text-ink antialiased">
     <a
       href="#contact"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-white"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-cobalt focus:px-4 focus:py-2 focus:text-white"
     >
       Skip to contact
     </a>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
     <slot />
   </body>
 
@@ -230,6 +302,82 @@ const jsonLdBlocks = jsonLd
       revealEls.forEach((el) => el.classList.add("is-revealed"));
     }
 
+    // Scroll progress bar + glass header once the page scrolls
+    const progress = document.querySelector<HTMLElement>("[data-scroll-progress]");
+    const header = document.querySelector<HTMLElement>("[data-header]");
+    let ticking = false;
+    const onScroll = () => {
+      ticking = false;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progress) {
+        progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+      }
+      if (header) header.toggleAttribute("data-scrolled", window.scrollY > 24);
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(onScroll);
+        }
+      },
+      { passive: true }
+    );
+    onScroll();
+
+    // Count-up numbers
+    const counters = document.querySelectorAll<HTMLElement>("[data-count-to]");
+    const runCounter = (el: HTMLElement) => {
+      const target = Number(el.dataset.countTo ?? 0);
+      if (reduceMotion || !target) return;
+      const start = performance.now();
+      const duration = 1400;
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = String(Math.round(target * eased));
+        if (t < 1) requestAnimationFrame(step);
+      };
+      el.textContent = "0";
+      requestAnimationFrame(step);
+    };
+    if ("IntersectionObserver" in window && counters.length) {
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            runCounter(entry.target as HTMLElement);
+            counterObserver.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.6 }
+      );
+      counters.forEach((el) => counterObserver.observe(el));
+    }
+
+    // Pointer spotlight + subtle 3D tilt on cards
+    if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+      document.querySelectorAll<HTMLElement>("[data-spotlight]").forEach((card) => {
+        const tilt = card.hasAttribute("data-tilt");
+        card.addEventListener("pointermove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty("--sx", `${x}px`);
+          card.style.setProperty("--sy", `${y}px`);
+          if (tilt) {
+            const rx = ((y / rect.height) - 0.5) * -6;
+            const ry = ((x / rect.width) - 0.5) * 6;
+            card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+          }
+        });
+        card.addEventListener("pointerleave", () => {
+          card.style.transform = "";
+        });
+      });
+    }
+
     // Smooth in-page hash navigation (including from /pricing)
     document.querySelectorAll('a[href^="/#"], a[href^="#"]').forEach((link) => {
       link.addEventListener("click", (e) => {
@@ -277,227 +425,4 @@ const jsonLdBlocks = jsonLd
     });
   </script>
 
-  <style is:global>
-    :root {
-      --color-ink: #07111f;
-      --color-mist: #f4f7fb;
-      --color-sand: #e8f0f4;
-      --color-slate: #44566a;
-      --color-accent: #0f9f90;
-      --color-accent-deep: #0b7a70;
-      --color-coral: #ff6b35;
-      --color-gold: #f5a623;
-      --color-aqua: #2ec4b6;
-      --color-line: rgba(7, 17, 31, 0.12);
-      --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    html {
-      scroll-behavior: smooth;
-      overflow-x: clip;
-    }
-
-    body {
-      font-family: "Source Sans 3", sans-serif;
-      background-image:
-        radial-gradient(
-          ellipse 70% 45% at 0% 0%,
-          rgba(46, 196, 182, 0.16),
-          transparent 55%
-        ),
-        radial-gradient(
-          ellipse 55% 40% at 100% 5%,
-          rgba(255, 107, 53, 0.12),
-          transparent 50%
-        ),
-        radial-gradient(
-          ellipse 40% 30% at 70% 100%,
-          rgba(245, 166, 35, 0.1),
-          transparent 55%
-        ),
-        linear-gradient(180deg, #f7fafc 0%, #f4f7fb 45%, #eef4f7 100%);
-      background-attachment: scroll;
-      min-height: 100vh;
-      min-width: 0;
-      overflow-x: clip;
-    }
-
-    img,
-    video,
-    embed,
-    object,
-    svg {
-      max-width: 100%;
-      height: auto;
-    }
-
-    iframe {
-      display: block;
-      max-width: 100%;
-    }
-
-    fieldset {
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    .calendly-inline-widget {
-      width: 100%;
-      min-width: 0;
-      max-width: 100%;
-      min-height: 700px;
-      height: 700px;
-      overflow: visible;
-    }
-
-    .calendly-inline-widget iframe {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 100% !important;
-      min-height: 700px !important;
-    }
-
-    @media (max-width: 639px) {
-      .calendly-inline-widget {
-        min-height: 920px;
-        height: 920px;
-      }
-
-      .calendly-inline-widget iframe {
-        min-height: 920px !important;
-      }
-    }
-
-    @media (min-width: 768px) {
-      body {
-        background-attachment: fixed;
-      }
-    }
-
-    ::selection {
-      background: rgba(255, 107, 53, 0.25);
-      color: #07111f;
-    }
-
-    [data-reveal] {
-      opacity: 0;
-      transform: translate3d(0, 32px, 0);
-      filter: blur(2px);
-      transition:
-        opacity 0.8s var(--ease-out-soft),
-        transform 0.8s var(--ease-out-soft),
-        filter 0.8s var(--ease-out-soft);
-      transition-delay: var(--reveal-delay, 0ms);
-      will-change: opacity, transform, filter;
-    }
-
-    [data-reveal="left"] {
-      transform: translate3d(-32px, 0, 0);
-    }
-
-    [data-reveal="right"] {
-      transform: translate3d(32px, 0, 0);
-    }
-
-    [data-reveal="scale"] {
-      transform: translate3d(0, 20px, 0) scale(0.96);
-    }
-
-    [data-reveal].is-revealed {
-      opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1);
-      filter: blur(0);
-    }
-
-    .nav-animate {
-      opacity: 0;
-      transform: translate3d(0, -10px, 0);
-    }
-
-    .motion-ready .nav-animate {
-      animation: nav-in 0.7s var(--ease-out-soft) both;
-      animation-delay: var(--nav-delay, 0ms);
-    }
-
-    @keyframes nav-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, -10px, 0);
-      }
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    [data-pricing-panel] {
-      animation: panel-in 0.45s var(--ease-out-soft) both;
-    }
-
-    @keyframes panel-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 14px, 0);
-      }
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    .hover-lift {
-      transition:
-        transform 0.35s var(--ease-out-soft),
-        box-shadow 0.35s var(--ease-out-soft),
-        border-color 0.35s ease;
-    }
-
-    .hover-lift:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 36px -24px rgba(7, 17, 31, 0.45);
-    }
-
-    [data-toggle-nav][data-open-nav="true"] #line1 {
-      transform: translateY(0.375rem) rotate(40deg);
-    }
-    [data-toggle-nav][data-open-nav="true"] #line2 {
-      transform: scaleX(0);
-      opacity: 0;
-    }
-    [data-toggle-nav][data-open-nav="true"] #line3 {
-      transform: translateY(-0.375rem) rotate(-40deg);
-    }
-
-    [data-navbar][data-open="true"] {
-      border: 1px solid var(--color-line);
-      box-shadow: 0 16px 40px -24px rgba(11, 31, 28, 0.45);
-    }
-
-    [data-nav-overlay][data-is-visible="true"] {
-      visibility: visible;
-      display: flex;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      [data-reveal],
-      [data-pricing-panel],
-      .hover-lift,
-      .nav-animate,
-      .animate-fade-up,
-      .animate-fade-in,
-      .animate-hero-pan,
-      .animate-accent-line {
-        animation: none !important;
-        transition: none !important;
-        opacity: 1 !important;
-        transform: none !important;
-        filter: none !important;
-      }
-    }
-  </style>
 </html>

@@ -42,7 +42,7 @@ const approachBySlug: Record<string, string[]> = {
 const approach = approachBySlug[story.slug] ?? [];
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} ogImage="/og/work-with-us.png" breadcrumbs={[{ name: "Work with us", path: "/work-with-us/" }, { name: story.title, path: `/work/${story.slug}/` }]}>
   <Navbar variant="overlay" />
   <main>
     <header
@@ -50,17 +50,17 @@ const approach = approachBySlug[story.slug] ?? [];
     >
       <div class="absolute inset-0" aria-hidden="true">
         <div
-          class="absolute inset-0 bg-[linear-gradient(120deg,#07111f_0%,#0a3d4a_55%,#0f9f90_100%)]"
+          class="absolute inset-0 bg-[linear-gradient(120deg,#0B0D10_0%,#13161B_55%,#1E43D6_100%)]"
         >
         </div>
         <div
-          class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-coral via-gold to-aqua"
+          class="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-to-r from-cobalt to-lime"
         >
         </div>
       </div>
       <Container className="relative max-w-3xl">
         <a
-          href="/#rescue-stories"
+          href="/work-with-us"
           class="text-sm font-semibold text-white/70 transition hover:text-gold"
         >
           ← Rescue patterns

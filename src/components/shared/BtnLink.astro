@@ -3,8 +3,17 @@ export interface Props {
   href: string;
   text: string;
   className?: string;
-  variant?: "primary" | "secondary" | "ghost" | "bright";
+  /**
+   * primary  – cobalt, works on paper and ink
+   * bright   – lime signal, use on ink for the main action
+   * secondary – white, use on ink
+   * ghost    – outline, on ink
+   * outline  – outline, on paper
+   * ink      – solid ink, on paper
+   */
+  variant?: "primary" | "secondary" | "ghost" | "bright" | "outline" | "ink";
   external?: boolean;
+  arrow?: boolean;
   track?: string;
   trackLocation?: string;
 }
@@ -15,22 +24,30 @@ const {
   className = "",
   variant = "primary",
   external = false,
+  arrow = true,
   track,
   trackLocation,
 } = Astro.props;
 
 const styles = {
-  primary:
-    "bg-coral text-white hover:bg-[#e85a28] shadow-[0_12px_32px_-12px_rgba(255,107,53,0.7)] hover:shadow-[0_16px_36px_-12px_rgba(255,107,53,0.85)]",
-  bright:
-    "bg-gold text-ink hover:bg-[#f0b429] shadow-[0_12px_32px_-12px_rgba(245,166,35,0.65)] hover:shadow-[0_16px_36px_-12px_rgba(245,166,35,0.8)]",
-  secondary:
-    "bg-white text-ink border border-transparent hover:bg-sand shadow-[0_10px_28px_-14px_rgba(10,22,40,0.35)]",
-  ghost:
-    "bg-transparent text-white border border-white/40 hover:bg-white/12 hover:border-white/70",
+  primary: "bg-cobalt text-white hover:bg-cobalt-deep",
+  bright: "bg-lime text-ink hover:bg-white",
+  secondary: "bg-white text-ink hover:bg-lime",
+  ghost: "border border-white/25 text-white hover:border-white hover:bg-white/5",
+  outline: "border border-ink/20 text-ink hover:border-ink hover:bg-ink/[0.03]",
+  ink: "bg-ink text-white hover:bg-cobalt",
 };
 
-const classes = `inline-flex max-w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-center font-sans text-sm font-semibold tracking-[0.02em] transition-all duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral sm:px-6 ${styles[variant]} ${className}`;
+const classes = `group/btn inline-flex max-w-full items-center justify-center gap-2.5 rounded-full py-3 pl-6 ${arrow ? "pr-2" : "pr-6"} text-center font-sans text-[0.95rem] font-semibold tracking-[-0.005em] transition-[background-color,border-color,color,transform] duration-300 ease-loop active:scale-[0.98] ${styles[variant]} ${className}`;
+
+const arrowBg = {
+  primary: "bg-white/15",
+  bright: "bg-ink text-lime",
+  secondary: "bg-ink text-white",
+  ghost: "bg-white/10",
+  outline: "bg-ink text-white",
+  ink: "bg-white/15",
+}[variant];
 
 const trackAttrs = track
   ? {
@@ -38,22 +55,22 @@ const trackAttrs = track
       ...(trackLocation ? { "data-track-location": trackLocation } : {}),
     }
   : {};
+const externalAttrs = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
 ---
 
-{
-  external ? (
-    <a
-      href={href}
-      class={classes}
-      target="_blank"
-      rel="noopener noreferrer"
-      {...trackAttrs}
-    >
-      {text}
-    </a>
-  ) : (
-    <a href={href} class={classes} {...trackAttrs}>
-      {text}
-    </a>
-  )
-}
+<a href={href} class={classes} {...externalAttrs} {...trackAttrs}>
+  <span>{text}</span>
+  {
+    arrow && (
+      <span class={`grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-full ${arrowBg}`} aria-hidden="true">
+        <svg class="h-4 w-4 transition-transform duration-300 ease-loop group-hover/btn:translate-x-0.5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          {external ? (
+            <path d="M6 14 14 6M7.5 6H14v6.5" stroke-linecap="round" stroke-linejoin="round" />
+          ) : (
+            <path d="M4 10h12m-5-5 5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+          )}
+        </svg>
+      </span>
+    )
+  }
+</a>

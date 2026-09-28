@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/elements/Navbar.astro";
+import Footer from "../../components/elements/Footer.astro";
+import PageHero from "../../components/ui/PageHero.astro";
+import ProductShowcase from "../../components/home/ProductShowcase.astro";
+import Contact from "../../components/home/Contact.astro";
+import { products } from "../../utils/company";
+---
+
+<Layout
+  title="Products | wohnmohr — NicheLinq & Split Biller"
+  description={`The products wohnmohr builds and runs: ${products.map((p) => `${p.name} (${p.oneLiner})`).join(" and ")}`}
+  breadcrumbs={[{ name: "Products", path: "/products/" }]}
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: products.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `https://wohnmohr.com/products/${p.slug}/`, name: p.name })),
+  }}
+>
+  <Navbar />
+  <main>
+    <PageHero
+      eyebrow="Products"
+      title="Small, sharp tools for<br />real everyday jobs."
+      intro="Every wohnmohr product does one job end to end. No bloat, no signup walls—just the fastest path from what you have to what you need."
+    />
+    <ProductShowcase showIntro={false} />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

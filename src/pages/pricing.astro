@@ -6,13 +6,12 @@ import PricingHero from "../components/sections/PricingHero.astro";
 import PricingRegions from "../components/sections/PricingRegions.astro";
 import CustomPricing from "../components/sections/CustomPricing.astro";
 
-const title =
-  "Pricing | wohnmohr AI Rescue, Build, Automate & Enterprise Contact";
+const title = "Pricing | wohnmohr — Rescue Sprint, Build & Ship, Retainers";
 const description =
   "Regional startup pricing for Rescue Sprint, Build & Ship, and Automate & Assure. Enterprise AI programs: contact us for a custom quote.";
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} ogImage="/og/work-with-us.png" breadcrumbs={[{ name: "Work with us", path: "/work-with-us/" }, { name: "Pricing", path: "/pricing/" }]}>
   <Navbar variant="overlay" />
   <main>
     <PricingHero />

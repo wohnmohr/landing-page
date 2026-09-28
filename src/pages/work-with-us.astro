@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/elements/Navbar.astro";
+import Footer from "../components/elements/Footer.astro";
+import BtnLink from "../components/shared/BtnLink.astro";
+import Container from "../components/shared/Container.astro";
+import Eyebrow from "../components/ui/Eyebrow.astro";
+import PageHero from "../components/ui/PageHero.astro";
+import Contact from "../components/home/Contact.astro";
+import { company, packages } from "../utils/company";
+import { servicePages } from "../utils/data";
+
+const rules = [
+  { title: "Fixed scope, fixed end", body: "Every engagement has a defined outcome and an end date. No open-ended hourly work." },
+  { title: "A few slots a month", body: "We cap client work so our own products never stall—which means your project gets our full attention, too." },
+  { title: "Built like our products", body: "Same stack, same tests, same evals we run on NicheLinq and Split Biller." },
+  { title: "You own everything", body: "Code, prompts, evals and docs are yours at handover. No lock-in." },
+];
+---
+
+<Layout
+  title="Work with us | wohnmohr AI product builds, rescue & automation"
+  description="wohnmohr takes on a few fixed-scope client builds each month: Rescue Sprint, Build & Ship, and Automate & Assure—built to the same standard as our own AI products."
+  ogImage="/og/work-with-us.png"
+  breadcrumbs={[{ name: "Work with us", path: "/work-with-us/" }]}
+>
+  <Navbar />
+  <main>
+    <PageHero
+      eyebrow="Work with us"
+      title="Your product, built<br />on our loop."
+      intro="We’re a product company first. A few times a month we bring the same team, stack and standards to someone else’s problem."
+    >
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <BtnLink text="Book a 30-min call" href={company.calendly} variant="bright" external track="calendly_click" trackLocation="work_with_us_hero" />
+        <BtnLink text="See pricing" href="/pricing" variant="ghost" arrow={false} />
+      </div>
+    </PageHero>
+
+    <section class="py-20 sm:py-28" aria-labelledby="packages-heading">
+      <Container>
+        <div data-reveal>
+          <Eyebrow index="01">Engagements</Eyebrow>
+          <h2 id="packages-heading" class="mt-4 font-display text-display-lg font-bold">Three ways in.</h2>
+        </div>
+        <ul class="mt-14 grid gap-4 lg:grid-cols-3">
+          {packages.map((pkg, i) => (
+            <li class:list={["flex flex-col rounded-[1.5rem] p-8", i === 1 ? "surface-ink" : "border border-line bg-white"]} data-reveal style={`--reveal-delay: ${i * 90}ms`}>
+              <div class="flex items-center justify-between">
+                <span class:list={["font-mono text-xs", i === 1 ? "text-fog" : "text-graphite"]}>0{i + 1}</span>
+                <span class:list={["rounded-full px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.12em]", i === 1 ? "bg-lime text-ink" : "bg-paper text-ink"]}>{pkg.duration}</span>
+              </div>
+              <h3 class="mt-10 font-display text-3xl font-bold tracking-tight">{pkg.name}</h3>
+              <p class:list={["mt-3 leading-relaxed", i === 1 ? "text-fog" : "text-graphite"]}>{pkg.summary}</p>
+              <ul class:list={["mt-8 space-y-3 border-t pt-6 text-sm", i === 1 ? "border-white/10" : "border-line"]}>
+                {pkg.includes.map((inc) => (
+                  <li class="flex gap-3"><span class={i === 1 ? "text-lime" : "text-cobalt"}>→</span>{inc}</li>
+                ))}
+              </ul>
+              <div class="mt-auto pt-10">
+                <BtnLink text="Learn more" href={pkg.href} variant={i === 1 ? "bright" : "ink"} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+
+    <section class="bg-paper-2 py-20 sm:py-28" aria-labelledby="rules-heading">
+      <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div data-reveal>
+          <Eyebrow index="02">House rules</Eyebrow>
+          <h2 id="rules-heading" class="mt-4 font-display text-display-md font-bold">Why we keep client work small.</h2>
+          <p class="mt-5 max-w-md text-lg leading-relaxed text-graphite">
+            Client builds fund the products; the products make us better at client builds. Keeping it small keeps both honest.
+          </p>
+        </div>
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {rules.map((r, i) => (
+            <li class="rounded-brand bg-white p-6" data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+              <span class="font-mono text-xs text-cobalt">0{i + 1}</span>
+              <h3 class="mt-3 font-display text-xl font-bold tracking-tight">{r.title}</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-graphite">{r.body}</p>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+
+    <section class="py-20 sm:py-24" aria-labelledby="services-heading">
+      <Container>
+        <div data-reveal>
+          <Eyebrow index="03">Services</Eyebrow>
+          <h2 id="services-heading" class="mt-4 font-display text-display-md font-bold">What we can help with.</h2>
+        </div>
+        <ul class="mt-10 border-t border-line">
+          {servicePages.map((s) => (
+            <li class="border-b border-line" data-reveal>
+              <a href={`/services/${s.slug}`} class="group grid gap-2 py-6 sm:grid-cols-[1fr_1.4fr_auto] sm:items-center sm:gap-8">
+                <span class="font-display text-2xl font-bold tracking-tight group-hover:text-cobalt">{s.navLabel}</span>
+                <span class="text-graphite">{s.metaDescription}</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-8 text-graphite" data-reveal>
+          Not sure your AI-built app is healthy? Try the
+          <a href="/tools/vibe-code-health-check" class="font-semibold text-cobalt underline underline-offset-4">free vibe-code health check</a>.
+        </p>
+      </Container>
+    </section>
+
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

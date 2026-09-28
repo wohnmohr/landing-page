@@ -1,0 +1,174 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/elements/Navbar.astro";
+import Footer from "../components/elements/Footer.astro";
+import BtnLink from "../components/shared/BtnLink.astro";
+import Container from "../components/shared/Container.astro";
+import Eyebrow from "../components/ui/Eyebrow.astro";
+import PageHero from "../components/ui/PageHero.astro";
+import Logo from "../components/brand/Logo.astro";
+import LoopDiagram from "../components/brand/LoopDiagram.astro";
+
+const colors = [
+  { name: "Ink", token: "ink", hex: "#0B0D10", use: "Primary dark surface. Text on paper.", swatch: "bg-ink", text: "text-white" },
+  { name: "Paper", token: "paper", hex: "#F3F4EE", use: "Primary light surface.", swatch: "bg-paper border border-line", text: "text-ink" },
+  { name: "Lime", token: "lime", hex: "#C6F432", use: "The ship signal. Main action on ink, highlights. Never as text on paper.", swatch: "bg-lime", text: "text-ink" },
+  { name: "Cobalt", token: "cobalt", hex: "#2B5BFF", use: "The build signal. Links and actions on paper.", swatch: "bg-cobalt", text: "text-white" },
+  { name: "Fog", token: "fog", hex: "#A0A7B2", use: "Secondary text on ink.", swatch: "bg-fog", text: "text-ink" },
+  { name: "Graphite", token: "graphite", hex: "#4A515C", use: "Secondary text on paper.", swatch: "bg-graphite", text: "text-white" },
+];
+
+const type = [
+  { name: "Display XL", cls: "font-display text-display-xl font-bold", sample: "Keep shipping.", spec: "Space Grotesk 700 · clamp 44–88px · −4.5%" },
+  { name: "Display L", cls: "font-display text-display-lg font-bold", sample: "Build. Ship. Learn.", spec: "Space Grotesk 700 · clamp 36–68px · −4%" },
+  { name: "Display M", cls: "font-display text-display-md font-bold", sample: "One job, done properly.", spec: "Space Grotesk 700 · clamp 28–44px · −3%" },
+  { name: "Body", cls: "text-lg leading-relaxed", sample: "Small, sharp software for real everyday jobs.", spec: "Inter 400 · 16–18px · 1.6" },
+  { name: "Label", cls: "font-mono text-xs uppercase tracking-[0.14em]", sample: "01 / Products", spec: "JetBrains Mono 500 · 12px · +14% · uppercase" },
+];
+
+const voice = [
+  { do: "Make ads from a link.", dont: "Leverage AI-powered creative synergies." },
+  { do: "Who owes whom in seconds.", dont: "Revolutionise your group finance experience." },
+  { do: "We’ll tell you what’s not worth saving.", dont: "We deliver best-in-class holistic solutions." },
+];
+---
+
+<Layout title="Brand & design system | wohnmohr" description="The wohnmohr brand: the loop mark, colour tokens, type scale, components, motion and voice." breadcrumbs={[{ name: "Brand", path: "/brand/" }]}>
+  <Navbar />
+  <main>
+    <PageHero
+      eyebrow="Brand & design system"
+      title="The Loop."
+      intro="Build → ship → learn → repeat. One idea, one mark, two signal colours. Everything on this page is live code from the site."
+    />
+
+    <section class="py-20 sm:py-24" aria-labelledby="logo-heading">
+      <Container>
+        <Eyebrow index="01">Logo</Eyebrow>
+        <h2 id="logo-heading" class="mt-4 font-display text-display-md font-bold">The mark is the process.</h2>
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-graphite">
+          An infinity loop in two halves: cobalt for <strong class="text-ink">build</strong>, lime for
+          <strong class="text-ink">ship</strong>. On screen, a white signal travels the loop. Keep clear space equal to
+          the height of one loop on every side; never rotate, outline or recolour it outside the tones below.
+        </p>
+        <div class="mt-10 grid gap-4 md:grid-cols-3">
+          <div class="surface-ink grid min-h-[220px] place-items-center rounded-brand"><Logo size={34} animated /></div>
+          <div class="grid min-h-[220px] place-items-center rounded-brand border border-line bg-white"><Logo size={34} tone="dark" /></div>
+          <div class="grid min-h-[220px] place-items-center rounded-brand bg-cobalt"><Logo size={34} tone="light" /></div>
+        </div>
+        <div class="mt-4 grid gap-4 sm:grid-cols-3">
+          <div class="surface-ink grid h-32 place-items-center rounded-brand"><Logo size={40} wordmark={false} /></div>
+          <div class="grid h-32 place-items-center rounded-brand bg-lime"><Logo size={40} wordmark={false} tone="dark" /></div>
+          <div class="grid h-32 place-items-center rounded-brand border border-line bg-white"><img src="/favicon.svg" width="64" height="64" alt="wohnmohr app icon" class="h-16 w-16" /></div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="bg-paper-2 py-20 sm:py-24" aria-labelledby="color-heading">
+      <Container>
+        <Eyebrow index="02">Colour</Eyebrow>
+        <h2 id="color-heading" class="mt-4 font-display text-display-md font-bold">Mostly ink and paper. Signals, sparingly.</h2>
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-graphite">
+          Roughly 90% ink and paper, 10% signal. Lime marks the one thing to do next; cobalt marks things you can click.
+          Tokens live in <code class="rounded bg-white px-1.5 py-0.5 font-mono text-sm">src/styles/brand.css</code>.
+        </p>
+        <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {colors.map((c) => (
+            <li class="overflow-hidden rounded-brand bg-white">
+              <div class={`flex h-36 items-end p-5 ${c.swatch} ${c.text}`}>
+                <span class="font-display text-2xl font-bold">{c.name}</span>
+              </div>
+              <div class="p-5">
+                <p class="font-mono text-xs text-graphite">--{c.token} · {c.hex}</p>
+                <p class="mt-2 text-sm leading-relaxed">{c.use}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+
+    <section class="py-20 sm:py-24" aria-labelledby="type-heading">
+      <Container>
+        <Eyebrow index="03">Type</Eyebrow>
+        <h2 id="type-heading" class="mt-4 font-display text-display-md font-bold">Grotesk to shout, mono to label.</h2>
+        <ul class="mt-10 border-t border-line">
+          {type.map((t) => (
+            <li class="grid gap-3 border-b border-line py-8 lg:grid-cols-[200px_1fr] lg:items-baseline">
+              <div>
+                <p class="font-semibold">{t.name}</p>
+                <p class="mt-1 font-mono text-[0.7rem] text-graphite">{t.spec}</p>
+              </div>
+              <p class={`${t.cls} break-words`}>{t.sample}</p>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+
+    <section class="bg-paper-2 py-20 sm:py-24" aria-labelledby="components-heading">
+      <Container>
+        <Eyebrow index="04">Components</Eyebrow>
+        <h2 id="components-heading" class="mt-4 font-display text-display-md font-bold">Pills, labels, markers.</h2>
+        <div class="mt-10 grid gap-4 lg:grid-cols-2">
+          <div class="rounded-brand bg-white p-8">
+            <p class="font-mono text-xs uppercase tracking-[0.14em] text-graphite">On paper</p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <BtnLink text="Primary" href="#components-heading" variant="primary" />
+              <BtnLink text="Ink" href="#components-heading" variant="ink" />
+              <BtnLink text="Outline" href="#components-heading" variant="outline" arrow={false} />
+            </div>
+            <div class="mt-8"><Eyebrow index="01">Section label</Eyebrow></div>
+            <p class="mt-6 font-display text-3xl font-bold">Put a <span class="marker">marker</span> on one word.</p>
+          </div>
+          <div class="surface-ink rounded-brand p-8">
+            <p class="font-mono text-xs uppercase tracking-[0.14em] text-fog">On ink</p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <BtnLink text="Bright" href="#components-heading" variant="bright" />
+              <BtnLink text="Secondary" href="#components-heading" variant="secondary" />
+              <BtnLink text="Ghost" href="#components-heading" variant="ghost" arrow={false} />
+            </div>
+            <div class="mt-8"><Eyebrow index="01" tone="ink">Section label</Eyebrow></div>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="rounded-full bg-lime px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-ink">Live</span>
+              <span class="rounded-full border border-lime/50 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-lime">Early access</span>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="surface-ink py-20 sm:py-24" aria-labelledby="motion-heading">
+      <Container className="grid items-center gap-12 lg:grid-cols-2">
+        <div>
+          <Eyebrow index="05" tone="ink">Motion</Eyebrow>
+          <h2 id="motion-heading" class="mt-4 font-display text-display-md font-bold">Everything moves like a loop.</h2>
+          <ul class="mt-8 space-y-4 text-fog">
+            <li><strong class="text-white">Signal:</strong> one bright point travelling a path—the loop comet, the logo dot, the scroll bar.</li>
+            <li><strong class="text-white">Rise:</strong> headlines slide up out of a mask, line by line.</li>
+            <li><strong class="text-white">Ease:</strong> <code class="font-mono text-sm text-lime">cubic-bezier(0.22, 1, 0.36, 1)</code> — fast out, soft landing. 180 / 420 / 800ms.</li>
+            <li><strong class="text-white">Respect:</strong> all motion stops for people who set reduced motion.</li>
+          </ul>
+        </div>
+        <LoopDiagram />
+      </Container>
+    </section>
+
+    <section class="py-20 sm:py-24" aria-labelledby="voice-heading">
+      <Container>
+        <Eyebrow index="06">Voice</Eyebrow>
+        <h2 id="voice-heading" class="mt-4 font-display text-display-md font-bold">Say the job, not the jargon.</h2>
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-graphite">Short sentences. Concrete verbs. Name the thing people get. No “leverage”, no “revolutionise”, no “AI-powered” as a selling point on its own.</p>
+        <ul class="mt-10 grid gap-3">
+          {voice.map((v) => (
+            <li class="grid overflow-hidden rounded-brand border border-line sm:grid-cols-2">
+              <p class="flex items-center gap-3 bg-white p-5 font-display text-lg font-bold"><span class="rounded-full bg-lime px-2 py-0.5 font-mono text-[0.6rem] uppercase text-ink">Say</span>{v.do}</p>
+              <p class="flex items-center gap-3 bg-paper-2 p-5 text-graphite line-through decoration-graphite/40"><span class="rounded-full bg-ink/10 px-2 py-0.5 font-mono text-[0.6rem] uppercase text-graphite no-underline">Not</span>{v.dont}</p>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+  </main>
+  <Footer />
+</Layout>

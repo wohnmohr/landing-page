@@ -1,0 +1,72 @@
+---
+/**
+ * The wohnmohr mark: an infinity loop — build (cobalt) → ship (lime) → repeat.
+ * A signal dot travels the loop when `animated` is set.
+ */
+export interface Props {
+  size?: number;
+  tone?: "color" | "light" | "dark";
+  wordmark?: boolean;
+  animated?: boolean;
+  className?: string;
+  label?: string;
+}
+
+const {
+  size = 36,
+  tone = "color",
+  wordmark = true,
+  animated = false,
+  className = "",
+  label = "wohnmohr",
+} = Astro.props;
+
+const right = "M24 12C28 6.5 32 4 36 4C40.4 4 44 7.6 44 12C44 16.4 40.4 20 36 20C32 20 28 17.5 24 12";
+const left = "M24 12C20 6.5 16 4 12 4C7.6 4 4 7.6 4 12C4 16.4 7.6 20 12 20C16 20 20 17.5 24 12";
+const full = `${right}${left.replace("M24 12", "")}Z`;
+
+const colors = {
+  color: { build: "rgb(var(--cobalt))", ship: "rgb(var(--lime))", word: "currentColor" },
+  light: { build: "#fff", ship: "#fff", word: "#fff" },
+  dark: { build: "rgb(var(--ink))", ship: "rgb(var(--ink))", word: "rgb(var(--ink))" },
+}[tone];
+
+const uid = `loop-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span class={`inline-flex items-center gap-2.5 ${className}`} aria-label={wordmark ? undefined : label} role={wordmark ? undefined : "img"}>
+  <svg
+    width={size * 2}
+    height={size}
+    viewBox="0 0 48 24"
+    fill="none"
+    aria-hidden="true"
+    class="shrink-0 overflow-visible"
+  >
+    <defs>
+      <clipPath id={`${uid}-l`}><rect x="-4" y="-4" width="28" height="32" /></clipPath>
+      <clipPath id={`${uid}-r`}><rect x="24" y="-4" width="28" height="32" /></clipPath>
+    </defs>
+    <path id={uid} d={full} stroke={colors.build} stroke-width="4.6" clip-path={`url(#${uid}-r)`} />
+    <path d={full} stroke={colors.ship} stroke-width="4.6" clip-path={`url(#${uid}-l)`} />
+    {
+      animated && (
+        <circle r="2.3" fill="#fff" class="loop-signal">
+          <animateMotion dur="3.6s" repeatCount="indefinite" rotate="auto" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.55 1">
+            <mpath href={`#${uid}`} />
+          </animateMotion>
+        </circle>
+      )
+    }
+  </svg>
+  {
+    wordmark && (
+      <span
+        class="font-display font-bold leading-none tracking-[-0.045em]"
+        style={`font-size: ${Math.round(size * 0.62)}px; color: ${colors.word}`}
+      >
+        wohnmohr
+      </span>
+    )
+  }
+</span>

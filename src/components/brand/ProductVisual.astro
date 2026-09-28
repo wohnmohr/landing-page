@@ -1,0 +1,130 @@
+---
+/** Illustrative product UI for each brand — built in HTML/CSS, not screenshots. */
+export interface Props {
+  slug: string;
+  className?: string;
+}
+const { slug, className = "" } = Astro.props;
+
+const scenes = ["Hook", "Fit", "Detail", "Drop"];
+const people = [
+  { name: "Aarav", amount: "₹960", owes: true },
+  { name: "Diya", amount: "₹960", owes: true },
+  { name: "Kabir", amount: "₹960", owes: false },
+];
+---
+
+{
+  slug === "nichelinq" ? (
+    <div class={`nl relative mx-auto w-full max-w-[420px] ${className}`} aria-hidden="true">
+      <div class="nl-link flex items-center gap-2 rounded-2xl border border-white/10 bg-ink-3 p-2 pl-4 font-mono text-[0.72rem] text-fog shadow-2xl">
+        <span class="truncate">yourlabel.com/products/<span class="text-white">heavyweight-hoodie</span></span>
+        <span class="ml-auto shrink-0 rounded-xl bg-lime px-3 py-2 font-sans text-xs font-bold text-ink">Make Reel</span>
+      </div>
+      <div class="relative mt-5 grid grid-cols-[150px_1fr] gap-4 sm:grid-cols-[170px_1fr]">
+        <div class="nl-phone relative aspect-[9/16] overflow-hidden rounded-[1.4rem] border-4 border-ink-3 bg-gradient-to-b from-[#1b2a12] via-[#10150c] to-black shadow-[0_30px_60px_-20px_rgb(var(--lime)/0.35)]">
+          <div class="absolute inset-x-3 top-3 flex gap-1">
+            {scenes.map((_, i) => (
+              <span class="h-0.5 flex-1 overflow-hidden rounded-full bg-white/20">
+                <span class="nl-bar block h-full bg-white" style={`--i:${i}`} />
+              </span>
+            ))}
+          </div>
+          <div class="absolute inset-0 grid place-items-center">
+            <div class="h-24 w-20 rounded-2xl bg-gradient-to-br from-lime/80 to-lime/20 blur-[1px]" />
+          </div>
+          <p class="nl-caption absolute inset-x-3 bottom-10 font-display text-[0.95rem] font-bold leading-tight text-white">
+            Built heavy.<br />Worn daily.
+          </p>
+          <p class="absolute inset-x-3 bottom-4 font-mono text-[0.55rem] uppercase tracking-widest text-lime">0:40 · Reel</p>
+        </div>
+        <ol class="space-y-2">
+          {scenes.map((s, i) => (
+            <li class="nl-scene flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5" style={`--i:${i}`}>
+              <span class="font-mono text-[0.6rem] text-fog">0{i + 1}</span>
+              <span class="text-sm font-semibold text-white">{s}</span>
+              <span class="ml-auto font-mono text-[0.6rem] text-fog">{[6, 12, 12, 10][i]}s</span>
+            </li>
+          ))}
+          <li class="flex items-center justify-between rounded-xl bg-white/[0.06] px-3 py-2.5 text-xs text-white/80">
+            You direct <span class="rounded-md bg-white px-2 py-1 font-bold text-ink">Render</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  ) : (
+    <div class={`sb relative mx-auto w-full max-w-[400px] ${className}`} aria-hidden="true">
+      <div class="rounded-[1.5rem] border border-ink/10 bg-white p-5 shadow-[0_40px_80px_-40px_rgb(var(--cobalt)/0.55)]">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-graphite">Goa trip · dinner</p>
+            <p class="mt-1 font-display text-3xl font-bold tracking-tight text-ink">₹3,840</p>
+          </div>
+          <span class="rounded-full bg-cobalt/10 px-3 py-1 text-xs font-semibold text-cobalt">4 people</span>
+        </div>
+        <ul class="mt-5 space-y-2">
+          {people.map((p, i) => (
+            <li class="sb-row flex items-center gap-3 rounded-xl bg-paper px-3 py-2.5" style={`--i:${i}`}>
+              <span class="grid h-8 w-8 place-items-center rounded-full bg-ink text-xs font-bold text-white">{p.name[0]}</span>
+              <span class="text-sm font-medium text-ink">
+                {p.name}{" "}<span class="text-graphite">{p.owes ? "owes you" : "is settled"}</span>
+              </span>
+              <span class:list={["ml-auto font-display text-sm font-bold", p.owes ? "text-ink" : "text-graphite line-through"]}>{p.amount}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-5 flex items-center gap-2">
+          <span class="sb-pay flex-1 rounded-full bg-cobalt py-3 text-center text-sm font-bold text-white">Settle via UPI</span>
+          <span class="rounded-full border border-ink/15 px-4 py-3 text-sm font-semibold text-ink">Share</span>
+        </div>
+        <p class="mt-3 text-center font-mono text-[0.6rem] uppercase tracking-[0.14em] text-graphite">No signup · No app</p>
+      </div>
+      <div class="sb-toast absolute -right-3 -top-4 flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-xs font-semibold text-white shadow-xl sm:-right-8">
+        <span class="h-2 w-2 rounded-full bg-lime" /> Kabir paid ₹960
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .nl-bar {
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: nl-bar 8s linear infinite;
+    animation-delay: calc(var(--i) * 2s);
+  }
+  @keyframes nl-bar {
+    0% { transform: scaleX(0); }
+    25%, 100% { transform: scaleX(1); }
+  }
+  .nl-scene {
+    animation: nl-scene 8s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 2s);
+  }
+  @keyframes nl-scene {
+    0%, 25% { border-color: rgb(var(--lime) / 0.8); background: rgb(var(--lime) / 0.08); }
+    30%, 100% { border-color: rgb(255 255 255 / 0.1); background: rgb(255 255 255 / 0.03); }
+  }
+  .nl-caption { animation: bob 5s ease-in-out infinite; }
+  .sb-toast { animation: bob 5s ease-in-out infinite; }
+  .sb-row { animation: row-in 0.8s var(--ease-loop) both; animation-delay: calc(0.2s + var(--i) * 0.12s); }
+  @keyframes row-in {
+    from { opacity: 0; transform: translateY(8px); }
+  }
+  .sb-pay { position: relative; overflow: hidden; }
+  .sb-pay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: shine 3.2s ease-in-out infinite;
+  }
+  @keyframes shine {
+    60%, 100% { transform: translateX(100%); }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+</style>
