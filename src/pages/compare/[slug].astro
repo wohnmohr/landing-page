@@ -16,7 +16,7 @@ export function getStaticPaths() {
 const { page } = Astro.props;
 ---
 
-<Layout title={page.metaTitle} description={page.metaDescription}>
+<Layout title={page.metaTitle} description={page.metaDescription} ogImage="/og/work-with-us.png" breadcrumbs={[{ name: "Work with us", path: "/work-with-us/" }, { name: page.eyebrow, path: `/compare/${page.slug}/` }]}>
   <Navbar variant="overlay" />
   <main>
     <header

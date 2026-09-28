@@ -20,11 +20,7 @@ const jsonLd = {
   name: service.title,
   description: service.metaDescription,
   url: `https://wohnmohr.com/services/${service.slug}/`,
-  provider: {
-    "@type": "ProfessionalService",
-    name: "wohnmohr",
-    url: "https://wohnmohr.com",
-  },
+  provider: { "@id": "https://wohnmohr.com/#organization" },
   areaServed: "Worldwide",
   serviceType: service.title,
 };
@@ -34,6 +30,8 @@ const jsonLd = {
   title={service.metaTitle}
   description={service.metaDescription}
   jsonLd={jsonLd}
+  ogImage="/og/work-with-us.png"
+  breadcrumbs={[{ name: "Work with us", path: "/work-with-us/" }, { name: service.navLabel, path: `/services/${service.slug}/` }]}
 >
   <Navbar variant="overlay" />
   <main>

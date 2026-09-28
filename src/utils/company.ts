@@ -11,7 +11,7 @@ export const company = {
   mission:
     "Build small, sharp software for real everyday jobs—then keep improving it, loop after loop, until it’s the obvious way to get that job done.",
   shortDescription:
-    "wohnmohr is an AI product company. We build and run NicheLinq and Split Biller—and take on a few client builds each month.",
+    "wohnmohr is an AI product company. We build and run NicheLinq (Reels ads from a product link) and Split Biller (split bills in ₹, settle via UPI)—plus a few client AI builds a month.",
   email: "hello@wohnmohr.com",
   calendly: "https://calendly.com/wohnmohr-contact/30min",
   whatsapp: "https://wa.me/918248438399",

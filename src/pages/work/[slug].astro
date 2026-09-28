@@ -42,7 +42,7 @@ const approachBySlug: Record<string, string[]> = {
 const approach = approachBySlug[story.slug] ?? [];
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} ogImage="/og/work-with-us.png" breadcrumbs={[{ name: "Work with us", path: "/work-with-us/" }, { name: story.title, path: `/work/${story.slug}/` }]}>
   <Navbar variant="overlay" />
   <main>
     <header

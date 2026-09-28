@@ -25,11 +25,19 @@ const jsonLd = {
   description: product.metaDescription,
   applicationCategory: "WebApplication",
   operatingSystem: "Web",
-  publisher: { "@type": "Organization", name: company.name, url: company.url },
+  publisher: { "@id": `${company.url}/#organization` },
+  image: `${company.url}/og/${product.slug}.png`,
 };
 ---
 
-<Layout title={product.metaTitle} description={product.metaDescription} jsonLd={jsonLd}>
+<Layout
+  title={product.metaTitle}
+  description={product.metaDescription}
+  jsonLd={jsonLd}
+  ogImage={`/og/${product.slug}.png`}
+  ogImageAlt={`${product.name} — ${product.oneLiner}`}
+  breadcrumbs={[{ name: "Products", path: "/products/" }, { name: product.name, path: `/products/${product.slug}/` }]}
+>
   <Navbar />
   <main>
     <section class="surface-ink grain relative overflow-hidden">

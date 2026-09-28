@@ -1,32 +1,103 @@
 ---
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/space-grotesk/700.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
 import "../styles/brand.css";
+import displayFont from "@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2?url";
+import bodyFont from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import { company, products } from "../utils/company";
+
+export type Crumb = { name: string; path: string };
 
 export interface Props {
   title: string;
   description?: string;
   ogType?: "website" | "article";
+  /** Path under /public, e.g. "/og/nichelinq.png". */
+  ogImage?: string;
+  ogImageAlt?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[] | null;
+  /** Trail below Home, e.g. [{ name: "Products", path: "/products/" }]. */
+  breadcrumbs?: Crumb[];
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = "wohnmohr is an AI product company. We build and run NicheLinq and Split Biller—and take on a few AI product builds for clients each month.",
+  description = company.shortDescription,
   ogType = "website",
+  ogImage: ogImagePath = "/og/default.png",
+  ogImageAlt = "wohnmohr — We build AI products that keep shipping.",
   jsonLd = null,
+  breadcrumbs = [],
+  noindex = false,
 } = Astro.props;
 
-const siteUrl = "https://wohnmohr.com";
+const siteUrl = company.url;
 const canonical = new URL(Astro.url.pathname, siteUrl).href;
-const ogImage = `${siteUrl}/images/landing-image.webp`;
+const ogImage = new URL(ogImagePath, siteUrl).href;
+
+// Site-wide entity graph: who we are and what the site is.
+const orgId = `${siteUrl}/#organization`;
+const siteLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": orgId,
+      name: company.name,
+      url: `${siteUrl}/`,
+      logo: { "@type": "ImageObject", url: `${siteUrl}/logo.png`, width: 512, height: 512 },
+      image: `${siteUrl}/og/default.png`,
+      slogan: company.tagline,
+      description: company.shortDescription,
+      brand: products.map((p) => ({ "@type": "Brand", name: p.name, url: p.url })),
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        url: company.calendly,
+        availableLanguage: ["English"],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: company.name,
+      publisher: { "@id": orgId },
+      inLanguage: "en",
+    },
+  ],
+};
+
+const breadcrumbLd =
+  breadcrumbs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [{ name: "Home", path: "/" }, ...breadcrumbs].map((c, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: c.name,
+          item: new URL(c.path, siteUrl).href,
+        })),
+      }
+    : null;
 const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY ?? "";
 const posthogHost =
   import.meta.env.PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
 
-const jsonLdBlocks = jsonLd
-  ? Array.isArray(jsonLd)
-    ? jsonLd
-    : [jsonLd]
-  : [];
+const jsonLdBlocks = [
+  siteLd,
+  ...(breadcrumbLd ? [breadcrumbLd] : []),
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+];
 ---
 
 <!doctype html>
@@ -36,15 +107,16 @@ const jsonLdBlocks = jsonLd
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta
-      name="keywords"
-      content="wohnmohr, AI product company, NicheLinq, Split Biller, AI product development, AI automation, AI testing, vibe code rescue"
+      name="robots"
+      content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"}
     />
-    <meta name="robots" content="index, follow" />
     <meta name="author" content="wohnmohr" />
     <meta name="theme-color" content="#0B0D10" />
 
@@ -54,21 +126,22 @@ const jsonLdBlocks = jsonLd
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
-    <link rel="alternate" type="application/rss+xml" title="wohnmohr Blog" href="/blogs/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="wohnmohr Journal" href="/blogs/rss.xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
 
     {
       jsonLdBlocks.map((block) => (
@@ -141,11 +214,6 @@ const jsonLdBlocks = jsonLd
         </script>
       )
     }
-    <script
-      type="text/javascript"
-      src="https://assets.calendly.com/assets/external/widget.js"
-      async></script>
-    <script src="https://tally.so/widgets/embed.js" defer></script>
   </head>
 
   <body class="bg-paper text-ink antialiased">

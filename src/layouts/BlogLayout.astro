@@ -31,15 +31,8 @@ const jsonLd = {
     name: "wohnmohr",
     url: "https://wohnmohr.com",
   },
-  publisher: {
-    "@type": "Organization",
-    name: "wohnmohr",
-    url: "https://wohnmohr.com",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://wohnmohr.com/logos/main-logo.png",
-    },
-  },
+  publisher: { "@id": "https://wohnmohr.com/#organization" },
+  image: "https://wohnmohr.com/og/journal.png",
   mainEntityOfPage: `https://wohnmohr.com/blogs/${post.slug}/`,
   keywords: post.tags.join(", "),
 };
@@ -49,7 +42,9 @@ const jsonLd = {
   title={`${post.title} | wohnmohr`}
   description={post.description}
   ogType="article"
+  ogImage="/og/journal.png"
   jsonLd={jsonLd}
+  breadcrumbs={[{ name: "Journal", path: "/blogs/" }, { name: post.title, path: `/blogs/${post.slug}/` }]}
 >
   <Navbar variant="overlay" />
   <main>

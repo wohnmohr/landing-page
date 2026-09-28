@@ -43,9 +43,12 @@ const uid = `loop-${Math.random().toString(36).slice(2, 8)}`;
     aria-hidden="true"
     class="shrink-0 overflow-visible"
   >
-    <path id={uid} d={full} stroke="none" />
-    <path d={left} stroke={colors.ship} stroke-width="4.6" stroke-linecap="round" />
-    <path d={right} stroke={colors.build} stroke-width="4.6" stroke-linecap="round" />
+    <defs>
+      <clipPath id={`${uid}-l`}><rect x="-4" y="-4" width="28" height="32" /></clipPath>
+      <clipPath id={`${uid}-r`}><rect x="24" y="-4" width="28" height="32" /></clipPath>
+    </defs>
+    <path id={uid} d={full} stroke={colors.build} stroke-width="4.6" clip-path={`url(#${uid}-r)`} />
+    <path d={full} stroke={colors.ship} stroke-width="4.6" clip-path={`url(#${uid}-l)`} />
     {
       animated && (
         <circle r="2.3" fill="#fff" class="loop-signal">

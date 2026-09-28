@@ -6,7 +6,7 @@ import BtnLink from "../components/shared/BtnLink.astro";
 import Container from "../components/shared/Container.astro";
 import { faqs } from "../utils/data";
 
-const title = "FAQ | wohnmohr AI Consulting";
+const title = "FAQ | wohnmohr — AI products & client builds";
 const description =
   "Answers about vibe-code rescue, AI product builds, ownership, timelines, and pricing from wohnmohr.";
 
@@ -24,7 +24,7 @@ const jsonLd = {
 };
 ---
 
-<Layout title={title} description={description} jsonLd={jsonLd}>
+<Layout title={title} description={description} jsonLd={jsonLd} breadcrumbs={[{ name: "FAQ", path: "/faq/" }]}>
   <Navbar variant="overlay" />
   <main>
     <header

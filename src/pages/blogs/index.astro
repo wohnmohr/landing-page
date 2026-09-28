@@ -5,12 +5,12 @@ import Footer from "../../components/elements/Footer.astro";
 import Container from "../../components/shared/Container.astro";
 import { blogPosts } from "../../utils/blogs";
 
-const title = "Blog | wohnmohr AI Consulting—Rescue, Build, Automate & Test";
+const title = "Journal | wohnmohr — notes on building AI products";
 const description =
   "Practical guides from wohnmohr on vibe-code rescue, AI automation, testing, and shipping AI products that last.";
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} ogImage="/og/journal.png" breadcrumbs={[{ name: "Journal", path: "/blogs/" }]}>
   <Navbar variant="overlay" />
   <main>
     <section class="relative overflow-hidden bg-ink pb-12 pt-28 text-white sm:pb-20 sm:pt-36">

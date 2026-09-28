@@ -11,19 +11,8 @@ import Journal from "../components/home/Journal.astro";
 import Contact from "../components/home/Contact.astro";
 import { company, products } from "../utils/company";
 
-const title = "wohnmohr | AI product company — makers of NicheLinq & Split Biller";
+const title = "wohnmohr — AI product company behind NicheLinq & Split Biller";
 const description = company.shortDescription;
-
-const organizationLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: company.name,
-  url: company.url,
-  logo: `${company.url}/favicon.svg`,
-  slogan: company.tagline,
-  description,
-  brand: products.map((p) => ({ "@type": "Brand", name: p.name, url: p.url, slogan: p.oneLiner })),
-};
 
 const productsLd = products.map((p) => ({
   "@context": "https://schema.org",
@@ -33,11 +22,11 @@ const productsLd = products.map((p) => ({
   description: p.summary,
   applicationCategory: "WebApplication",
   operatingSystem: "Web",
-  publisher: { "@type": "Organization", name: company.name, url: company.url },
+  publisher: { "@id": `${company.url}/#organization` },
 }));
 ---
 
-<Layout title={title} description={description} jsonLd={[organizationLd, ...productsLd]}>
+<Layout title={title} description={description} jsonLd={productsLd}>
   <Navbar />
   <main>
     <Hero />

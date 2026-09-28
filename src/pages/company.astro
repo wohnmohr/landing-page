@@ -15,6 +15,9 @@ import { company, loop, products } from "../utils/company";
 <Layout
   title="Company | wohnmohr — an AI product company"
   description={`${company.mission} wohnmohr builds and runs ${products.map((p) => p.name).join(" and ")}.`}
+  ogImage="/og/company.png"
+  breadcrumbs={[{ name: "Company", path: "/company/" }]}
+  jsonLd={{ "@context": "https://schema.org", "@type": "AboutPage", url: "https://wohnmohr.com/company/", mainEntity: { "@id": "https://wohnmohr.com/#organization" } }}
 >
   <Navbar />
   <main>

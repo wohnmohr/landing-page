@@ -11,6 +11,12 @@ import { products } from "../../utils/company";
 <Layout
   title="Products | wohnmohr — NicheLinq & Split Biller"
   description={`The products wohnmohr builds and runs: ${products.map((p) => `${p.name} (${p.oneLiner})`).join(" and ")}`}
+  breadcrumbs={[{ name: "Products", path: "/products/" }]}
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: products.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `https://wohnmohr.com/products/${p.slug}/`, name: p.name })),
+  }}
 >
   <Navbar />
   <main>
