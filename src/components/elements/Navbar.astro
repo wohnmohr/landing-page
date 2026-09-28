@@ -11,6 +11,7 @@ const { variant = "overlay" } = Astro.props;
 const isOverlay = variant === "overlay";
 
 const navItems = [
+  { href: "/#products", text: "Products" },
   { href: "/#about", text: "About" },
   { href: "/services/vibe-code-rescue", text: "Services" },
   { href: "/blogs", text: "Blog" },
@@ -22,9 +23,11 @@ const bookCallHref = "https://calendly.com/wohnmohr-contact/30min";
 ---
 
 <header
+  data-header
+  data-variant={variant}
   class:list={[
     "inset-x-0 top-0 z-50 py-4",
-    isOverlay ? "absolute" : "sticky border-b border-line bg-mist/95 backdrop-blur",
+    isOverlay ? "fixed" : "sticky border-b border-line bg-mist/95 backdrop-blur",
   ]}
 >
   <Container>

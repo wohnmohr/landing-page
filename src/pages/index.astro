@@ -3,6 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/elements/Navbar.astro";
 import Footer from "../components/elements/Footer.astro";
 import Hero from "../components/sections/Hero.astro";
+import Stats from "../components/sections/Stats.astro";
+import Products from "../components/sections/Products.astro";
+import { brands } from "../utils/data";
 import About from "../components/sections/About.astro";
 import Capabilities from "../components/sections/Capabilities.astro";
 import RescueStories from "../components/sections/RescueStories.astro";
@@ -15,11 +18,22 @@ import Brands from "../components/sections/Brands.astro";
 import CTA from "../components/sections/CTA.astro";
 
 const title =
-  "wohnmohr | AI Consulting Startup—Build, Automate, Test & Fix Vibe Coding";
-const description =
-  "wohnmohr is an AI consulting startup. We build AI products, automations, and test systems—and rescue projects when vibe coding goes bad. Book a free intro call.";
+  "wohnmohr | AI Product Studio—Build, Automate, Test & Fix Vibe Coding";
+const description = `wohnmohr is an AI product studio behind ${brands
+  .map((b) => b.name)
+  .join(" and ")}. We build AI products, automations, and test systems—and rescue projects when vibe coding goes bad.`;
 
-const jsonLd = {
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "wohnmohr",
+  url: "https://wohnmohr.com",
+  logo: "https://wohnmohr.com/logos/main-logo.png",
+  brand: brands.map((b) => ({ "@type": "Brand", name: b.name, url: b.url, slogan: b.tagline })),
+  owns: brands.map((b) => ({ "@type": "WebSite", name: b.name, url: b.url })),
+};
+
+const serviceLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "wohnmohr",
@@ -43,10 +57,12 @@ const jsonLd = {
 };
 ---
 
-<Layout title={title} description={description} jsonLd={jsonLd}>
+<Layout title={title} description={description} jsonLd={[organizationLd, serviceLd]}>
   <Navbar />
   <main>
     <Hero />
+    <Stats />
+    <Products />
     <About />
     <Capabilities />
     <RescueStories />

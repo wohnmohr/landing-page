@@ -1,12 +1,12 @@
 ---
 import Container from "../shared/Container.astro";
-import { servicePages } from "../../utils/data";
+import { brands, servicePages } from "../../utils/data";
 ---
 
 <footer class="border-t border-line bg-ink text-white" data-reveal>
   <Container className="py-10 sm:py-12">
     <div
-      class="grid min-w-0 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]"
+      class="grid min-w-0 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]"
     >
       <a href="/" class="inline-flex items-start gap-3">
         <img
@@ -21,7 +21,7 @@ import { servicePages } from "../../utils/data";
             wohnmohr
           </p>
           <p class="mt-1 text-sm text-white/65">
-            AI consulting startup—build, automate, test, and rescue.
+            AI product studio—build, automate, test, and rescue. Home of {brands.map((b) => b.name).join(" & ")}.
           </p>
         </div>
       </a>
@@ -81,6 +81,37 @@ import { servicePages } from "../../utils/data";
           </a>
         </div>
       </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+          Our products
+        </p>
+        <div class="mt-4 flex flex-col gap-3 text-sm font-medium text-white/75">
+          {
+            brands.map((b) => (
+              <a
+                href={b.url}
+                target="_blank"
+                rel="noopener"
+                class="group inline-flex items-center gap-2.5 transition hover:text-white"
+                data-track="brand_click"
+                data-track-location="footer"
+              >
+                <span
+                  class="grid h-7 w-7 place-items-center rounded-lg text-[0.6rem] font-extrabold text-ink"
+                  style={`background: linear-gradient(135deg, ${b.colors[0]}, ${b.colors[1]})`}
+                >
+                  {b.mark}
+                </span>
+                <span>
+                  {b.name}
+                  <span class="block text-xs font-normal text-white/45">{b.domain}</span>
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </Container>
 
@@ -91,7 +122,7 @@ import { servicePages } from "../../utils/data";
       <p>
         &copy; <span id="year"></span> wohnmohr. All rights reserved.
       </p>
-      <p>AI products · Automation · Testing · Vibe-code rescue</p>
+      <p>{brands.map((b) => b.name).join(" · ")} · AI consulting</p>
     </Container>
   </div>
 </footer>

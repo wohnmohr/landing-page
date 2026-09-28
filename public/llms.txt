@@ -1,6 +1,6 @@
 # wohnmohr
 
-> AI consulting startup that builds AI products, automations, and test systems—and rescues vibe-coded projects when they go bad.
+> AI product studio and consulting startup that builds AI products, automations, and test systems—and rescues vibe-coded projects when they go bad.
 
 ## Site
 - Home: https://wohnmohr.com/
@@ -14,6 +14,10 @@
 - AI automation: https://wohnmohr.com/services/ai-automation/
 - AI testing: https://wohnmohr.com/services/ai-testing/
 - AI product development: https://wohnmohr.com/services/ai-product-development/
+
+## Our products
+- Split Biller (split shared bills and expenses): https://splitbiller.com
+- NicheLinq (niche discovery and matching platform): https://nichelinq.com
 
 ## Contact
 - Book a call: https://calendly.com/wohnmohr-contact/30min

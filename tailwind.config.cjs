@@ -19,6 +19,15 @@ module.exports = {
         display: ["Newsreader", "Georgia", "serif"],
         sans: ["Source Sans 3", "sans-serif"],
       },
+      opacity: {
+        4: "0.04",
+        6: "0.06",
+        12: "0.12",
+        45: "0.45",
+        55: "0.55",
+        65: "0.65",
+        85: "0.85",
+      },
       screens: {
         midmd: "880px",
       },

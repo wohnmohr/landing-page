@@ -152,6 +152,7 @@ const jsonLdBlocks = jsonLd
     >
       Skip to contact
     </a>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
     <slot />
   </body>
 
@@ -228,6 +229,82 @@ const jsonLdBlocks = jsonLd
       revealEls.forEach((el) => observer.observe(el));
     } else {
       revealEls.forEach((el) => el.classList.add("is-revealed"));
+    }
+
+    // Scroll progress bar + glass header once the page scrolls
+    const progress = document.querySelector<HTMLElement>("[data-scroll-progress]");
+    const header = document.querySelector<HTMLElement>("[data-header]");
+    let ticking = false;
+    const onScroll = () => {
+      ticking = false;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progress) {
+        progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+      }
+      if (header) header.toggleAttribute("data-scrolled", window.scrollY > 24);
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(onScroll);
+        }
+      },
+      { passive: true }
+    );
+    onScroll();
+
+    // Count-up numbers
+    const counters = document.querySelectorAll<HTMLElement>("[data-count-to]");
+    const runCounter = (el: HTMLElement) => {
+      const target = Number(el.dataset.countTo ?? 0);
+      if (reduceMotion || !target) return;
+      const start = performance.now();
+      const duration = 1400;
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = String(Math.round(target * eased));
+        if (t < 1) requestAnimationFrame(step);
+      };
+      el.textContent = "0";
+      requestAnimationFrame(step);
+    };
+    if ("IntersectionObserver" in window && counters.length) {
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            runCounter(entry.target as HTMLElement);
+            counterObserver.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.6 }
+      );
+      counters.forEach((el) => counterObserver.observe(el));
+    }
+
+    // Pointer spotlight + subtle 3D tilt on cards
+    if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+      document.querySelectorAll<HTMLElement>("[data-spotlight]").forEach((card) => {
+        const tilt = card.hasAttribute("data-tilt");
+        card.addEventListener("pointermove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty("--sx", `${x}px`);
+          card.style.setProperty("--sy", `${y}px`);
+          if (tilt) {
+            const rx = ((y / rect.height) - 0.5) * -6;
+            const ry = ((x / rect.width) - 0.5) * 6;
+            card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+          }
+        });
+        card.addEventListener("pointerleave", () => {
+          card.style.transform = "";
+        });
+      });
     }
 
     // Smooth in-page hash navigation (including from /pricing)
@@ -375,6 +452,38 @@ const jsonLdBlocks = jsonLd
       }
     }
 
+    .scroll-progress {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 3px;
+      z-index: 60;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: linear-gradient(90deg, var(--color-aqua), var(--color-gold), var(--color-coral));
+      pointer-events: none;
+    }
+
+    [data-header] {
+      transition:
+        background-color 0.4s var(--ease-out-soft),
+        box-shadow 0.4s var(--ease-out-soft),
+        padding 0.4s var(--ease-out-soft),
+        backdrop-filter 0.4s;
+    }
+
+    [data-header][data-variant="overlay"][data-scrolled] {
+      background-color: rgba(7, 17, 31, 0.78);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 40px -28px rgba(0, 0, 0, 0.8);
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
+    }
+
+    [data-spotlight] {
+      will-change: transform;
+    }
+
     ::selection {
       background: rgba(255, 107, 53, 0.25);
       color: #07111f;
@@ -491,7 +600,8 @@ const jsonLdBlocks = jsonLd
       .animate-fade-up,
       .animate-fade-in,
       .animate-hero-pan,
-      .animate-accent-line {
+      .animate-accent-line,
+      .scroll-progress {
         animation: none !important;
         transition: none !important;
         opacity: 1 !important;

@@ -1,62 +1,84 @@
 ---
 import BtnLink from "../shared/BtnLink.astro";
 import Container from "../shared/Container.astro";
+import { brands } from "../../utils/data";
+
+const rotatingWords = ["AI products", "automations", "test systems", "rescues"];
+
+const satellites = [
+  ...brands.map((b) => ({ label: b.name, mark: b.mark, colors: b.colors, href: `#brand-${b.slug}` })),
+  { label: "Your product", mark: "+", colors: ["#ffffff", "#cbd5e1"] as [string, string], href: "#contact" },
+];
 ---
 
 <section
-  class="relative min-h-[100svh] overflow-hidden bg-ink"
+  class="hero relative min-h-[100svh] overflow-hidden bg-ink"
   aria-labelledby="hero-heading"
+  data-hero
 >
   <div class="absolute inset-0" aria-hidden="true">
-    <div class="absolute inset-0 bg-[#07111f]"></div>
+    <div class="hero-orb hero-orb--aqua"></div>
+    <div class="hero-orb hero-orb--coral"></div>
+    <div class="hero-orb hero-orb--gold"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-spotlight" data-hero-spotlight></div>
+    <div class="hero-noise"></div>
     <div
-      class="absolute inset-y-0 right-0 w-full animate-hero-pan bg-[linear-gradient(115deg,#07111f_0%,#07111f_38%,#0a3d4a_62%,#0f9f90_82%,#2ec4b6_100%)] lg:w-[72%]"
-    >
-    </div>
-    <div
-      class="absolute inset-y-0 right-0 hidden w-[42%] animate-hero-pan bg-[linear-gradient(160deg,rgba(255,107,53,0.92)_0%,rgba(245,166,35,0.75)_45%,rgba(46,196,182,0.2)_100%)] lg:block"
-      style="animation-delay: -6s"
-    >
-    </div>
-    <div
-      class="absolute bottom-0 left-0 h-1.5 w-full origin-left animate-accent-line bg-gradient-to-r from-coral via-gold to-aqua"
+      class="absolute bottom-0 left-0 h-1 w-full origin-left animate-accent-line bg-gradient-to-r from-coral via-gold to-aqua"
       style="animation-delay: 0.35s"
-    >
-    </div>
-    <div
-      class="absolute inset-0 opacity-[0.07]"
-      style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 80px 80px;"
     >
     </div>
   </div>
 
   <Container
-    className="relative flex min-h-[100svh] flex-col justify-center pb-20 pt-28 sm:pb-24 sm:pt-32"
+    className="relative grid min-h-[100svh] items-center gap-12 pb-20 pt-28 sm:pb-24 sm:pt-32 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8"
   >
     <div class="max-w-2xl">
       <p
-        class="animate-fade-up font-display text-[2.25rem] font-semibold tracking-[-0.02em] text-white sm:text-5xl md:text-6xl"
-        style="animation-delay: 0.08s"
+        class="inline-flex animate-fade-up items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80 backdrop-blur"
+        style="animation-delay: 0.05s"
       >
-        wohnmohr
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-aqua opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-aqua"></span>
+        </span>
+        AI studio · consulting + our own products
       </p>
+
       <h1
         id="hero-heading"
-        class="mt-5 max-w-xl animate-fade-up break-words font-display text-[1.45rem] font-medium leading-[1.25] tracking-[-0.015em] text-white sm:mt-7 sm:text-3xl md:text-[2.35rem] md:leading-[1.18]"
-        style="animation-delay: 0.2s"
+        class="mt-6 animate-fade-up break-words font-display text-[2.35rem] font-semibold leading-[1.08] tracking-[-0.025em] text-white sm:text-5xl md:text-6xl lg:text-[4.1rem]"
+        style="animation-delay: 0.15s"
       >
-        AI consulting that builds, automates, tests—and fixes vibe coding gone bad.
+        We build
+        <span class="rotator" data-rotator aria-live="polite">
+          {
+            rotatingWords.map((word, i) => (
+              <span class:list={["rotator-word", i === 0 && "is-active"]}>{word}</span>
+            ))
+          }
+        </span>
+        <br class="hidden sm:block" />
+        that ship—and stay shipped.
       </h1>
+
       <p
-        class="mt-5 max-w-lg animate-fade-up font-sans text-base font-normal leading-relaxed text-white/80 sm:mt-6 sm:text-lg"
-        style="animation-delay: 0.32s"
+        class="mt-6 max-w-xl animate-fade-up text-base leading-relaxed text-white/75 sm:text-lg"
+        style="animation-delay: 0.28s"
       >
-        We’re an AI consulting startup. Need an AI product, automation, or solid
-        testing? We do it. Prompt-built chaos that barely runs? We fix it.
+        wohnmohr is an AI product studio. We design, automate, test, and rescue
+        software for founders—and we run our own products like
+        {brands.map((b, i) => (
+          <Fragment>
+            <a href={`#brand-${b.slug}`} class="font-semibold text-white underline decoration-white/30 underline-offset-4 transition hover:decoration-gold">{b.name}</a>{i < brands.length - 2 ? ", " : i === brands.length - 2 ? " and " : ""}
+          </Fragment>
+        ))}
+        on the same stack.
       </p>
+
       <div
-        class="mt-8 flex animate-fade-up flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center"
-        style="animation-delay: 0.44s"
+        class="mt-9 flex animate-fade-up flex-col gap-3 sm:flex-row sm:items-center"
+        style="animation-delay: 0.4s"
       >
         <BtnLink
           text="Book a free intro call"
@@ -67,14 +89,320 @@ import Container from "../shared/Container.astro";
           trackLocation="hero"
         />
         <BtnLink
-          text="Free health check"
-          href="#health-check"
+          text="Explore our products"
+          href="#products"
           variant="ghost"
           className="w-full sm:w-auto"
-          track="health_check_click"
+          track="products_click"
           trackLocation="hero"
         />
       </div>
+
+      <dl
+        class="mt-10 grid max-w-lg animate-fade-up grid-cols-3 gap-4 border-t border-white/10 pt-6"
+        style="animation-delay: 0.52s"
+      >
+        <div>
+          <dt class="text-xs uppercase tracking-[0.14em] text-white/50">Build</dt>
+          <dd class="mt-1 font-display text-lg text-white">AI products</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-[0.14em] text-white/50">Assure</dt>
+          <dd class="mt-1 font-display text-lg text-white">Testing & evals</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-[0.14em] text-white/50">Fix</dt>
+          <dd class="mt-1 font-display text-lg text-white">Vibe-code rescue</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Orbit visual -->
+    <div
+      class="relative mx-auto hidden aspect-square w-full max-w-[520px] animate-fade-in sm:block"
+      style="animation-delay: 0.3s"
+      data-hero-orbit
+    >
+      <div class="orbit-ring orbit-ring--outer" aria-hidden="true"></div>
+      <div class="orbit-ring orbit-ring--mid" aria-hidden="true"></div>
+      <div class="orbit-ring orbit-ring--inner" aria-hidden="true"></div>
+
+      <div class="orbit-core">
+        <div class="orbit-core-glow" aria-hidden="true"></div>
+        <img src="/logos/main-logo.png" alt="" width="56" height="56" class="relative h-14 w-14 rounded-xl object-contain" />
+        <span class="relative mt-2 font-display text-lg font-semibold text-white">wohnmohr</span>
+        <span class="relative text-[0.65rem] uppercase tracking-[0.2em] text-white/55">studio core</span>
+      </div>
+
+      <ul class="orbit-track" style={`--count: ${satellites.length}`}>
+        {
+          satellites.map((s, i) => (
+            <li class="orbit-item" style={`--i: ${i}`}>
+              <a
+                href={s.href}
+                class="orbit-chip"
+                style={`--c1: ${s.colors[0]}; --c2: ${s.colors[1]}`}
+              >
+                <span class="orbit-mark">{s.mark}</span>
+                <span class="orbit-label">{s.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="float-card float-card--a" aria-hidden="true">
+        <span class="h-2 w-2 rounded-full bg-aqua"></span>
+        <span>evals passing</span>
+        <strong class="text-aqua">98.4%</strong>
+      </div>
+      <div class="float-card float-card--b" aria-hidden="true">
+        <span class="h-2 w-2 rounded-full bg-gold"></span>
+        <span>p95 latency</span>
+        <strong class="text-gold">−62%</strong>
+      </div>
+      <div class="float-card float-card--c" aria-hidden="true">
+        <span class="h-2 w-2 rounded-full bg-coral"></span>
+        <span>deploy</span>
+        <strong class="text-coral">shipped</strong>
+      </div>
     </div>
   </Container>
+
+  <a
+    href="#products"
+    class="scroll-cue absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-white/50 transition hover:text-white md:flex"
+  >
+    Scroll
+    <span class="scroll-cue-line"></span>
+  </a>
 </section>
+
+<style>
+  .hero-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.55;
+    will-change: transform;
+  }
+  .hero-orb--aqua {
+    width: 46rem; height: 46rem; right: -14rem; top: -12rem;
+    background: radial-gradient(circle, #0f9f90 0%, transparent 65%);
+    animation: drift-a 22s ease-in-out infinite;
+  }
+  .hero-orb--coral {
+    width: 34rem; height: 34rem; right: 8%; bottom: -14rem;
+    background: radial-gradient(circle, #ff6b35 0%, transparent 65%);
+    opacity: 0.4;
+    animation: drift-b 26s ease-in-out infinite;
+  }
+  .hero-orb--gold {
+    width: 26rem; height: 26rem; left: -10rem; top: 30%;
+    background: radial-gradient(circle, #f5a623 0%, transparent 65%);
+    opacity: 0.18;
+    animation: drift-a 30s ease-in-out infinite reverse;
+  }
+  @keyframes drift-a {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(-6%, 8%, 0) scale(1.08); }
+  }
+  @keyframes drift-b {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(8%, -6%, 0) scale(0.94); }
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 30%, transparent 75%);
+    animation: grid-pan 40s linear infinite;
+  }
+  @keyframes grid-pan {
+    to { background-position: 64px 64px, 64px 64px; }
+  }
+  .hero-spotlight {
+    position: absolute; inset: 0;
+    background: radial-gradient(500px circle at var(--mx, 70%) var(--my, 40%), rgba(46,196,182,0.14), transparent 60%);
+    transition: background 0.2s;
+  }
+  .hero-noise {
+    position: absolute; inset: 0; opacity: 0.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Rotating word */
+  .rotator {
+    position: relative;
+    display: inline-grid;
+    vertical-align: bottom;
+  }
+  .rotator-word {
+    grid-area: 1 / 1;
+    background: linear-gradient(90deg, #2ec4b6, #f5a623 55%, #ff6b35);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0;
+    transform: translateY(0.45em);
+    filter: blur(6px);
+    transition: opacity 0.6s var(--ease-out-soft), transform 0.6s var(--ease-out-soft), filter 0.6s var(--ease-out-soft);
+    white-space: nowrap;
+  }
+  .rotator-word.is-active {
+    opacity: 1; transform: none; filter: none;
+  }
+  .rotator-word.is-leaving {
+    opacity: 0; transform: translateY(-0.45em); filter: blur(6px);
+  }
+
+  /* Orbit */
+  [data-hero-orbit] { container-type: inline-size; transition: transform 0.4s var(--ease-out-soft); }
+  .orbit-ring {
+    position: absolute; border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.1);
+    left: 50%; top: 50%; translate: -50% -50%;
+  }
+  .orbit-ring--outer { width: 100%; height: 100%; border-style: dashed; animation: spin 90s linear infinite; }
+  .orbit-ring--mid { width: 72%; height: 72%; border-color: rgba(46,196,182,0.25); }
+  .orbit-ring--inner { width: 44%; height: 44%; border-color: rgba(255,255,255,0.08); animation: spin 60s linear infinite reverse; border-style: dotted; }
+
+  .orbit-core {
+    position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+    width: 38%; aspect-ratio: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.12), rgba(7,17,31,0.85) 70%);
+    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 30px 80px -30px rgba(46,196,182,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+  }
+  .orbit-core-glow {
+    position: absolute; inset: -18%; border-radius: 9999px;
+    background: conic-gradient(from 0deg, #2ec4b6, #f5a623, #ff6b35, #2ec4b6);
+    filter: blur(28px); opacity: 0.35; z-index: -1;
+    animation: spin 12s linear infinite, pulse 4s ease-in-out infinite;
+  }
+
+  .orbit-track {
+    position: absolute; inset: 0;
+    animation: spin 48s linear infinite;
+  }
+  .orbit-item {
+    position: absolute; left: 50%; top: 50%;
+    --angle: calc(360deg / var(--count) * var(--i));
+    transform: rotate(var(--angle)) translateY(-36cqw);
+  }
+  .orbit-chip {
+    display: flex; align-items: center; gap: 0.6rem;
+    translate: -50% -50%;
+    transform: rotate(calc(-1 * var(--angle)));
+    padding: 0.45rem 0.9rem 0.45rem 0.45rem;
+    border-radius: 9999px;
+    background: rgba(12, 24, 40, 0.78);
+    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 16px 40px -18px var(--c1);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    color: #fff;
+    font-weight: 600; font-size: 0.85rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    animation: counter-spin 48s linear infinite;
+  }
+  .orbit-chip:hover { border-color: var(--c2); box-shadow: 0 18px 48px -12px var(--c1); }
+  .orbit-mark {
+    display: grid; place-items: center;
+    width: 2rem; height: 2rem; border-radius: 9999px;
+    background: linear-gradient(135deg, var(--c1), var(--c2));
+    color: #07111f; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em;
+  }
+  @keyframes spin { to { rotate: 360deg; } }
+  @keyframes counter-spin {
+    from { transform: rotate(calc(-1 * var(--angle))); }
+    to { transform: rotate(calc(-1 * var(--angle) - 360deg)); }
+  }
+  @keyframes pulse { 0%,100% { opacity: 0.28; } 50% { opacity: 0.5; } }
+
+  .float-card {
+    position: absolute;
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 0.75rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    color: rgba(255,255,255,0.75);
+    font-size: 0.78rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    box-shadow: 0 20px 40px -24px rgba(0,0,0,0.8);
+    animation: bob 6s ease-in-out infinite;
+  }
+  .float-card--a { left: -4%; top: 16%; }
+  .float-card--b { right: -8%; top: 34%; animation-delay: -2s; }
+  .float-card--c { right: 2%; bottom: 10%; animation-delay: -4s; }
+  @keyframes bob {
+    0%,100% { transform: translate3d(0,0,0); }
+    50% { transform: translate3d(0,-12px,0); }
+  }
+
+  .scroll-cue-line {
+    display: block; width: 1px; height: 36px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.7), transparent);
+    animation: scroll-cue 2s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes scroll-cue {
+    0% { transform: scaleY(0); opacity: 1; }
+    60% { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(1); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-orb, .hero-grid, .orbit-ring, .orbit-track, .orbit-chip,
+    .orbit-core-glow, .float-card, .scroll-cue-line {
+      animation: none !important;
+    }
+    .rotator-word { transition: none; }
+  }
+</style>
+
+<script>
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll<HTMLElement>("[data-rotator]").forEach((rotator) => {
+    const words = Array.from(rotator.querySelectorAll<HTMLElement>(".rotator-word"));
+    if (words.length < 2 || reduce) return;
+    let index = 0;
+    setInterval(() => {
+      const current = words[index];
+      index = (index + 1) % words.length;
+      const next = words[index];
+      current.classList.remove("is-active");
+      current.classList.add("is-leaving");
+      next.classList.remove("is-leaving");
+      next.classList.add("is-active");
+      setTimeout(() => current.classList.remove("is-leaving"), 650);
+    }, 2400);
+  });
+
+  const hero = document.querySelector<HTMLElement>("[data-hero]");
+  const spotlight = document.querySelector<HTMLElement>("[data-hero-spotlight]");
+  const orbit = document.querySelector<HTMLElement>("[data-hero-orbit]");
+  if (hero && spotlight && !reduce && window.matchMedia("(pointer: fine)").matches) {
+    hero.addEventListener("pointermove", (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      spotlight.style.setProperty("--mx", `${x}px`);
+      spotlight.style.setProperty("--my", `${y}px`);
+      if (orbit) {
+        const dx = (x / rect.width - 0.5) * 14;
+        const dy = (y / rect.height - 0.5) * 14;
+        orbit.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+      }
+    });
+  }
+</script>
