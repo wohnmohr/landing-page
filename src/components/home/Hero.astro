@@ -5,13 +5,13 @@ import LoopDiagram from "../brand/LoopDiagram.astro";
 import { products } from "../../utils/company";
 ---
 
-<section class="surface-ink grain relative overflow-hidden" aria-labelledby="hero-heading">
+<section class="surface-ink grain relative min-h-[100dvh] overflow-hidden" aria-labelledby="hero-heading">
   <div class="dot-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_70%_40%,#000,transparent)]" aria-hidden="true"></div>
   <div class="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-cobalt/25 blur-[120px]" aria-hidden="true"></div>
   <div class="pointer-events-none absolute -left-40 bottom-0 h-[24rem] w-[24rem] rounded-full bg-lime/10 blur-[120px]" aria-hidden="true"></div>
 
-  <Container className="relative pb-10 pt-32 sm:pt-40">
-    <div class="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+  <Container className="relative pb-10 pt-28 sm:pt-36 lg:pt-40">
+    <div class="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-[1.15fr_0.85fr]">
       <div>
         <p class="animate-fade-up font-mono text-[0.72rem] uppercase tracking-[0.16em] text-fog" style="animation-delay: 0.05s">
           <span class="mr-2 inline-block h-2 w-2 rounded-[2px] bg-lime align-middle"></span>
@@ -37,25 +37,25 @@ import { products } from "../../utils/company";
         </div>
       </div>
 
-      <div class="animate-fade-in" style="animation-delay: 0.4s">
-        <LoopDiagram className="mx-auto max-w-[520px]" />
+      <div class="animate-fade-in hidden sm:block" style="animation-delay: 0.4s">
+        <LoopDiagram className="mx-auto max-w-[380px] md:max-w-[460px] lg:max-w-[520px]" />
       </div>
     </div>
 
-    <ul class="mt-16 grid border-t border-white/10 sm:mt-20 md:grid-cols-2">
+    <ul class="mt-16 grid grid-cols-1 border-t border-white/10 sm:mt-20 lg:grid-cols-2">
       {
         products.map((p, i) => (
-          <li class:list={["border-b border-white/10", i % 2 === 0 && "md:border-r"]}>
-            <a href={`/products/${p.slug}`} class="group flex items-center gap-4 py-5 transition-colors md:px-6 md:first:pl-0 hover:bg-white/[0.03]" data-track="product_click" data-track-location="hero_index">
-              <span class="font-mono text-xs text-fog">{p.index} /</span>
-              <span class="min-w-0">
+          <li class:list={["border-b border-white/10", i % 2 === 0 && "lg:border-r"]}>
+            <a href={`/products/${p.slug}`} class="group flex items-center gap-3 py-5 transition-colors hover:bg-white/[0.03] sm:gap-4 lg:px-6" data-track="product_click" data-track-location="hero_index">
+              <span class="hidden font-mono text-xs text-fog sm:inline">{p.index} /</span>
+              <span class="min-w-0 flex-1">
                 <span class="block font-display text-xl font-bold tracking-tight">{p.name}</span>
                 <span class="block truncate text-sm text-fog">{p.oneLiner}</span>
               </span>
-              <span class:list={["ml-auto shrink-0 rounded-full px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em]", p.status === "Live" ? "bg-lime text-ink" : "border border-white/20 text-white"]}>
+              <span class:list={["shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.1em]", p.status === "Live" ? "bg-lime text-ink" : "border border-white/20 text-white"]}>
                 {p.status}
               </span>
-              <svg class="h-5 w-5 shrink-0 text-fog transition-transform duration-300 group-hover:translate-x-1 group-hover:text-lime" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              <svg class="hidden h-5 w-5 shrink-0 text-fog transition-transform duration-300 group-hover:translate-x-1 group-hover:text-lime sm:block" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke-linecap="round" stroke-linejoin="round" /></svg>
             </a>
           </li>
         ))

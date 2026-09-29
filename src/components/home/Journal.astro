@@ -1,12 +1,7 @@
 ---
 import Container from "../shared/Container.astro";
-import Eyebrow from "../ui/Eyebrow.astro";
 import { blogPosts } from "../../utils/blogs";
 
-export interface Props {
-  index?: string;
-}
-const { index = "05" } = Astro.props;
 const posts = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 const fmt = (d: string) =>
   new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
@@ -16,10 +11,9 @@ const fmt = (d: string) =>
   <Container>
     <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
       <div>
-        <Eyebrow index={index}>Journal</Eyebrow>
-        <h2 id="journal-heading" class="mt-4 font-display text-display-lg font-bold">Notes from the loop.</h2>
+        <h2 id="journal-heading" class="font-display text-display-lg font-bold">Notes from the loop.</h2>
       </div>
-      <a href="/blogs" class="font-semibold text-cobalt underline decoration-cobalt/30 underline-offset-4 hover:decoration-cobalt">All posts →</a>
+      <a href="/blogs" class="inline-block py-2 font-semibold text-cobalt underline decoration-cobalt/30 underline-offset-4 hover:decoration-cobalt">All posts →</a>
     </div>
 
     <ul class="mt-12 border-t border-line">

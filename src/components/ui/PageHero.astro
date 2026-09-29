@@ -10,10 +10,10 @@ export interface Props {
 const { eyebrow, title, intro } = Astro.props;
 ---
 
-<section class="surface-ink grain relative overflow-hidden">
+<section class="surface-ink grain relative flex min-h-[60dvh] flex-col justify-end overflow-hidden sm:min-h-[56dvh]">
   <div class="dot-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_60%_80%_at_80%_20%,#000,transparent)]" aria-hidden="true"></div>
   <div class="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-cobalt/25 blur-[120px]" aria-hidden="true"></div>
-  <Container className="relative pb-16 pt-36 sm:pb-24 sm:pt-44">
+  <Container className="relative pb-14 pt-32 sm:pb-20 sm:pt-40">
     <Eyebrow tone="ink" className="animate-fade-up">{eyebrow}</Eyebrow>
     <h1 class="mt-5 max-w-4xl font-display text-display-lg font-bold">
       <span class="line-mask"><span style="--d: 100ms" set:html={title} /></span>

@@ -50,7 +50,7 @@ body {
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   background: rgb(var(--paper));
   color: rgb(var(--ink));
-  min-height: 100vh;
+  min-height: 100dvh;
   min-width: 0;
   overflow-x: clip;
   font-feature-settings: "ss01", "cv11";
@@ -87,6 +87,13 @@ fieldset {
 
 .surface-ink :focus-visible {
   outline-color: rgb(var(--lime));
+}
+
+/* ---------- Layout safety ---------- */
+/* Grid/flex children default to min-width:auto, so one long unbreakable line
+   (a URL, a nowrap label) can stretch a column past the phone screen. */
+.grid > * {
+  min-width: 0;
 }
 
 /* ---------- Surfaces ---------- */

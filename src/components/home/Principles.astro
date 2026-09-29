@@ -1,19 +1,12 @@
 ---
 import Container from "../shared/Container.astro";
-import Eyebrow from "../ui/Eyebrow.astro";
 import { principles } from "../../utils/company";
-
-export interface Props {
-  index?: string;
-}
-const { index = "03" } = Astro.props;
 ---
 
 <section class="py-20 sm:py-28" aria-labelledby="principles-heading">
   <Container>
     <div class="max-w-2xl" data-reveal>
-      <Eyebrow index={index}>What we believe</Eyebrow>
-      <h2 id="principles-heading" class="mt-4 font-display text-display-lg font-bold">
+      <h2 id="principles-heading" class="font-display text-display-lg font-bold">
         Software people <span class="marker">actually</span> use.
       </h2>
     </div>

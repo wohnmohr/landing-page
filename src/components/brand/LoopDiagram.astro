@@ -40,10 +40,10 @@ const nodes = [
         <g class="loop-node" style={`--i: ${i}`}>
           <circle cx={n.x} cy={n.y} r="16" fill={tone === "ink" ? "rgb(var(--ink))" : "rgb(var(--paper))"} stroke={n.color} stroke-width="3" />
           <circle cx={n.x} cy={n.y} r="5" fill={n.color} class="loop-node-dot" />
-          <text x={n.lx} y={n.ly} text-anchor={n.anchor} fill={text} font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17" letter-spacing="-0.3">
+          <text class="loop-label" x={n.lx} y={n.ly} text-anchor={n.anchor} fill={text} font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17" letter-spacing="-0.3">
             {`0${i + 1} ${n.label}`}
           </text>
-          <text x={n.lx} y={n.ly + 16} text-anchor={n.anchor} fill={muted} font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="0.4">
+          <text class="loop-sub" x={n.lx} y={n.ly + 16} text-anchor={n.anchor} fill={muted} font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="0.4">
             {n.sub}
           </text>
         </g>
@@ -81,6 +81,11 @@ const nodes = [
   @keyframes node-pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.6); }
+  }
+  /* On phones the SVG scales to ~70%: drop the tiny captions, enlarge labels. */
+  @media (max-width: 639px) {
+    .loop-sub { display: none; }
+    .loop-label { font-size: 22px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .loop-comet, .loop-node-dot { animation: none !important; }

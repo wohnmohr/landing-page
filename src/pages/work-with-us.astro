@@ -43,12 +43,12 @@ const rules = [
           <Eyebrow index="01">Engagements</Eyebrow>
           <h2 id="packages-heading" class="mt-4 font-display text-display-lg font-bold">Three ways in.</h2>
         </div>
-        <ul class="mt-14 grid gap-4 lg:grid-cols-3">
+        <ul class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {packages.map((pkg, i) => (
-            <li class:list={["flex flex-col rounded-[1.5rem] p-8", i === 1 ? "surface-ink" : "border border-line bg-white"]} data-reveal style={`--reveal-delay: ${i * 90}ms`}>
+            <li class:list={["flex flex-col rounded-[1.5rem] p-6 sm:p-8", i === 1 ? "surface-ink" : "border border-line bg-white"]} data-reveal style={`--reveal-delay: ${i * 90}ms`}>
               <div class="flex items-center justify-between">
                 <span class:list={["font-mono text-xs", i === 1 ? "text-fog" : "text-graphite"]}>0{i + 1}</span>
-                <span class:list={["rounded-full px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.12em]", i === 1 ? "bg-lime text-ink" : "bg-paper text-ink"]}>{pkg.duration}</span>
+                <span class:list={["rounded-full px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.1em]", i === 1 ? "bg-lime text-ink" : "bg-paper text-ink"]}>{pkg.duration}</span>
               </div>
               <h3 class="mt-10 font-display text-3xl font-bold tracking-tight">{pkg.name}</h3>
               <p class:list={["mt-3 leading-relaxed", i === 1 ? "text-fog" : "text-graphite"]}>{pkg.summary}</p>
