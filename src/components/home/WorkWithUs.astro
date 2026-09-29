@@ -13,7 +13,7 @@ const { index = "04", compact = true } = Astro.props;
 
 <section class="bg-paper-2 py-20 sm:py-28" aria-labelledby="work-heading">
   <Container>
-    <div class="grid gap-6 md:grid-cols-[1fr_0.8fr] md:items-end" data-reveal>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-[1fr_0.8fr] md:items-end" data-reveal>
       <div>
         <Eyebrow index={index}>Work with us</Eyebrow>
         <h2 id="work-heading" class="mt-4 font-display text-display-lg font-bold">
@@ -26,7 +26,7 @@ const { index = "04", compact = true } = Astro.props;
       </p>
     </div>
 
-    <ul class="mt-14 grid gap-4 md:grid-cols-3">
+    <ul class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
       {
         packages.map((pkg, i) => (
           <li data-reveal style={`--reveal-delay: ${i * 90}ms`}>

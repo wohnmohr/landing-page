@@ -40,9 +40,9 @@ const jsonLd = {
 >
   <Navbar />
   <main>
-    <section class="surface-ink grain relative overflow-hidden">
+    <section class="surface-ink grain relative min-h-[100dvh] overflow-hidden">
       <div class:list={["pointer-events-none absolute -right-32 -top-32 h-[32rem] w-[32rem] rounded-full blur-[120px]", dark ? "bg-lime/15" : "bg-cobalt/30"]} aria-hidden="true"></div>
-      <Container className="relative grid grid-cols-1 items-center gap-12 pb-16 pt-32 sm:gap-14 sm:pb-20 sm:pt-44 lg:grid-cols-2">
+      <Container className="relative grid grid-cols-1 items-center gap-10 pb-14 pt-28 sm:gap-14 sm:pb-20 sm:pt-40 lg:grid-cols-2 lg:pt-44">
         <div>
           <div class="flex flex-wrap items-center gap-3 animate-fade-up">
             <Eyebrow tone="ink" index={product.index}>{product.name}</Eyebrow>
@@ -75,7 +75,7 @@ const jsonLd = {
           <Eyebrow index="01">How it works</Eyebrow>
           <h2 id="how-heading" class="mt-4 font-display text-display-lg font-bold">Three steps. That’s it.</h2>
         </div>
-        <ol class="mt-14 grid gap-4 md:grid-cols-3">
+        <ol class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           {product.steps.map((step, i) => (
             <li class="relative rounded-brand border border-line bg-white p-7 sm:p-8" data-reveal style={`--reveal-delay: ${i * 100}ms`}>
               <span class:list={["grid h-11 w-11 place-items-center rounded-full font-display text-lg font-bold", i === 2 ? "bg-lime text-ink" : "bg-ink text-white"]}>{i + 1}</span>
@@ -88,7 +88,7 @@ const jsonLd = {
     </section>
 
     <section class="bg-paper-2 py-20 sm:py-24" aria-labelledby="features-heading">
-      <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+      <Container className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
         <div data-reveal>
           <Eyebrow index="02">Why {product.name}</Eyebrow>
           <h2 id="features-heading" class="mt-4 font-display text-display-md font-bold">Built around one job, done properly.</h2>

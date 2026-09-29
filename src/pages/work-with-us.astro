@@ -43,7 +43,7 @@ const rules = [
           <Eyebrow index="01">Engagements</Eyebrow>
           <h2 id="packages-heading" class="mt-4 font-display text-display-lg font-bold">Three ways in.</h2>
         </div>
-        <ul class="mt-14 grid gap-4 lg:grid-cols-3">
+        <ul class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {packages.map((pkg, i) => (
             <li class:list={["flex flex-col rounded-[1.5rem] p-6 sm:p-8", i === 1 ? "surface-ink" : "border border-line bg-white"]} data-reveal style={`--reveal-delay: ${i * 90}ms`}>
               <div class="flex items-center justify-between">

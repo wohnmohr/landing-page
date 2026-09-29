@@ -1,7 +1,6 @@
 ---
 import BtnLink from "../shared/BtnLink.astro";
 import Container from "../shared/Container.astro";
-import Eyebrow from "../ui/Eyebrow.astro";
 import Logo from "../brand/Logo.astro";
 import { company } from "../../utils/company";
 ---
@@ -11,8 +10,7 @@ import { company } from "../../utils/company";
   <Container className="relative">
     <div class="mx-auto max-w-3xl text-center" data-reveal>
       <div class="flex justify-center"><Logo size={30} wordmark={false} animated /></div>
-      <Eyebrow tone="ink" className="mt-8">Say hello</Eyebrow>
-      <h2 id="contact-heading" class="mt-4 font-display text-display-lg font-bold">
+      <h2 id="contact-heading" class="mt-8 font-display text-display-lg font-bold">
         Got a job worth <span class="marker">looping</span> on?
       </h2>
       <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-fog">
@@ -25,7 +23,7 @@ import { company } from "../../utils/company";
       </div>
     </div>
 
-    <div class="mx-auto mt-14 grid max-w-5xl gap-4 lg:grid-cols-2">
+    <div class="mx-auto mt-12 grid max-w-5xl gap-4 sm:mt-14 lg:grid-cols-2">
       <div class="min-w-0 rounded-brand bg-white p-5 text-ink sm:p-7" data-reveal>
         <h3 class="font-display text-xl font-bold tracking-tight">Send a quick brief</h3>
         <p class="mt-1 text-sm text-graphite">A few lines is plenty. We reply within a working day.</p>
@@ -42,7 +40,7 @@ import { company } from "../../utils/company";
       <div class="min-w-0 overflow-hidden rounded-brand border border-white/10 bg-ink-2 p-1 sm:p-3" data-reveal style="--reveal-delay: 100ms">
         <h3 class="px-3 pt-3 font-display text-xl font-bold tracking-tight sm:px-4">Or pick a time</h3>
         <div
-          class="calendly-inline-widget mt-2"
+          class="calendly-inline-widget mt-2 min-h-[580px] sm:min-h-[660px]"
           data-url={company.calendly}
           style="height:700px;"
           role="region"
