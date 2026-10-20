@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-20T05:56:25+00:00",
+  "title": "Design System: wohnmohr",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Workshop Ink",
+        "canonical": "rgb(15 16 18)",
+        "tonalRamp": [
+          "#23252A",
+          "#3C4048",
+          "#565B67",
+          "#6F7786",
+          "#8D93A0",
+          "#ACB0B9",
+          "#D0D2D8",
+          "#F1F2F3"
+        ]
+      },
+      "ink-raised": {
+        "role": "neutral",
+        "displayName": "Raised Ink",
+        "canonical": "rgb(27 28 32)",
+        "tonalRamp": [
+          "#232429",
+          "#3D3F48",
+          "#565A66",
+          "#707485",
+          "#8E919F",
+          "#ACAFB9",
+          "#D0D1D7",
+          "#F1F2F3"
+        ]
+      },
+      "ink-panel": {
+        "role": "neutral",
+        "displayName": "Panel Ink",
+        "canonical": "rgb(40 42 47)",
+        "tonalRamp": [
+          "#232529",
+          "#3D4048",
+          "#575B66",
+          "#717684",
+          "#8E939F",
+          "#ACB0B9",
+          "#D0D2D7",
+          "#F1F2F3"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Daylight Paper",
+        "canonical": "rgb(251 251 250)",
+        "tonalRamp": [
+          "#2A2A22",
+          "#4A4A3B",
+          "#696954",
+          "#88886D",
+          "#A2A28B",
+          "#BBBBAA",
+          "#D8D8CF",
+          "#F4F4F1"
+        ]
+      },
+      "paper-sunken": {
+        "role": "neutral",
+        "displayName": "Sunken Paper",
+        "canonical": "rgb(243 243 241)",
+        "tonalRamp": [
+          "#292923",
+          "#47473D",
+          "#666657",
+          "#848471",
+          "#9E9E8E",
+          "#B8B8AD",
+          "#D7D7D0",
+          "#F3F3F1"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "rgb(88 92 100)",
+        "tonalRamp": [
+          "#242529",
+          "#3E4147",
+          "#585C64",
+          "#737882",
+          "#90949D",
+          "#AEB1B7",
+          "#D1D3D6",
+          "#F1F2F3"
+        ]
+      },
+      "fog": {
+        "role": "neutral",
+        "displayName": "Fog",
+        "canonical": "rgb(163 167 174)",
+        "tonalRamp": [
+          "#242629",
+          "#3E4147",
+          "#585D64",
+          "#737882",
+          "#90959D",
+          "#AEB1B7",
+          "#D1D3D6",
+          "#F1F2F3"
+        ]
+      },
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Signal Cobalt",
+        "canonical": "rgb(43 91 255)",
+        "tonalRamp": [
+          "#00114C",
+          "#001E85",
+          "#002BBD",
+          "#0037F5",
+          "#2E5DFF",
+          "#6689FF",
+          "#A8BCFF",
+          "#E5EBFF"
+        ]
+      },
+      "cobalt-deep": {
+        "role": "primary",
+        "displayName": "Deep Cobalt",
+        "canonical": "rgb(30 67 214)",
+        "tonalRamp": [
+          "#091543",
+          "#102474",
+          "#1734A5",
+          "#1E43D7",
+          "#4867E5",
+          "#7990EC",
+          "#B3C0F4",
+          "#E9EDFC"
+        ]
+      },
+      "cobalt-soft": {
+        "role": "primary",
+        "displayName": "Cobalt Mist",
+        "canonical": "rgb(143 168 255)",
+        "tonalRamp": [
+          "#00114C",
+          "#001E85",
+          "#002ABD",
+          "#0037F5",
+          "#2E5DFF",
+          "#6688FF",
+          "#A8BCFF",
+          "#E5EBFF"
+        ]
+      },
+      "cobalt-tint": {
+        "role": "primary",
+        "displayName": "Cobalt Wash",
+        "canonical": "rgb(220 229 255)",
+        "tonalRamp": [
+          "#00144C",
+          "#002285",
+          "#0031BD",
+          "#003FF5",
+          "#2E64FF",
+          "#668DFF",
+          "#A8BFFF",
+          "#E5ECFF"
+        ]
+      },
+      "split-biller": {
+        "role": "product",
+        "displayName": "Split Biller Plum",
+        "canonical": "rgb(83 48 123)",
+        "tonalRamp": [
+          "#251537",
+          "#40255F",
+          "#5C3588",
+          "#7745B0",
+          "#9369C4",
+          "#B091D4",
+          "#D2C1E7",
+          "#F2EDF8"
+        ]
+      },
+      "nichelinq": {
+        "role": "product",
+        "displayName": "NicheLinq Violet",
+        "canonical": "rgb(109 58 223)",
+        "tonalRamp": [
+          "#1C0B42",
+          "#301372",
+          "#441AA2",
+          "#5922D3",
+          "#7A4BE2",
+          "#9D7BEA",
+          "#C8B4F3",
+          "#EFE9FB"
+        ]
+      },
+      "chargemyai": {
+        "role": "product",
+        "displayName": "ChargeMyAI Green",
+        "canonical": "rgb(15 122 74)",
+        "tonalRamp": [
+          "#084429",
+          "#0F7648",
+          "#15A866",
+          "#1BDA84",
+          "#45E89F",
+          "#77EEB9",
+          "#B2F6D7",
+          "#E8FCF3"
+        ]
+      },
+      "mythreadpay": {
+        "role": "product",
+        "displayName": "MyThreadPay Navy",
+        "canonical": "rgb(31 42 92)",
+        "tonalRamp": [
+          "#131A39",
+          "#212D63",
+          "#30408D",
+          "#3E54B7",
+          "#6375CA",
+          "#8D9AD8",
+          "#BEC6E9",
+          "#ECEEF9"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgb(15 16 18 / 0.14)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Homepage headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Homepage section headings, page hero and product page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Inner-page section headings and closing CTA lines."
+      },
+      "title-sm": {
+        "displayName": "Title small",
+        "purpose": "The one-line promise in each product tile."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Sublines, summaries and principle bodies in graphite, 40 to 60ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, links, nav, chips."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Code samples and token names only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "frame-float",
+        "value": "0 0 0 1px rgb(15 16 18 / 0.08), 0 2px 4px rgb(var(--frame-shadow) / 0.04), 0 24px 48px -24px rgb(var(--frame-shadow) / 0.28)",
+        "purpose": "Every screenshot frame; tinted with the product colour inside a tile."
+      },
+      {
+        "name": "hairline-ring",
+        "value": "0 0 0 1px rgb(15 16 18 / 0.08)",
+        "purpose": "White chips and white panels."
+      },
+      {
+        "name": "menu-panel",
+        "value": "0 0 0 1px rgb(15 16 18 / 0.08), 0 24px 48px -24px rgb(15 16 18 / 0.35)",
+        "purpose": "Mobile navigation panel."
+      },
+      {
+        "name": "header-rule",
+        "value": "0 1px 0 rgb(15 16 18 / 0.08)",
+        "purpose": "Fixed header once scrolled."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-loop",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "All entrances and state transitions."
+      },
+      {
+        "name": "dur-fast",
+        "value": "160ms",
+        "purpose": "Small state changes."
+      },
+      {
+        "name": "dur-base",
+        "value": "360ms",
+        "purpose": "Tile wash and header changes."
+      },
+      {
+        "name": "dur-slow",
+        "value": "700ms",
+        "purpose": "Tile frame lift."
+      },
+      {
+        "name": "rise",
+        "value": "opacity 0 to 1, translateY 16px to 0, 0.9s ease-loop, 80ms stagger",
+        "purpose": "The one entrance: hero copy, CTAs and screenshot wall. Static under reduced motion."
+      },
+      {
+        "name": "tile-lift",
+        "value": "translateY(-6px) over 700ms on hover",
+        "purpose": "Signature interaction; hover-capable pointers only, off under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "midmd",
+        "value": "880px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "The main action on paper.",
+      "html": "<a href=\"#\" class=\"ds-btn ds-btn-ink\">See the products<svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M4 10h12m-5-5 5 5-5 5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 20px;border-radius:9999px;font:500 0.95rem/1 'Mona Sans',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;text-decoration:none;border:0;transition:background-color .2s cubic-bezier(0.16,1,0.3,1),box-shadow .2s cubic-bezier(0.16,1,0.3,1),transform .2s}.ds-btn:active{transform:scale(.98)}.ds-btn:focus-visible{outline:2px solid #2B5BFF;outline-offset:3px}.ds-btn svg{width:16px;height:16px;transition:transform .2s}.ds-btn:hover svg{transform:translateX(2px)}.ds-btn-ink{background:#0F1012;color:#fff}.ds-btn-ink:hover{background:#282A2F}"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Cobalt pill for an accent action.",
+      "html": "<a href=\"#\" class=\"ds-btn ds-btn-primary\">Primary<svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M4 10h12m-5-5 5 5-5 5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 20px;border-radius:9999px;font:500 0.95rem/1 'Mona Sans',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;text-decoration:none;border:0;transition:background-color .2s cubic-bezier(0.16,1,0.3,1),box-shadow .2s cubic-bezier(0.16,1,0.3,1),transform .2s}.ds-btn:active{transform:scale(.98)}.ds-btn:focus-visible{outline:2px solid #2B5BFF;outline-offset:3px}.ds-btn svg{width:16px;height:16px;transition:transform .2s}.ds-btn:hover svg{transform:translateX(2px)}.ds-btn-primary{background:#2B5BFF;color:#fff}.ds-btn-primary:hover{background:#1E43D6}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Second action beside an ink pill.",
+      "html": "<a href=\"#\" class=\"ds-btn ds-btn-outline\">How we build</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 20px;border-radius:9999px;font:500 0.95rem/1 'Mona Sans',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;text-decoration:none;border:0;transition:background-color .2s cubic-bezier(0.16,1,0.3,1),box-shadow .2s cubic-bezier(0.16,1,0.3,1),transform .2s}.ds-btn:active{transform:scale(.98)}.ds-btn:focus-visible{outline:2px solid #2B5BFF;outline-offset:3px}.ds-btn svg{width:16px;height:16px;transition:transform .2s}.ds-btn:hover svg{transform:translateX(2px)}.ds-btn-outline{background:transparent;color:#0F1012;box-shadow:inset 0 0 0 1px rgb(15 16 18 / .18)}.ds-btn-outline:hover{box-shadow:inset 0 0 0 1px rgb(15 16 18 / .5)}"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "status-chip",
+      "description": "Live or Early access, beside a product name.",
+      "html": "<span class=\"ds-chip ds-chip-live\"><span class=\"ds-dot\"></span>Live</span> <span class=\"ds-chip ds-chip-early\">Early access</span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:9999px;font:500 .78rem/1.5 'Mona Sans',ui-sans-serif,sans-serif}.ds-chip-live{background:#fff;color:#0F1012;box-shadow:0 0 0 1px rgb(15 16 18 / .08)}.ds-dot{width:6px;height:6px;border-radius:9999px;background:#2B5BFF}.ds-chip-early{color:#585C64;box-shadow:inset 0 0 0 1px rgb(15 16 18 / .15)}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Fixed translucent paper bar with pill links and a compact ink Contact pill.",
+      "html": "<nav class=\"ds-nav\"><strong class=\"ds-logo\">wohnmohr</strong><span class=\"ds-links\"><a href=\"#\" class=\"ds-link is-current\">Products</a><a href=\"#\" class=\"ds-link\">Company</a></span><a href=\"#\" class=\"ds-nav-cta\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 32px;background:rgb(251 251 250 / .8);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgb(15 16 18 / .08);font-family:'Mona Sans',ui-sans-serif,sans-serif}.ds-logo{font-weight:600;letter-spacing:-0.02em;color:#0F1012}.ds-links{display:flex;gap:2px}.ds-link{display:inline-flex;align-items:center;height:40px;padding:0 14px;border-radius:9999px;font-size:.92rem;font-weight:500;color:#585C64;text-decoration:none;transition:color .2s}.ds-link:hover{color:#0F1012}.ds-link.is-current{background:rgb(15 16 18 / .06);color:#0F1012}.ds-nav-cta{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:9999px;background:#0F1012;color:#fff;font-size:.88rem;font-weight:500;text-decoration:none}.ds-nav-cta:hover{background:#282A2F}.ds-link:focus-visible,.ds-nav-cta:focus-visible{outline:2px solid #2B5BFF;outline-offset:3px}"
+    },
+    {
+      "name": "Product Tile",
+      "kind": "card",
+      "refersTo": "product-tile",
+      "description": "A product's own colour wash at 6%, deepening to 10% on hover, with its real screenshot frame lifting.",
+      "html": "<article class=\"ds-tile\"><h3 class=\"ds-tile-name\">Split Biller</h3><p class=\"ds-tile-aud\">For friends, flatmates and trips</p><p class=\"ds-tile-promise\">Split bills in rupees, settle with UPI.</p><a href=\"#\" class=\"ds-tile-link\">How it works</a><figure class=\"ds-frame\"><figcaption>splitbiller.com</figcaption><div class=\"ds-shot\"></div></figure></article>",
+      "css": ".ds-tile{--tile:83 48 123;background:rgb(var(--tile) / .06);border-radius:16px;padding:36px 36px 0;overflow:hidden;font-family:'Mona Sans',ui-sans-serif,sans-serif;color:#0F1012;transition:background-color 360ms cubic-bezier(0.16,1,0.3,1)}.ds-tile:hover{background:rgb(var(--tile) / .1)}.ds-tile-name{margin:0;font-size:1.15rem;font-weight:600;letter-spacing:-0.02em}.ds-tile-aud{margin:4px 0 0;font-size:.95rem;color:#585C64}.ds-tile-promise{margin:24px 0 0;font-size:1.5rem;font-weight:600;line-height:1.25;letter-spacing:-0.02em;max-width:22ch}.ds-tile-link{display:inline-block;margin-top:24px;color:#2B5BFF;font-weight:500;text-decoration:none}.ds-frame{margin:36px auto -40px;width:60%;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgb(15 16 18 / .08),0 2px 4px rgb(var(--tile) / .04),0 24px 48px -24px rgb(var(--tile) / .28);transition:transform 700ms cubic-bezier(0.16,1,0.3,1)}.ds-tile:hover .ds-frame{transform:translateY(-6px)}.ds-frame figcaption{height:28px;display:flex;align-items:center;justify-content:center;background:rgb(243 243 241 / .7);border-bottom:1px solid rgb(15 16 18 / .14);font-size:.72rem;font-weight:500;color:#585C64}.ds-shot{aspect-ratio:52/100;background:#fff}@media (prefers-reduced-motion:reduce){.ds-tile:hover .ds-frame{transform:none}}"
+    },
+    {
+      "name": "Closing Surface",
+      "kind": "card",
+      "refersTo": "closing-surface",
+      "description": "Sunken paper block at 28px for the contact form and closing CTA.",
+      "html": "<div class=\"ds-close\"><p class=\"ds-close-line\">Talk to the people who run them.</p><a href=\"#\" class=\"ds-close-btn\">Contact</a></div>",
+      "css": ".ds-close{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;background:#F3F3F1;border-radius:28px;padding:56px 48px;font-family:'Mona Sans',ui-sans-serif,sans-serif}.ds-close-line{margin:0;max-width:16ch;font-size:2.4rem;font-weight:600;line-height:1.12;letter-spacing:-0.03em;color:#0F1012}.ds-close-btn{display:inline-flex;align-items:center;height:44px;padding:0 20px;border-radius:9999px;background:#0F1012;color:#fff;font-weight:500;text-decoration:none}.ds-close-btn:hover{background:#282A2F}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Shop Window",
+    "overview": "**Creative North Star: \"The Shop Window\"**\n\nA product company played straight, at the craft level of Linear, Stripe, Apple and 37signals. The page is a clean window and the products are what is in it: real screenshots of four live products, each sitting in its own faint wash of that product's colour. Everything around them (type, buttons, hairlines) is ink on near-white paper, quiet enough that the screenshots carry the colour and the interest.\n\nDensity is calm and generous: large tight-tracked headlines, an 18px reading size, wide section rhythm, and very few elements per view. The world is light-only by design: products are used in daylight, at counters and in shops, so there is no dark theme. The company itself has one accent, cobalt, and spends it on actions and links.\n\nConfirmed rejections: glow blobs, a dark AI hero, fake div-built product UIs, eyebrows and kickers, rows of identical feature cards, gradients as decoration, and client-services language anywhere.",
+    "keyCharacteristics": [
+      "Real product screenshots in hairline frames are the only imagery.",
+      "Ink on near-white paper; cobalt is the single company accent.",
+      "Each product owns its colour, used only inside its own tile.",
+      "Mona Sans everywhere, tight negative tracking on display sizes.",
+      "Full-pill buttons, 16px tiles and frames, 28px large surfaces.",
+      "One staggered rise on entry, one tile lift on hover; static under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Cobalt is the only company accent. No second accent, no accent-coloured headings, no accent backgrounds on large areas.",
+        "section": "colors"
+      },
+      {
+        "name": "The Own Colour Rule",
+        "body": "A product colour appears only inside that product's own tile or product page, at a wash, never as a fill behind company UI and never on another product.",
+        "section": "colors"
+      },
+      {
+        "name": "The Daylight Rule",
+        "body": "Light theme only. Do not add a dark mode or a dark hero; ink is reserved for buttons and the logo reversal.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Kicker Rule",
+        "body": "A heading stands alone. No eyebrow, kicker, overline or small uppercase label above any heading, and no uppercase tracked labels anywhere.",
+        "section": "typography"
+      },
+      {
+        "name": "The Real Sequence Rule",
+        "body": "Numbers appear in front of items only when they are a real ordered sequence the reader follows (product \"Step 1, 2, 3\"). Sections are never numbered.",
+        "section": "typography"
+      },
+      {
+        "name": "The Plain Punctuation Rule",
+        "body": "No em or en dashes in copy. Use a full stop, a colon or a comma.",
+        "section": "typography"
+      },
+      {
+        "name": "The Soft Light Rule",
+        "body": "Shadows are soft, negative-spread and tinted. No hard offset shadows, no glow, no coloured halos.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Clear Glass Rule",
+        "body": "The fixed header is the one translucent surface (paper at 80% with a 12px backdrop blur, falling back to 95% paper). No other glass panels or frosted cards.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** let real product screenshots, in product frames, be the only imagery on the page.",
+      "**Do** use ink pills for the main action on paper and pair them with an outline pill for the second.",
+      "**Do** tint each product tile with only that product's colour at 6%, deepening to 10% on hover.",
+      "**Do** separate sections with a hairline and generous padding (80px, 112px from sm) rather than with coloured bands.",
+      "**Do** keep headings in Mona Sans 600 with the display tracking from the scale, left-aligned and width-capped.",
+      "**Do** keep entrance motion to the one staggered rise and the tile lift, and make both static under reduced motion."
+    ],
+    "donts": [
+      "**Don't** put an eyebrow, kicker or small label above a heading.",
+      "**Don't** number sections; number only a real step sequence.",
+      "**Don't** use em or en dashes in copy.",
+      "**Don't** use gradients as decoration, glass or frosted panels (beyond the header), glow, or hard offset shadows.",
+      "**Don't** introduce a second accent colour or use a product colour outside its own tile or page.",
+      "**Don't** build fake product UIs from divs; capture the real product.",
+      "**Don't** add a dark theme or a dark hero.",
+      "**Don't** use client-services language (agency, services, pricing packages, \"we build for you\"); wohnmohr is a product company."
+    ]
+  }
+}

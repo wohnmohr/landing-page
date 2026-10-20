@@ -1,0 +1,98 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/elements/Navbar.astro";
+import Footer from "../components/elements/Footer.astro";
+import Container from "../components/shared/Container.astro";
+import PageHero from "../components/ui/PageHero.astro";
+import Principles from "../components/home/Principles.astro";
+import Contact from "../components/home/Contact.astro";
+import { company, products } from "../utils/company";
+
+const list = (items: string[]) => (items.length > 1 ? `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}` : items[0]);
+const description = `wohnmohr is a product company founded in ${company.founded}. We build and run software for everyday jobs. Who we are, and why we only build our own products.`;
+---
+
+<Layout
+  title="About wohnmohr: who we are and why we build our own products"
+  description={description}
+  ogImage="/og/company.png"
+  ogImageAlt="About wohnmohr"
+  breadcrumbs={[{ name: "About", path: "/about/" }]}
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "About wohnmohr",
+    url: `${company.url}/about/`,
+    description,
+    mainEntity: { "@id": `${company.url}/#organization` },
+  }}
+>
+  <Navbar />
+  <main>
+    <PageHero
+      title="About wohnmohr"
+      intro="We're a product company. We build and run software that makes everyday jobs easier, and nothing else."
+    />
+
+    <section class="pb-20 sm:pb-28" aria-labelledby="story-heading">
+      <Container className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
+        <h2 id="story-heading" class="font-display text-display-md font-semibold lg:col-span-4">Our story</h2>
+        <div class="lg:col-span-8">
+          <div class="max-w-[62ch] space-y-6 text-lg leading-relaxed text-graphite">
+            <p class="text-xl leading-relaxed text-ink sm:text-2xl sm:leading-snug">
+              We grew up in Trichy, a small city in Tamil Nadu, and learned the craft of engineering inside tech companies, from Bangalore to Delhi, and later at US-based companies building in web3.
+            </p>
+            <p>
+              Along the way we spent years building software for other companies, including {list(company.pastClients)}. We saw the same problems again and again: the demo was easy, the product was hard, and the work stopped at handover, just when the product needed someone to keep improving it.
+            </p>
+            <p>
+              So in {company.founded} we started wohnmohr to build our own. Today it is only a product company: we design, build, run and answer for every product we make.
+            </p>
+            <p>
+              Each product starts from a job ordinary people do every week. If it doesn't make that job simpler, it doesn't ship.
+            </p>
+          </div>
+
+          <dl class="mt-12 grid grid-cols-1 gap-x-8 gap-y-6 border-t border-line pt-6 sm:grid-cols-3">
+            <div>
+              <dt class="text-[0.9rem] text-graphite">Founded</dt>
+              <dd class="mt-1 text-lg font-semibold tracking-[-0.02em]">{company.founded}</dd>
+            </div>
+            <div>
+              <dt class="text-[0.9rem] text-graphite">Where we come from</dt>
+              <dd class="mt-1 text-lg font-semibold tracking-[-0.02em]">{company.roots}</dd>
+            </div>
+            <div>
+              <dt class="text-[0.9rem] text-graphite">What we do</dt>
+              <dd class="mt-1 text-lg font-semibold tracking-[-0.02em]">Build our own products</dd>
+            </div>
+          </dl>
+        </div>
+      </Container>
+    </section>
+
+    <section class="border-t border-line py-20 sm:py-28" aria-labelledby="run-heading">
+      <Container>
+        <h2 id="run-heading" class="font-display text-display-md font-semibold">What we run</h2>
+        <ul class="mt-8 border-t border-line">
+          {products.map((p) => (
+            <li class="border-b border-line">
+              <a href={`/products/${p.slug}`} class="group grid grid-cols-1 gap-1 py-5 sm:grid-cols-[14rem_1fr_auto] sm:items-baseline sm:gap-8">
+                <span class="text-xl font-semibold tracking-[-0.02em] group-hover:text-cobalt">{p.name}</span>
+                <span class="text-graphite">{p.oneLiner}</span>
+                <span class="text-[0.9rem] text-graphite">{p.status}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-8 max-w-[60ch] text-lg leading-relaxed text-graphite">
+          We are working on more products that make everyday life easier for ordinary people. Each one will appear here when it is ready to use.
+        </p>
+      </Container>
+    </section>
+
+    <Principles />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

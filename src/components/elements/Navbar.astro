@@ -2,22 +2,17 @@
 import BtnLink from "../shared/BtnLink.astro";
 import Container from "../shared/Container.astro";
 import Logo from "../brand/Logo.astro";
-import { company } from "../../utils/company";
 
 export interface Props {
-  /** overlay: transparent over a dark hero. solid: paper bar for light pages. */
+  /** Kept for older callers; the bar is the same on every page. */
   variant?: "overlay" | "solid";
 }
 
-const { variant = "overlay" } = Astro.props;
-const isOverlay = variant === "overlay";
 const path = Astro.url.pathname;
 
 const navItems = [
   { href: "/products", text: "Products" },
-  { href: "/company", text: "Company" },
-  { href: "/work-with-us", text: "Work with us" },
-  { href: "/blogs", text: "Journal" },
+  { href: "/about", text: "About" },
 ];
 
 const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
@@ -25,35 +20,23 @@ const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
 
 <header
   data-header
-  data-variant={variant}
-  class:list={[
-    "inset-x-0 top-0 z-50 py-4",
-    isOverlay ? "fixed text-white" : "sticky border-b border-line bg-paper/90 text-ink backdrop-blur",
-  ]}
+  class="fixed inset-x-0 top-0 z-50 bg-paper/95 text-ink supports-[backdrop-filter]:bg-paper/80 supports-[backdrop-filter]:backdrop-blur-md"
 >
   <Container>
-    <nav class="relative flex items-center justify-between gap-4" aria-label="Main">
-      <a href="/" class="nav-animate relative z-50 inline-flex h-10 items-center" style="--nav-delay: 0ms" aria-label="wohnmohr home">
-        <Logo size={22} tone={isOverlay ? "color" : "color"} animated />
+    <nav class="relative flex h-16 items-center justify-between gap-4" aria-label="Main">
+      <a href="/" class="relative z-50 inline-flex h-10 items-center text-ink" aria-label="wohnmohr home">
+        <Logo size={27} />
       </a>
 
-      <ul
-        class:list={[
-          "nav-animate hidden items-center gap-1 rounded-full p-1 lg:flex",
-          isOverlay ? "border border-white/10 bg-white/[0.04]" : "border border-line bg-white/60",
-        ]}
-        style="--nav-delay: 80ms"
-      >
+      <ul class="hidden items-center gap-0.5 lg:flex">
         {
           navItems.map((item) => (
             <li>
               <a
                 href={item.href}
                 class:list={[
-                  "inline-flex h-9 items-center rounded-full px-4 text-sm font-medium transition-colors duration-300",
-                  isActive(item.href)
-                    ? isOverlay ? "bg-white text-ink" : "bg-ink text-white"
-                    : isOverlay ? "text-white/75 hover:text-white" : "text-ink/70 hover:text-ink",
+                  "inline-flex h-10 items-center rounded-full px-3.5 text-[0.92rem] font-medium transition-colors duration-200",
+                  isActive(item.href) ? "bg-ink/[0.06] text-ink" : "text-graphite hover:text-ink",
                 ]}
                 aria-current={isActive(item.href) ? "page" : undefined}
               >
@@ -64,48 +47,51 @@ const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
         }
       </ul>
 
-      <div class="nav-animate relative z-50 flex items-center gap-2" style="--nav-delay: 140ms">
+      <div class="relative z-50 flex items-center gap-2">
         <BtnLink
-          text="Book a call"
-          href={company.calendly}
-          variant={isOverlay ? "bright" : "ink"}
-          external
-          className="hidden !py-1.5 text-sm lg:inline-flex"
-          track="calendly_click"
+          text="Contact"
+          href="/#contact"
+          variant="ink"
+          arrow={false}
+          className="hidden !h-9 !px-4 !text-[0.88rem] lg:inline-flex"
+          track="contact_click"
           trackLocation="navbar"
         />
         <button
           data-toggle-nav
           data-open-nav="false"
-          class:list={[
-            "inline-flex h-10 w-10 items-center justify-center rounded-full lg:hidden",
-            isOverlay ? "bg-white/10" : "bg-ink/5",
-          ]}
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full shadow-[inset_0_0_0_1px_rgb(var(--ink)/0.15)] lg:hidden"
           aria-label="Toggle navigation"
           aria-expanded="false"
         >
           <span class="flex w-5 flex-col">
-            <span id="line1" class="h-0.5 w-5 rounded-full bg-current transition-all duration-300"></span>
-            <span id="line2" class="mt-1 h-0.5 w-5 rounded-full bg-current transition-all duration-300"></span>
-            <span id="line3" class="mt-1 h-0.5 w-5 rounded-full bg-current transition-all duration-300"></span>
+            <span id="line1" class="h-0.5 w-5 bg-current transition-all duration-300"></span>
+            <span id="line2" class="mt-1 h-0.5 w-5 bg-current transition-all duration-300"></span>
+            <span id="line3" class="mt-1 h-0.5 w-5 bg-current transition-all duration-300"></span>
           </span>
         </button>
       </div>
 
-      <div data-nav-overlay aria-hidden="true" class="fixed inset-0 z-40 hidden bg-ink/60 backdrop-blur-sm lg:!hidden"></div>
+      <div data-nav-overlay aria-hidden="true" class="fixed inset-0 top-16 z-40 hidden bg-ink/30 lg:!hidden"></div>
 
       <div
         data-navbar
         data-open="false"
-        class="absolute left-0 right-0 top-[calc(100%+0.75rem)] z-50 flex h-0 flex-col overflow-hidden rounded-brand bg-ink-2 text-white shadow-2xl transition-[height] duration-300 ease-loop lg:hidden"
+        class="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 flex h-0 flex-col overflow-hidden rounded-brand bg-white text-ink shadow-[0_0_0_1px_rgb(var(--ink)/0.08),0_24px_48px_-24px_rgb(var(--ink)/0.35)] transition-[height] duration-300 ease-loop lg:hidden"
       >
         <ul class="flex flex-col px-3 pt-3">
           {
-            navItems.map((item, i) => (
+            navItems.map((item) => (
               <li>
-                <a href={item.href} class="flex items-center justify-between rounded-xl px-3 py-3.5 font-display text-xl font-semibold tracking-tight hover:bg-white/5">
+                <a
+                  href={item.href}
+                  class:list={[
+                    "flex items-center rounded-xl px-3 py-3 text-lg font-medium tracking-[-0.02em]",
+                    isActive(item.href) ? "bg-ink/[0.05] text-ink" : "text-ink hover:bg-ink/[0.04]",
+                  ]}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                >
                   {item.text}
-                  <span class="font-mono text-xs text-fog">0{i + 1}</span>
                 </a>
               </li>
             ))
@@ -113,12 +99,12 @@ const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
         </ul>
         <div class="p-4">
           <BtnLink
-            text="Book a call"
-            href={company.calendly}
-            variant="bright"
-            external
+            text="Contact"
+            href="/#contact"
+            variant="ink"
+            arrow={false}
             className="w-full"
-            track="calendly_click"
+            track="contact_click"
             trackLocation="navbar_mobile"
           />
         </div>

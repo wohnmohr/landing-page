@@ -9,7 +9,7 @@ function sitemap() {
   const priority = (path) =>
     path === "/" ? "1.0"
     : path.startsWith("/products/") ? "0.9"
-    : ["/work-with-us/", "/company/", "/pricing/"].includes(path) ? "0.8"
+    : path === "/about/" ? "0.8"
     : path === "/brand/" ? "0.4"
     : "0.7";
 
