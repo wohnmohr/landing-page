@@ -19,3 +19,8 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# impeccable working files (screenshots, question logs, hook cache)
+.impeccable/review/
+.impeccable/questions/
+.impeccable/hook.cache.json

@@ -1,0 +1,233 @@
+{
+  "title": "Choose the visual world for wohnmohr",
+  "question": "The roll assigned Platform Board. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Platform Board",
+      "kicker": "THE ROLL",
+      "lineage": "Indian Railways station boards and departure indicators",
+      "thesis": "wohnmohr as a station: four products listed like departures, each telling you exactly where to go.",
+      "palette": [
+        "#F2C200",
+        "#141414",
+        "#F4F4F1",
+        "#1F3F8C",
+        "#FF9F1C"
+      ],
+      "materials": [
+        "enamel signboard",
+        "tabular departure type",
+        "dot-matrix status lamp"
+      ],
+      "viewport": "A yellow station-name board carries the wordmark and one line; directly beneath it a departure board lists Split Biller, NicheLinq, ChargeMyAI and MyThreadPay with job, domain and status.",
+      "risk": "Can read as a theme-park gimmick if the board is decorative instead of the actual product index.",
+      "raised": [
+        {
+          "from": "challenger-vu-meter",
+          "raise": "One lamp colour only: amber means live, and nothing else on the page may glow."
+        },
+        {
+          "from": "challenger-livery",
+          "raise": "Each product carries its own platform colour band from board row to product page to share card."
+        },
+        {
+          "from": "challenger-algorave",
+          "raise": "Early-access products show as arriving, with what is next, never a dead label."
+        },
+        {
+          "from": "challenger-daylight",
+          "raise": "Every flap motion settles into a still, readable board; reduced motion shows the settled board."
+        }
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Signwriter Street",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "hand-painted Indian shopfront signboards",
+      "thesis": "Each product gets its own painted shop board on one street.",
+      "palette": [
+        "#C8102E",
+        "#0B7A4B",
+        "#F2C200",
+        "#F6F4EE",
+        "#151515"
+      ],
+      "materials": [
+        "enamel paint on tin",
+        "signwriter lettering",
+        "shutter steel"
+      ],
+      "viewport": "A row of four shopfront boards, each product lettered in its own colours, the company name painted on the awning above.",
+      "risk": "The most familiar way to say 'India' on the web; tips into kitsch without a real signwriter's hand."
+    },
+    {
+      "id": "challenger-glazier",
+      "label": "Glazier's Partition",
+      "verdict": "competitive",
+      "lineage": "steel-framed workshop glass walls",
+      "thesis": "The company as one glazed wall: each product is a pane that lights in its own colour when you step up.",
+      "palette": [
+        "#111111",
+        "#EEF1F0",
+        "#F7F7F5",
+        "#2747B8",
+        "#E09A1B",
+        "#7A1E2C"
+      ],
+      "materials": [
+        "black glazing bars",
+        "seeded white glass",
+        "backlit colour panes"
+      ],
+      "viewport": "A full-width wall of panes; the four product panes are the largest, one statement each, with company and contact panes around them.",
+      "case": "Fuses cleanly: four panes map to four products and pane size carries hierarchy; weaker on audience identification.",
+      "risk": "Can feel cold and architectural instead of everyday.",
+      "hero": "https://impeccable.style/worlds/cards/craft-making-glazier-colorfield-partition-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/craft-making-glazier-colorfield-partition.webp"
+    },
+    {
+      "id": "challenger-seed-packet",
+      "label": "Packet Rack",
+      "verdict": "competitive",
+      "lineage": "hardware-store seed packet racks",
+      "thesis": "Each product is a printed packet: the promise on the front, how it works on the back.",
+      "palette": [
+        "#C8372D",
+        "#4E8B3A",
+        "#E8B23A",
+        "#B9BDC1",
+        "#1A1A1A"
+      ],
+      "materials": [
+        "gouache packet fronts",
+        "ruled instruction backs",
+        "galvanised rack"
+      ],
+      "viewport": "A rack of four packets; each front shows what the product does, and flips to its three steps and price.",
+      "case": "Fuses well: promise and instructions map to what it does and how it works; loses on premium feel.",
+      "risk": "Needs real painted artwork we do not have; reads crafty if faked.",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-seed-packet-rack-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/vernacular-ephemera-seed-packet-rack.webp"
+    },
+    {
+      "id": "challenger-vu-meter",
+      "label": "VU Meter Bridge",
+      "verdict": "declined",
+      "lineage": "recording desk meter bridges",
+      "thesis": "Products as identical meters read as one row.",
+      "palette": [
+        "#EFE8D6",
+        "#151515",
+        "#C4302B"
+      ],
+      "materials": [
+        "meter faces behind glass",
+        "walnut desk frame"
+      ],
+      "viewport": "A row of four meters with needles.",
+      "case": "Fuses poorly: no audience link, and needles invent numbers we do not have.",
+      "kept": "One signal colour reserved for a single meaning.",
+      "risk": "Implies live metrics that do not exist.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-vu-meter-bridge-hero.webp"
+    },
+    {
+      "id": "challenger-livery",
+      "label": "Livery Garage",
+      "verdict": "declined",
+      "lineage": "endurance-racing liveries",
+      "thesis": "Each product as a racing livery that reads before any word.",
+      "palette": [
+        "#9CC9E6",
+        "#F28C28",
+        "#FFFFFF",
+        "#1A1A1A"
+      ],
+      "materials": [
+        "stripe systems",
+        "number roundels"
+      ],
+      "viewport": "Four cars in a garage, each in its livery.",
+      "case": "Fuses poorly: motorsport has nothing to do with splitting bills or paying wages.",
+      "kept": "Identity carried by a colour band across every page.",
+      "risk": "Pure costume for this audience.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-endurance-livery-garage-hero.webp"
+    },
+    {
+      "id": "challenger-algorave",
+      "label": "Algorave Floor",
+      "verdict": "declined",
+      "lineage": "live-coded club nights",
+      "thesis": "The site as a live code buffer.",
+      "palette": [
+        "#0B0B0B",
+        "#39FF88",
+        "#FF3DA5",
+        "#FFB000"
+      ],
+      "materials": [
+        "projected code",
+        "phosphor"
+      ],
+      "viewport": "A code buffer as stage.",
+      "case": "Fuses poorly: only ChargeMyAI's developers would recognise it; the dark-neon look is the AI default.",
+      "kept": "Show what is about to change before it changes.",
+      "risk": "Lands exactly in the near-black neon rut.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-algorave-source-floor-hero.webp"
+    },
+    {
+      "id": "challenger-daylight",
+      "label": "Daylight Section",
+      "verdict": "declined",
+      "lineage": "architectural sun-path sections",
+      "thesis": "A day of light moving through one building.",
+      "palette": [
+        "#F3F1EA",
+        "#2B2B2B",
+        "#E3A82B",
+        "#5C7896"
+      ],
+      "materials": [
+        "limewash",
+        "section poche"
+      ],
+      "viewport": "One long building section lit by a moving beam.",
+      "case": "Fuses poorly: no product maps to a room, and clarity drops.",
+      "kept": "A still state for every motion.",
+      "risk": "Beautiful and unrelated.",
+      "hero": "https://impeccable.style/worlds/cards/architecture-inhabitable-space-daylight-section-hero.webp"
+    }
+  ],
+  "reroll": {
+    "registers": [
+      "safer",
+      "bolder"
+    ]
+  },
+  "buildPath": {
+    "value": "code",
+    "toggle": false
+  },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A product-studio homepage done straight: plain headline, four product tiles with real screenshots.",
+    "palette": [
+      "#FAFAFA",
+      "#111111",
+      "#2B5BFF"
+    ],
+    "materials": [
+      "clean grid",
+      "real product screenshots"
+    ],
+    "viewport": "Short headline left, product screenshots right; four product tiles below.",
+    "risk": "Indistinguishable from every other product studio by design."
+  },
+  "steer": true,
+  "seed": {
+    "key": "f2e1f43f",
+    "note": "concept-seed --scope direction --mode persuade; pick recorded, then canon recorded after the user rejected the pick"
+  }
+}

@@ -1,0 +1,14 @@
+# Client services, pricing and their supporting pages were retired on 2026-10-20:
+# wohnmohr is a product company. Old links land on the homepage.
+/services/*      /   301
+/pricing         /   301
+/work-with-us    /   301
+/compare/*       /   301
+/work/*          /   301
+/tools/*         /   301
+/blogs           /   301
+/blogs/*         /   301
+/faq             /   301
+
+# The company page became the About page.
+/company         /about   301

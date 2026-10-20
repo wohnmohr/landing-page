@@ -4,13 +4,12 @@ import Navbar from "../../components/elements/Navbar.astro";
 import Footer from "../../components/elements/Footer.astro";
 import PageHero from "../../components/ui/PageHero.astro";
 import ProductShowcase from "../../components/home/ProductShowcase.astro";
-import Contact from "../../components/home/Contact.astro";
 import { products } from "../../utils/company";
 ---
 
 <Layout
-  title="Products | wohnmohr — NicheLinq & Split Biller"
-  description={`The products wohnmohr builds and runs: ${products.map((p) => `${p.name} (${p.oneLiner})`).join(" and ")}`}
+  title="Products | wohnmohr"
+  description="Every product wohnmohr builds and runs: a growing suite of focused software, each one made for a single everyday job."
   breadcrumbs={[{ name: "Products", path: "/products/" }]}
   jsonLd={{
     "@context": "https://schema.org",
@@ -21,12 +20,12 @@ import { products } from "../../utils/company";
   <Navbar />
   <main>
     <PageHero
-      eyebrow="Products"
-      title="Small, sharp tools for<br />real everyday jobs."
-      intro="Every wohnmohr product does one job end to end. No bloat, no signup walls—just the fastest path from what you have to what you need."
+      title="Products built for one job each."
+      intro="Each one does a single everyday job well. Every product here is one we build and run ourselves, and more are on the way."
     />
-    <ProductShowcase showIntro={false} />
-    <Contact />
+    <div class="-mt-16 sm:-mt-20">
+      <ProductShowcase showIntro={false} />
+    </div>
   </main>
   <Footer />
 </Layout>

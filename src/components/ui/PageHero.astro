@@ -1,24 +1,17 @@
 ---
 import Container from "../shared/Container.astro";
-import Eyebrow from "./Eyebrow.astro";
 
 export interface Props {
-  eyebrow: string;
   title: string;
   intro?: string;
 }
-const { eyebrow, title, intro } = Astro.props;
+const { title, intro } = Astro.props;
 ---
 
-<section class="surface-ink grain relative flex min-h-[60dvh] flex-col justify-end overflow-hidden sm:min-h-[56dvh]">
-  <div class="dot-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_60%_80%_at_80%_20%,#000,transparent)]" aria-hidden="true"></div>
-  <div class="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-cobalt/25 blur-[120px]" aria-hidden="true"></div>
-  <Container className="relative pb-14 pt-32 sm:pb-20 sm:pt-40">
-    <Eyebrow tone="ink" className="animate-fade-up">{eyebrow}</Eyebrow>
-    <h1 class="mt-5 max-w-4xl font-display text-display-lg font-bold">
-      <span class="line-mask"><span style="--d: 100ms" set:html={title} /></span>
-    </h1>
-    {intro && <p class="mt-6 max-w-2xl animate-fade-up text-lg leading-relaxed text-fog" style="animation-delay: 0.35s">{intro}</p>}
+<section class="pt-16">
+  <Container className="pb-12 pt-16 sm:pb-16 sm:pt-24">
+    <h1 class="rise max-w-[18ch] text-balance font-display text-display-lg font-semibold" set:html={title} />
+    {intro && <p class="rise mt-6 max-w-[56ch] text-lg leading-relaxed text-graphite sm:text-xl" style="--rise-delay: 80ms">{intro}</p>}
     <slot />
   </Container>
 </section>

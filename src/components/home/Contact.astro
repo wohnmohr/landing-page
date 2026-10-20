@@ -1,56 +1,35 @@
 ---
-import BtnLink from "../shared/BtnLink.astro";
 import Container from "../shared/Container.astro";
-import Logo from "../brand/Logo.astro";
 import { company } from "../../utils/company";
+
+const formSrc = `https://tally.so/embed/${company.tallyFormId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
 ---
 
-<section id="contact" class="surface-ink grain relative scroll-mt-16 overflow-hidden py-20 sm:py-28" aria-labelledby="contact-heading">
-  <div class="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[50rem] -translate-x-1/2 rounded-full bg-cobalt/20 blur-[140px]" aria-hidden="true"></div>
-  <Container className="relative">
-    <div class="mx-auto max-w-3xl text-center" data-reveal>
-      <div class="flex justify-center"><Logo size={30} wordmark={false} animated /></div>
-      <h2 id="contact-heading" class="mt-8 font-display text-display-lg font-bold">
-        Got a job worth <span class="marker">looping</span> on?
-      </h2>
-      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-fog">
-        Feedback on our products, a partnership idea, or a build you want done
-        properly—tell us in a few lines, or grab 30 minutes.
-      </p>
-      <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-        <BtnLink text="Book a 30-min call" href={company.calendly} variant="bright" external track="calendly_click" trackLocation="contact" />
-        <BtnLink text="Message on WhatsApp" href={company.whatsapp} variant="ghost" external track="whatsapp_click" trackLocation="contact" />
+<section id="contact" class="scroll-mt-20 pb-20 sm:pb-28" aria-labelledby="contact-heading">
+  <Container>
+    <div class="grid grid-cols-1 gap-10 rounded-[28px] bg-paper-2 px-6 py-12 sm:px-12 sm:py-16 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-5">
+        <h2 id="contact-heading" class="max-w-[14ch] text-balance font-display text-display-lg font-semibold">Talk to the people who run them.</h2>
+        <p class="mt-4 max-w-[44ch] text-lg leading-relaxed text-graphite">
+          Feedback on a product, a partnership, or an interest in what we are building. A few lines is plenty.
+        </p>
+        <p class="mt-8 text-[0.95rem] text-graphite">
+          Prefer email? <a href={`mailto:${company.email}`} class="text-cobalt underline decoration-cobalt/30 hover:decoration-cobalt">{company.email}</a>
+          <span class="mx-1.5" aria-hidden="true">/</span>
+          <a href={company.whatsapp} target="_blank" rel="noopener noreferrer" class="text-cobalt underline decoration-cobalt/30 hover:decoration-cobalt" data-track="whatsapp_click" data-track-location="contact">WhatsApp</a>
+        </p>
       </div>
-    </div>
-
-    <div class="mx-auto mt-12 grid max-w-5xl gap-4 sm:mt-14 lg:grid-cols-2">
-      <div class="min-w-0 rounded-brand bg-white p-5 text-ink sm:p-7" data-reveal>
-        <h3 class="font-display text-xl font-bold tracking-tight">Send a quick brief</h3>
-        <p class="mt-1 text-sm text-graphite">A few lines is plenty. We reply within a working day.</p>
-        <div class="mt-4 min-w-0 overflow-x-clip">
-          <iframe
-            data-tally-src="https://tally.so/embed/wv4Jv0?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-            loading="lazy"
-            width="100%"
-            height="320"
-            title="wohnmohr contact form"
-            class="min-h-[240px] w-full max-w-full border-0 sm:min-h-[280px]"></iframe>
-        </div>
-      </div>
-      <div class="min-w-0 overflow-hidden rounded-brand border border-white/10 bg-ink-2 p-1 sm:p-3" data-reveal style="--reveal-delay: 100ms">
-        <h3 class="px-3 pt-3 font-display text-xl font-bold tracking-tight sm:px-4">Or pick a time</h3>
-        <div
-          class="calendly-inline-widget mt-2 min-h-[580px] sm:min-h-[660px]"
-          data-url={company.calendly}
-          style="height:700px;"
-          role="region"
-          aria-label="Calendly booking calendar"
-        >
-        </div>
+      <div class="min-w-0 lg:col-span-7">
+        <iframe
+          data-tally-src={formSrc}
+          loading="lazy"
+          width="100%"
+          height="560"
+          title="Write to wohnmohr"
+          class="min-h-[520px] w-full max-w-full border-0"></iframe>
       </div>
     </div>
   </Container>
 </section>
 
-<script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script is:inline src="https://tally.so/widgets/embed.js" defer></script>

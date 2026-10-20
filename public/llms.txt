@@ -1,28 +1,20 @@
 # wohnmohr
 
-> wohnmohr is an AI product company. It builds and runs NicheLinq and Split Biller, and takes on a few fixed-scope client builds each month (AI products, automation, testing, and vibe-code rescue).
+> wohnmohr is a product company. It builds and runs a growing suite of focused software for everyday jobs (current products are listed below). It does not offer client services.
 
 ## Site
 - Home: https://wohnmohr.com/
 - Products: https://wohnmohr.com/products/
-- Company: https://wohnmohr.com/company/
-- Work with us: https://wohnmohr.com/work-with-us/
-- Brand & design system: https://wohnmohr.com/brand/
-- Pricing: https://wohnmohr.com/pricing/
-- Blog: https://wohnmohr.com/blogs/
-- FAQ: https://wohnmohr.com/faq/
-- Free vibe-code health scorecard: https://wohnmohr.com/tools/vibe-code-health-check/
-
-## Services
-- Vibe-code rescue: https://wohnmohr.com/services/vibe-code-rescue/
-- AI automation: https://wohnmohr.com/services/ai-automation/
-- AI testing: https://wohnmohr.com/services/ai-testing/
-- AI product development: https://wohnmohr.com/services/ai-product-development/
+- About: https://wohnmohr.com/about/
+- Brand: https://wohnmohr.com/brand/
 
 ## Our products
-- NicheLinq — make Reels ads from a product link, for streetwear & fashion labels (early access): https://nichelinq.com
-- Split Biller — split bills in ₹ and settle with UPI; no signup, no app download: https://www.splitbiller.com
+- Split Biller: split bills in ₹ and settle with UPI; no signup, no app download (live): https://www.splitbiller.com
+- NicheLinq: one link, QR code and shop screen for a small business's offers, each with a pay, order, book or call button (live): https://nichelinq.com
+- ChargeMyAI: add AI to a web app with one script tag; users pay per reply over UPI and the developer earns a share (early access): https://chargemyai.com
+- MyThreadPay: piece-rate and daily wages for garment, carton and construction units; records pieces and attendance, works out weekly pay; English and Tamil (early access): https://mythreadpay.com
 
 ## Contact
-- Book a call: https://calendly.com/wohnmohr-contact/30min
+- Email: tech@wohnmohr.com
+- Contact form: https://tally.so/r/Eqzjxq
 - WhatsApp: https://wa.me/918248438399

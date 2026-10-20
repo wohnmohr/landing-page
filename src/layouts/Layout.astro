@@ -1,16 +1,12 @@
 ---
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/space-grotesk/500.css";
-import "@fontsource/space-grotesk/600.css";
-import "@fontsource/space-grotesk/700.css";
-import "@fontsource/jetbrains-mono/400.css";
-import "@fontsource/jetbrains-mono/500.css";
+import "@fontsource/mona-sans/400.css";
+import "@fontsource/mona-sans/500.css";
+import "@fontsource/mona-sans/600.css";
+import "@fontsource/mona-sans/700.css";
+import "@fontsource/geist-mono/400.css";
 import "../styles/brand.css";
-import displayFont from "@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2?url";
-import bodyFont from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import displayFont from "@fontsource/mona-sans/files/mona-sans-latin-600-normal.woff2?url";
+import bodyFont from "@fontsource/mona-sans/files/mona-sans-latin-400-normal.woff2?url";
 import { company, products } from "../utils/company";
 
 export type Crumb = { name: string; path: string };
@@ -33,7 +29,7 @@ const {
   description = company.shortDescription,
   ogType = "website",
   ogImage: ogImagePath = "/og/default.png",
-  ogImageAlt = "wohnmohr — We build AI products that keep shipping.",
+  ogImageAlt = `wohnmohr: ${company.tagline}`,
   jsonLd = null,
   breadcrumbs = [],
   noindex = false,
@@ -58,10 +54,11 @@ const siteLd = {
       slogan: company.tagline,
       description: company.shortDescription,
       brand: products.map((p) => ({ "@type": "Brand", name: p.name, url: p.url })),
+      foundingDate: company.founded,
       contactPoint: {
         "@type": "ContactPoint",
-        contactType: "sales",
-        url: company.calendly,
+        contactType: "customer support",
+        url: `${siteUrl}/#contact`,
         availableLanguage: ["English"],
       },
     },
@@ -105,7 +102,7 @@ const jsonLdBlocks = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
@@ -118,7 +115,7 @@ const jsonLdBlocks = [
       content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"}
     />
     <meta name="author" content="wohnmohr" />
-    <meta name="theme-color" content="#0B0D10" />
+    <meta name="theme-color" content="#FBFBFA" />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="wohnmohr" />
@@ -137,7 +134,6 @@ const jsonLdBlocks = [
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
-    <link rel="alternate" type="application/rss+xml" title="wohnmohr Journal" href="/blogs/rss.xml" />
     <link rel="sitemap" href="/sitemap.xml" />
 
     <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
@@ -219,11 +215,11 @@ const jsonLdBlocks = [
   <body class="bg-paper text-ink antialiased">
     <a
       href="#contact"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-cobalt focus:px-4 focus:py-2 focus:text-white"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-brand focus:bg-cobalt focus:px-4 focus:py-2 focus:text-white"
     >
       Skip to contact
     </a>
-    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+    <div data-scroll-sentinel aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-6"></div>
     <slot />
   </body>
 
@@ -282,103 +278,16 @@ const jsonLdBlocks = [
       document.documentElement.classList.add("motion-ready");
     });
 
-    const revealEls = document.querySelectorAll<HTMLElement>("[data-reveal]");
-
-    if (reduceMotion) {
-      revealEls.forEach((el) => el.classList.add("is-revealed"));
-    } else if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-revealed");
-            observer.unobserve(entry.target);
-          });
-        },
-        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
-      );
-      revealEls.forEach((el) => observer.observe(el));
-    } else {
-      revealEls.forEach((el) => el.classList.add("is-revealed"));
-    }
-
-    // Scroll progress bar + glass header once the page scrolls
-    const progress = document.querySelector<HTMLElement>("[data-scroll-progress]");
+    // Header gets a cast shadow once the page leaves the top.
     const header = document.querySelector<HTMLElement>("[data-header]");
-    let ticking = false;
-    const onScroll = () => {
-      ticking = false;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (progress) {
-        progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
-      }
-      if (header) header.toggleAttribute("data-scrolled", window.scrollY > 24);
-    };
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(onScroll);
-        }
-      },
-      { passive: true }
-    );
-    onScroll();
-
-    // Count-up numbers
-    const counters = document.querySelectorAll<HTMLElement>("[data-count-to]");
-    const runCounter = (el: HTMLElement) => {
-      const target = Number(el.dataset.countTo ?? 0);
-      if (reduceMotion || !target) return;
-      const start = performance.now();
-      const duration = 1400;
-      const step = (now: number) => {
-        const t = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - t, 3);
-        el.textContent = String(Math.round(target * eased));
-        if (t < 1) requestAnimationFrame(step);
-      };
-      el.textContent = "0";
-      requestAnimationFrame(step);
-    };
-    if ("IntersectionObserver" in window && counters.length) {
-      const counterObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            runCounter(entry.target as HTMLElement);
-            counterObserver.unobserve(entry.target);
-          });
-        },
-        { threshold: 0.6 }
-      );
-      counters.forEach((el) => counterObserver.observe(el));
+    const sentinel = document.querySelector<HTMLElement>("[data-scroll-sentinel]");
+    if (header && sentinel && "IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => {
+        header.toggleAttribute("data-scrolled", !entry.isIntersecting);
+      }).observe(sentinel);
     }
 
-    // Pointer spotlight + subtle 3D tilt on cards
-    if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
-      document.querySelectorAll<HTMLElement>("[data-spotlight]").forEach((card) => {
-        const tilt = card.hasAttribute("data-tilt");
-        card.addEventListener("pointermove", (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty("--sx", `${x}px`);
-          card.style.setProperty("--sy", `${y}px`);
-          if (tilt) {
-            const rx = ((y / rect.height) - 0.5) * -6;
-            const ry = ((x / rect.width) - 0.5) * 6;
-            card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
-          }
-        });
-        card.addEventListener("pointerleave", () => {
-          card.style.transform = "";
-        });
-      });
-    }
-
-    // Smooth in-page hash navigation (including from /pricing)
+    // Smooth in-page hash navigation (including /#contact from other pages)
     document.querySelectorAll('a[href^="/#"], a[href^="#"]').forEach((link) => {
       link.addEventListener("click", (e) => {
         const href = (link as HTMLAnchorElement).getAttribute("href");

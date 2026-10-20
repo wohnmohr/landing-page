@@ -4,14 +4,11 @@ import Navbar from "../components/elements/Navbar.astro";
 import Footer from "../components/elements/Footer.astro";
 import Hero from "../components/home/Hero.astro";
 import ProductShowcase from "../components/home/ProductShowcase.astro";
-import Method from "../components/home/Method.astro";
 import Principles from "../components/home/Principles.astro";
-import WorkWithUs from "../components/home/WorkWithUs.astro";
-import Journal from "../components/home/Journal.astro";
 import Contact from "../components/home/Contact.astro";
 import { company, products } from "../utils/company";
 
-const title = "wohnmohr — AI product company behind NicheLinq & Split Biller";
+const title = `wohnmohr | ${company.tagline.replace(/\.$/, "")}`;
 const description = company.shortDescription;
 
 const productsLd = products.map((p) => ({
@@ -31,10 +28,7 @@ const productsLd = products.map((p) => ({
   <main>
     <Hero />
     <ProductShowcase />
-    <Method />
     <Principles />
-    <WorkWithUs />
-    <Journal />
     <Contact />
   </main>
   <Footer />
